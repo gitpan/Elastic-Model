@@ -12,7 +12,7 @@ Elastic::Manual::Searching - Which search method to use with a View, and how to 
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 DESCRIPTION
 

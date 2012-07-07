@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.01'; # TRIAL
+  $Elastic::Model::Role::Doc::VERSION = '0.02';
 }
 
 use Moose::Role;
@@ -183,7 +183,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
