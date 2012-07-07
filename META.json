@@ -1,0 +1,76 @@
+{
+   "abstract" : "A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.",
+   "author" : [
+      "Clinton Gormley <drtech@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300020, CPAN::Meta::Converter version 2.120630",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Elastic-Model",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Class::Load" : "0",
+            "Class::MOP" : "0",
+            "Data::Dump" : "0",
+            "DateTime" : "0",
+            "ElasticSearch" : "0.55",
+            "List::MoreUtils" : "0",
+            "List::Util" : "0",
+            "MIME::Base64" : "0",
+            "Moose" : "0",
+            "Moose::Exporter" : "0",
+            "Moose::Role" : "0",
+            "Moose::Util" : "0",
+            "Moose::Util::TypeConstraints" : "0",
+            "MooseX::Attribute::Chained" : "0",
+            "MooseX::Types" : "0",
+            "MooseX::Types::Moose" : "0",
+            "MooseX::Types::Structured" : "0",
+            "Scalar::Util" : "0",
+            "Sub::Exporter" : "0",
+            "Time::HiRes" : "0",
+            "Try::Tiny" : "0",
+            "namespace::autoclean" : "0",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "ElasticSearch::TestServer" : "0",
+            "Test::Deep" : "0",
+            "Test::Exception" : "0",
+            "Test::Moose" : "0",
+            "Test::More" : "0.96",
+            "Test::Strict" : "0",
+            "utf8" : "0"
+         }
+      }
+   },
+   "release_status" : "testing",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/clintongormley/Elastic-Model/issues"
+      },
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/clintongormley/Elastic-Model.git",
+         "web" : "https://github.com/clintongormley/Elastic-Model"
+      }
+   },
+   "version" : "0.01"
+}
+
