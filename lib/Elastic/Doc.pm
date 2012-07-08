@@ -1,6 +1,6 @@
 package Elastic::Doc;
 {
-  $Elastic::Doc::VERSION = '0.02';
+  $Elastic::Doc::VERSION = '0.03';
 }
 
 use Moose();
@@ -33,7 +33,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -122,6 +122,14 @@ exporting the L</"has_mapping"> function to allow you to customize the
 special "meta-fields" in the type mapping in ElasticSearch
 
 =back
+
+=head1 INTRODUCTION TO Elastic::Model
+
+If you are not familiar with L<Elastic::Model>, you should start by reading
+L<Elastic::Manual::Intro>.
+
+The rest of the documentation on this page explains how to use the
+L<Elastic::Doc> module itself.
 
 =head1 EXPORTED FUNCTIONS
 

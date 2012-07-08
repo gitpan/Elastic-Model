@@ -1,6 +1,6 @@
 package Elastic::Model::Types;
 {
-  $Elastic::Model::Types::VERSION = '0.02';
+  $Elastic::Model::Types::VERSION = '0.03';
 }
 
 use strict;
@@ -203,7 +203,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
