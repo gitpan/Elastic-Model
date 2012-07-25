@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.03';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.04';
 }
 
 use Moose::Role;
@@ -191,7 +191,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 DESCRIPTION
 

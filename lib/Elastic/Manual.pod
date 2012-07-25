@@ -12,7 +12,7 @@ Elastic::Manual - What is Elastic::Model and how do I use it?
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 WHAT IS ELASTIC::MODEL?
 
@@ -151,7 +151,8 @@ but you will lose any indices matching C</^myapp.*/>.
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
-perldoc Elastic::Manual
+
+    perldoc Elastic::Manual
 
 You can also look for information at:
 

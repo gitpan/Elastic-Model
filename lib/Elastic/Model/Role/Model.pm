@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Model;
 {
-  $Elastic::Model::Role::Model::VERSION = '0.03';
+  $Elastic::Model::Role::Model::VERSION = '0.04';
 }
 
 use Moose::Role;
@@ -344,9 +344,12 @@ sub save_doc {
     my $uid  = $doc->uid;
     my $data = $self->deflate_object($doc);
 
-    my $action      = $uid->from_store ? 'index_doc' : 'create_doc';
+    my $action
+        = ( $uid->from_store || defined $args{version} )
+        ? 'index_doc'
+        : 'create_doc';
     my $on_conflict = delete $args{on_conflict};
-    my $result      = eval { $self->store->$action( $uid, $data, %args ) }
+    my $result = eval { $self->store->$action( $uid, $data, %args ) }
         or return $self->_handle_error( $@, $on_conflict, $doc );
 
     $uid->update_from_store($result);
@@ -367,18 +370,22 @@ sub _handle_error {
 
     die $error
         unless $on_conflict
-            and $error =~ /ElasticSearch::Error::Conflict/;
+        and $error =~ /ElasticSearch::Error::Conflict/;
 
-    my $current_version = $error->{-vars}{current_version}
-        or die "Missing current_version from ElasticSearch::Error::Conflict";
+    my $new;
+    if ( my $current_version = $error->{-vars}{current_version} ) {
+        my $uid = Elastic::Model::UID->new(
+            %{ $original->uid->read_params },
+            version    => $current_version,
+            from_store => 1
+        );
+        $new = $self->get_doc( uid => $uid );
 
-    my $uid = Elastic::Model::UID->new(
-        %{ $original->uid->read_params },
-        version    => $current_version,
-        from_store => 1
-    );
+    }
+    else {
+        $new = $self->get_doc( uid => $original->uid->clone );
+    }
 
-    my $new = $self->get_doc( uid => $uid );
     $on_conflict->( $original, $new );
 
     return;
@@ -488,7 +495,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
