@@ -1,6 +1,6 @@
 package Elastic::Model::Trait::Field;
 {
-  $Elastic::Model::Trait::Field::VERSION = '0.04';
+  $Elastic::Model::Trait::Field::VERSION = '0.05';
 }
 
 use Moose::Role;
@@ -16,35 +16,66 @@ use Carp;
 use namespace::autoclean;
 
 #===================================
-around [
-    '_inline_instance_get',   '_inline_instance_set',
-    '_inline_instance_clear', '_inline_instance_has'
-    ]
+around '_inline_instance_clear' => sub {
 #===================================
-    => sub {
     my ( $orig, $attr, $instance, @args ) = @_;
     my $inline = $attr->$orig( $instance, @args );
     unless ( $attr->exclude ) {
+        my $name       = $attr->name;
+        my $inline_has = $attr->_inline_instance_has($instance);
+        my $inline_get = $attr->_inline_instance_get($instance);
         $inline = <<"INLINE"
     do {
-        $instance->_can_inflate && $instance->_inflate_doc;
+        my \@val = $inline_get;
+        $inline_has && $instance->has_changed('$name',\@val);
         $inline
     }
 INLINE
     }
     return $inline;
-    };
+};
 
 #===================================
-around [ 'get_value', 'set_value', 'clear_value', 'has_value' ]
+around 'clear_value' => sub {
 #===================================
-    => sub {
     my ( $orig, $attr, $instance, @args ) = @_;
     unless ( $attr->exclude ) {
-        $instance->_can_inflate && $instance->_inflate_doc;
+        my @val = $attr->get_value($instance);
+        $attr->has_value($instance)
+            && $instance->has_changed( $attr->name, @val );
     }
     return $attr->$orig( $instance, @args );
-    };
+};
+
+#===================================
+before '_process_options' => sub {
+#===================================
+    my ( $class, $name, $opts ) = @_;
+    if ( my $orig = $opts->{trigger} ) {
+        ( 'CODE' eq ref $orig )
+            || $class->throw_error(
+            "Trigger must be a CODE ref on attribute ($name)",
+            data => $opts->{trigger} );
+        $opts->{trigger} = sub {
+            my $self = shift;
+            no warnings 'uninitialized';
+            unless ( @_ == 2 && $_[1] eq $_[0] ) {
+                $self->has_changed( $name, $_[1] );
+            }
+            $self->$orig(@_);
+        };
+    }
+    else {
+
+        $opts->{trigger} = sub {
+            my $self = shift;
+            no warnings 'uninitialized';
+            unless ( @_ == 2 && $_[1] eq $_[0] ) {
+                $self->has_changed( $name, $_[1] );
+            }
+        };
+    }
+};
 
 #===================================
 has 'type' => (
@@ -113,6 +144,13 @@ has 'boost' => (
 
 #===================================
 has 'null_value' => (
+#===================================
+    isa => Str,
+    is  => 'ro'
+);
+
+#===================================
+has 'unique_key' => (
 #===================================
     isa => Str,
     is  => 'ro'
@@ -280,36 +318,6 @@ has 'exclude_attrs' => (
     is => 'ro'
 );
 
-#===================================
-before '_process_options' => sub {
-#===================================
-    my ( $class, $name, $opts ) = @_;
-    if ( my $orig = $opts->{trigger} ) {
-        ( 'CODE' eq ref $orig )
-            || $class->throw_error(
-            "Trigger must be a CODE ref on attribute ($name)",
-            data => $opts->{trigger} );
-        $opts->{trigger} = sub {
-            my $self = shift;
-            no warnings 'uninitialized';
-            unless ( @_ == 2 && $_[1] eq $_[0] ) {
-                $self->has_changed( $name, $_[1] );
-            }
-            $self->$orig(@_);
-        };
-    }
-    else {
-
-        $opts->{trigger} = sub {
-            my $self = shift;
-            no warnings 'uninitialized';
-            unless ( @_ == 2 && $_[1] eq $_[0] ) {
-                $self->has_changed( $name, $_[1] );
-            }
-        };
-    }
-};
-
 1;
 
 
@@ -322,7 +330,7 @@ Elastic::Model::Trait::Field - Add ElasticSearch specific keywords to your attri
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 DESCRIPTION
 

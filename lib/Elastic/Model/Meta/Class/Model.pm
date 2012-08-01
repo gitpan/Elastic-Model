@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.04';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.05';
 }
 
 use Moose::Role;
@@ -70,6 +70,14 @@ has 'classes' => (
         set_class => 'set',
         get_class => 'get',
     }
+);
+
+#===================================
+has 'unique_index' => (
+#===================================
+    is      => 'rw',
+    isa     => 'Str',
+    default => sub {'unique_key'}
 );
 
 no Moose;
@@ -191,7 +199,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 DESCRIPTION
 
@@ -305,6 +313,16 @@ A hash ref containing all namespaces plus their configuration, eg:
             }
         }
     }
+
+=head2 unique_index
+
+    $index = $meta->unique_index
+
+The name of the index where unique keys will be stored, which defaults
+to C<unique_key>.  A different value can be specified with
+L<has_unique_index|Elastic::Model/Custom unique key index>.
+
+See L<Elastic::Manual::Attributes::Unique> for more.
 
 =head2 analyzers
 

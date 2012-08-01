@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.04';
+  $Elastic::Model::Role::Doc::VERSION = '0.05';
 }
 
 use Moose::Role;
@@ -183,7 +183,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -354,6 +354,25 @@ The doc will only be saved if it has changed. If you want to force saving
 on a doc that hasn't changed, then you can do:
 
     $doc->touch->save;
+
+=head3 on_unique
+
+If you have any L<unique attributes|Elastic::Manual::Attributes/unique_key> then
+you can catch unique-key conflicts with the C<on_unique> handler.
+
+    $doc->save(
+        on_unique => sub {
+            my ($doc,$conflicts) = @_;
+            # do something
+        }
+    )
+
+The C<$conflicts> hashref will contain a hashref whose keys are the name
+of the L<unique_keys|Elastic::Manual::Attributes/unique_key> that have
+conflicts, and whose values are the values of those keys which already exist,
+and so cannot be overwritten.
+
+See L<Elastic::Manual::Attributes::Unique> for more.
 
 =head2 overwrite()
 

@@ -3,7 +3,7 @@ NAME
     objects using ElasticSearch as a backend.
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
         package MyApp;
@@ -85,6 +85,14 @@ USING ELASTIC::MODEL
 
     See Elastic::Model::TypeMap::Base for instructions on how to define your
     own type-map classes.
+
+  Custom unique key index
+    If you have attributes whose values are unique, then you can customize
+    the index where these unique values are stored.
+
+        has_unique_index 'myapp_unique';
+
+    The default value is "unique_key".
 
   Custom analyzers
     Analysis is the process of converting full text into "terms" or "tokens"

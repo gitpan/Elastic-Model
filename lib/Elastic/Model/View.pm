@@ -1,6 +1,6 @@
 package Elastic::Model::View;
 {
-  $Elastic::Model::View::VERSION = '0.04';
+  $Elastic::Model::View::VERSION = '0.05';
 }
 
 use Moose;
@@ -455,7 +455,7 @@ Elastic::Model::View - Views to query your docs in ElasticSearch
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -492,7 +492,7 @@ Efficiently retrieve all posts, unsorted:
 
     $results = $posts->size(100)->scan;
 
-    while (my $result = $results->shift_result)) {
+    while (my $result = $results->shift_result) {
         do_something_with($result);
     );
 
@@ -583,7 +583,8 @@ All other metadta is thrown away.
 
 Deletes all docs matching the query and returns a hashref indicating
 success. Any docs that are stored in a live L<scope|Elastic::Model::Scope>
-or are cached somewhere are not removed.
+or are cached somewhere are not removed. Any
+L<unique keys|Elastic::Manual::Attributes::Unique> are not removed.
 
 This should really only be used once you are sure that the matching docs
 are out of circulation.  Also, it is more efficient to just delete a whole index

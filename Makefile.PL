@@ -33,7 +33,8 @@ my %WriteMakefileArgs = (
     "Class::MOP" => 0,
     "Data::Dump" => 0,
     "DateTime" => 0,
-    "ElasticSearch" => "0.55",
+    "ElasticSearch" => "0.57",
+    "ElasticSearchX::UniqueKey" => "0.03",
     "List::MoreUtils" => 0,
     "List::Util" => 0,
     "MIME::Base64" => 0,
@@ -50,11 +51,12 @@ my %WriteMakefileArgs = (
     "Sub::Exporter" => 0,
     "Time::HiRes" => 0,
     "Try::Tiny" => 0,
+    "Variable::Magic" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t t/00_setup/*.t t/10_typemaps/*.t t/20_namespace/*.t t/30_domain/*.t t/40_view/*.t t/50_scope/*.t t/60_reindex/*.t"
   }

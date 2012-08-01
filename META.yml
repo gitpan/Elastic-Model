@@ -25,7 +25,8 @@ requires:
   Class::MOP: 0
   Data::Dump: 0
   DateTime: 0
-  ElasticSearch: 0.55
+  ElasticSearch: 0.57
+  ElasticSearchX::UniqueKey: 0.03
   List::MoreUtils: 0
   List::Util: 0
   MIME::Base64: 0
@@ -42,10 +43,11 @@ requires:
   Sub::Exporter: 0
   Time::HiRes: 0
   Try::Tiny: 0
+  Variable::Magic: 0
   namespace::autoclean: 0
   strict: 0
   warnings: 0
 resources:
   bugtracker: https://github.com/clintongormley/Elastic-Model/issues
   repository: git://github.com/clintongormley/Elastic-Model.git
-version: 0.04
+version: 0.05

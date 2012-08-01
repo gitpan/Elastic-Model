@@ -10,6 +10,7 @@ lib/Elastic/Doc.pm
 lib/Elastic/Manual.pod
 lib/Elastic/Manual/Analysis.pod
 lib/Elastic/Manual/Attributes.pod
+lib/Elastic/Manual/Attributes/Unique.pod
 lib/Elastic/Manual/Intro.pod
 lib/Elastic/Manual/NoSQL.pod
 lib/Elastic/Manual/QueryDSL.pod
@@ -87,6 +88,7 @@ t/20_namespace/04_index_role.t
 t/20_namespace/05_namespace_for_domain.t
 t/30_domain/01_crud.t
 t/30_domain/02_conflict.t
+t/30_domain/03_uniques.t
 t/40_view/01_view_attrs.t
 t/40_view/02_view_methods.t
 t/40_view/03_results.t
@@ -118,7 +120,9 @@ t/lib/IndexConfig/BadTokenizer.pm
 t/lib/IndexConfig/NoAnalyzer.pm
 t/lib/MyApp.pm
 t/lib/MyApp/Post.pm
+t/lib/MyApp/UniqUser.pm
 t/lib/MyApp/User.pm
+t/lib/MyAppUniq.pm
 t/lib/TypeTest.pm
 t/lib/TypeTest/Common.pm
 t/lib/TypeTest/ES.pm

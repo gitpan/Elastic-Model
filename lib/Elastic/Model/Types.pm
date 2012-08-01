@@ -1,11 +1,12 @@
 package Elastic::Model::Types;
 {
-  $Elastic::Model::Types::VERSION = '0.04';
+  $Elastic::Model::Types::VERSION = '0.05';
 }
 
 use strict;
 use warnings;
 use ElasticSearch();
+use ElasticSearchX::UniqueKey();
 
 use MooseX::Types::Moose qw(:all);
 use MooseX::Types::Structured qw (Dict Optional Map);
@@ -18,11 +19,13 @@ use MooseX::Types -declare => [ qw(
         CoreFieldType
         DynamicMapping
         ES
+        ES_UniqueKey
         FieldType
         GeoPoint
         HighlightArgs
         IndexMapping
         IndexNames
+        Keyword
         Latitude
         Longitude
         MultiField
@@ -89,6 +92,10 @@ coerce ES, from ArrayRef, via {
     s/^:/127.0.0.1:/ for @servers;
     ElasticSearch->new( servers => \@servers );
 };
+
+#===================================
+class_type ES_UniqueKey, { class => 'ElasticSearchX::UniqueKey' };
+#===================================
 
 #===================================
 subtype StoreMapping, as enum( [ 'yes', 'no' ] );
@@ -186,6 +193,10 @@ subtype Timestamp, as Num;
 #===================================
 
 #===================================
+subtype Keyword, as Str;
+#===================================
+
+#===================================
 class_type UID, { class => 'Elastic::Model::UID' };
 #===================================
 coerce UID, from Str,     via { Elastic::Model::UID->new_from_string($_) };
@@ -203,7 +214,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -221,6 +232,19 @@ Elastic::Model::Types define a number of L<MooseX::Types>, some for internal
 use and some which will be useful generally.
 
 =head1 PUBLIC TYPES
+
+=head2 Keyword
+
+    use Elastic::Model::Types qw(Keyword);
+
+    has 'status' => (
+        is  => 'ro',
+        isa => Keyword
+    );
+
+C<Keyword> is a sub-type of C<Str>.  It is provided to make it easy to map
+string values which should not be analyzed (eg a C<status> field rather than
+a C<comment_body> field). See L<Elastic::Model::TypeMap::ES/Keyword>.
 
 =head2 Binary
 

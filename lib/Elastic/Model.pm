@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.04';
+  $Elastic::Model::VERSION = '0.05';
 }
 
 use Moose();
@@ -12,7 +12,8 @@ Moose::Exporter->setup_import_methods(
     class_metaroles => { class => ['Elastic::Model::Meta::Class::Model'] },
     with_meta       => [
         qw(has_namespace has_typemap override_classes
-            has_analyzer has_tokenizer has_filter has_char_filter)
+            has_analyzer has_tokenizer has_filter has_char_filter
+            has_unique_index)
     ],
     base_class_roles => ['Elastic::Model::Role::Model'],
     also             => 'Moose',
@@ -35,6 +36,13 @@ sub has_namespace {
 #===================================
 sub has_typemap { shift->set_class( 'typemap', @_ ) }
 #===================================
+
+#===================================
+sub has_unique_index {
+#===================================
+    my ( $meta, $val ) = @_;
+    $meta->unique_index($val);
+}
 
 #===================================
 sub override_classes {
@@ -85,7 +93,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -175,6 +183,16 @@ You can specify your own TypeMap using:
 
 See L<Elastic::Model::TypeMap::Base> for instructions on how to define
 your own type-map classes.
+
+=head2 Custom unique key index
+
+If you have attributes whose values are
+L<unique|Elastic::Manual::Attributes::Unique>, then you can customize the index
+where these unique values are stored.
+
+    has_unique_index 'myapp_unique';
+
+The default value is C<unique_key>.
 
 =head2 Custom analyzers
 

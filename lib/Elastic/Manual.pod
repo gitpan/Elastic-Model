@@ -12,7 +12,7 @@ Elastic::Manual - What is Elastic::Model and how do I use it?
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 WHAT IS ELASTIC::MODEL?
 
@@ -77,6 +77,10 @@ NoSQL document store like ElasticSearch.
 =head2 L<Elastic::Manual::Attributes>
 
 Fine-tuning how the attributes in your Elastic::Doc classes are indexed.
+
+=head2 L<Elastic::Manual::Attributes::Unique>
+
+Making attributes in your Elastic::Doc classes unique.
 
 =head2 L<Elastic::Manual::Reindexing>
 

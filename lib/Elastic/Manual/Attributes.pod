@@ -13,7 +13,7 @@ Elastic::Manual::Attributes - Fine-tuning how your attributes are indexed
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -191,6 +191,7 @@ C<no>: This attribute will not be indexed, and will thus not be searchable.
 
 C<not_analyzed>: This attribute will be indexed using exactly the value
 that you pass in, eg C<FoO> will be stored (and searchable) as C<FoO>.
+Also see L<Elastic::Model::TypeMap::ES/Keyword>.
 
 =item *
 
@@ -343,6 +344,18 @@ Sometimes, you may want to specify a different name for a field.  For instance:
 
 You can use the C<index_name> to distinguish C<town_name> from C<street_name>.
 
+=head2 unique_key
+
+    has 'email' => (
+        is          => 'ro',
+        isa         => 'Str',
+        unique_key  => 'myapp_email'
+    );
+
+The L</unique_key> keyword allows you to ensure that an attribute's value
+is unique, eg to ensure that only one user account has a particular email
+address.  See L<Elastic::Manual::Attributes::Unique> for a fuller explanation.
+
 =head2 store
 
     has 'big_field' => (
@@ -403,7 +416,7 @@ detailed discussion.
 
 The keywords below apply only to fields of L</type> C<string>. You can also
 use L</index>, L</include_in_all>, L</boost>, L</multi>, L</index_name>,
-L</store> and L</null_value>.
+L</unique_key>, L</store> and L</null_value>.
 
 =head2 analyzer
 
@@ -527,7 +540,7 @@ The following keyword applies only to fields of L</type> C<integer>,
 C<long>, C<float>, C<double>, C<short> or C<byte>.
 
 You can also use L</index>, L</include_in_all>, L</boost>, L</multi>,
-L</index_name>, L</store> and L</null_value>.
+L</index_name>, L</unique_key>, L</store> and L</null_value>.
 
 =head2 precision_step (numeric)
 
@@ -547,7 +560,7 @@ B<milli>seconds since the epoch.
 
 The following keywords apply only to fields of L</"type"> C<date>.
 You can also use L</index>, L</include_in_all>, L</boost>, L</multi>,
-L</index_name>, L</store> and L</null_value>.
+L</index_name>, L</unique_key>, L</store> and L</null_value>.
 
 =head2 format
 
@@ -613,7 +626,7 @@ Fields of type C<ip> can be used to index IPv4 addresses in numeric form.
 
 The following keyword applies only to fields of L</type> C<ip>.
 You can also use L</index>, L</include_in_all>, L</boost>, L</multi>,
-L</index_name>, L</store> and L</null_value>.
+L</index_name>, L</unique_key>, L</store> and L</null_value>.
 
 =head2 precision_step (ip)
 
