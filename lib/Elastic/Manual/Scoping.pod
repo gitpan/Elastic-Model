@@ -12,7 +12,7 @@ Elastic::Manual::Scoping - An optional in-memory cache, essential for keeping we
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 Warning
 

@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Store;
 {
-  $Elastic::Model::Role::Store::VERSION = '0.05';
+  $Elastic::Model::Role::Store::VERSION = '0.06';
 }
 
 use Moose::Role;
@@ -75,7 +75,7 @@ Elastic::Model::Role::Store - ElasticSearch backend for document read/write requ
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 DESCRIPTION
 

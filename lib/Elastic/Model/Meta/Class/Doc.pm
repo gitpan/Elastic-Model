@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Doc;
 {
-  $Elastic::Model::Meta::Class::Doc::VERSION = '0.05';
+  $Elastic::Model::Meta::Class::Doc::VERSION = '0.06';
 }
 
 use Moose::Role;
@@ -87,7 +87,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 DESCRIPTION
 
