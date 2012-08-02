@@ -1,6 +1,6 @@
 package Elastic::Model::View;
 {
-  $Elastic::Model::View::VERSION = '0.06';
+  $Elastic::Model::View::VERSION = '0.07';
 }
 
 use Moose;
@@ -10,7 +10,7 @@ use Elastic::Model::Types qw(
     IndexNames ArrayRefOfStr SortArgs
     HighlightArgs Consistency Replication);
 use MooseX::Types::Moose qw(Str Int HashRef ArrayRef Bool Num Object);
-
+use Elastic::Model::SearchBuilder();
 use namespace::autoclean;
 
 #===================================
@@ -218,7 +218,7 @@ has 'search_builder' => (
 );
 
 #===================================
-sub _build_search_builder { shift->model->es->builder }
+sub _build_search_builder { Elastic::Model::SearchBuilder->new }
 #===================================
 
 #===================================
@@ -455,7 +455,7 @@ Elastic::Model::View - Views to query your docs in ElasticSearch
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -635,7 +635,7 @@ one or more types.
 Specify the query to run in the native
 L<ElasticSearch query DSL|http://www.elasticsearch.org/guide/reference/query-dsl/>
 or use C<queryb()> to specify your query  with the more Perlish
-L<ElasticSearch::SearchBuilder> query syntax.
+L<Elastic::Model::SearchBuilder> query syntax.
 
 By default, the query will
 L<match all docs|http://www.elasticsearch.org/guide/reference/query-dsl/match-all-query.html>.
@@ -654,7 +654,7 @@ L<match all docs|http://www.elasticsearch.org/guide/reference/query-dsl/match-al
 
 You can specify a filter to apply to the query results using either
 the native ElasticSearch query DSL or, use C<filterb()> to specify your
-filter with the more Perlish L<ElasticSearch::SearchBuilder> DSL.
+filter with the more Perlish L<Elastic::Model::SearchBuilder> DSL.
 If a filter is specified, it will be combined with the L</query>
 as a L<filtered query|http://www.elasticsearch.org/guide/reference/query-dsl/filtered-query.html>,
 or (if no query is specified) as a
@@ -680,7 +680,7 @@ results would then be limited to just those docs where C<tag == perl>.
 
 You can specify a post_filter using either the native ElasticSearch query DSL or,
 use C<post_filterb()> to specify it with the more Perlish
-L<ElasticSearch::SearchBuilder> DSL.
+L<Elastic::Model::SearchBuilder> DSL.
 
 =head2 sort
 
@@ -907,7 +907,7 @@ can later be retrieved using L<ElasticSearch/index_stats()>.
     $builder  = $view->search_builder;
 
 If you would like to use a different search builder than the default
-L<ElasticSearch::SearchBuilder> for L</"queryb">, L</"filterb"> or
+L<Elastic::Model::SearchBuilder> for L</"queryb">, L</"filterb"> or
 L</post_filterb>, then you can set a value for L</search_builder>.
 
 =head1 DELETE ATTRIBUTES

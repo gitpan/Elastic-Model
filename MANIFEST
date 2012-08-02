@@ -40,6 +40,7 @@ lib/Elastic/Model/Role/Model.pm
 lib/Elastic/Model/Role/Results.pm
 lib/Elastic/Model/Role/Store.pm
 lib/Elastic/Model/Scope.pm
+lib/Elastic/Model/SearchBuilder.pm
 lib/Elastic/Model/Store.pm
 lib/Elastic/Model/Trait/Exclude.pm
 lib/Elastic/Model/Trait/Field.pm
@@ -100,6 +101,17 @@ t/50_scope/03_delete.t
 t/50_scope/04_search.t
 t/60_reindex/01_basic.t
 t/60_reindex/02_objects_with_uids.t
+t/70_searchbuilder/00-basic.t
+t/70_searchbuilder/01-filters-field-ops.t
+t/70_searchbuilder/02-filters-unary-ops.t
+t/70_searchbuilder/03-filters-logic.t
+t/70_searchbuilder/04-queries-field-ops.t
+t/70_searchbuilder/05-queries-unary-ops.t
+t/70_searchbuilder/06-queries-logic.t
+t/70_searchbuilder/07-raw_dsl.t
+t/70_searchbuilder/08-misc.t
+t/70_searchbuilder/10_object_filters.t
+t/70_searchbuilder/11_object_queries.t
 t/lib/FieldTest.pm
 t/lib/FieldTest/Binary.pm
 t/lib/FieldTest/Boolean.pm
