@@ -101,6 +101,7 @@ t/50_scope/03_delete.t
 t/50_scope/04_search.t
 t/60_reindex/01_basic.t
 t/60_reindex/02_objects_with_uids.t
+t/60_reindex/03_transform.t
 t/70_searchbuilder/00-basic.t
 t/70_searchbuilder/01-filters-field-ops.t
 t/70_searchbuilder/02-filters-unary-ops.t

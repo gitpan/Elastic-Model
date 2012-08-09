@@ -1,6 +1,6 @@
 package Elastic::Model::Index;
 {
-  $Elastic::Model::Index::VERSION = '0.07';
+  $Elastic::Model::Index::VERSION = '0.08';
 }
 
 use Carp;
@@ -35,6 +35,7 @@ sub reindex {
     my $bulk_size  = $args{bulk_size} || $size;
     my $dest_index = $self->name;
     my $model      = $self->model;
+    my $transform  = $args{transform} || sub {@_};
 
     printf "Reindexing domain ($domain) to index ($dest_index)\n" if $verbose;
 
@@ -50,7 +51,7 @@ sub reindex {
     # later, when they're used in docs that aren't being reindexed
     my @uids;
     my $doc_updater = sub {
-        my ($doc) = @_;
+        my ($doc) = $transform->(@_);
         push @uids, [ @{$doc}{qw(_index _type _id)} ];
         $doc->{_index} = $dest_index;
         return $doc;
@@ -73,12 +74,13 @@ sub reindex {
 
     my $source = $model->view->domain($domain)->size($size)->scan($scan);
     $model->es->reindex(
-        source      => $source->as_elements,
-        quiet       => !$verbose,
-        transform   => $updater,
-        bulk_size   => $bulk_size,
-        on_conflict => $args{on_conflict},
-        on_error    => $args{on_error},
+        source       => $source,
+        _method_name => 'shift_element',
+        quiet        => !$verbose,
+        transform    => $updater,
+        bulk_size    => $bulk_size,
+        on_conflict  => $args{on_conflict},
+        on_error     => $args{on_error},
     );
 
     return 1 unless $args{repoint_uids};
@@ -160,12 +162,13 @@ sub repoint_uids {
         my $source = $view->filterb( \@clauses )->scan($scan);
 
         $model->es->reindex(
-            source      => $source->as_elements,
-            bulk_size   => $bulk_size,
-            quiet       => 1,
-            transform   => $updater,
-            on_conflict => $args{on_conflict},
-            on_error    => $args{on_error},
+            source       => $source,
+            _method_name => 'shift_element',
+            bulk_size    => $bulk_size,
+            quiet        => 1,
+            transform    => $updater,
+            on_conflict  => $args{on_conflict},
+            on_error     => $args{on_error},
         );
 
     }
@@ -215,7 +218,7 @@ Elastic::Model::Index - Create and administer indices in ElasticSearch
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -277,6 +280,8 @@ L<namespace|Elastic::Model::Namespace>, pass in a list of C<@types>.
         scan            => '2m',
         quiet           => 0,
 
+        transform       => sub {...},
+
         on_conflict     => sub {...} | 'IGNORE'
         on_error        => sub {...} | 'IGNORE'
         uid_on_conflict => sub {...} | 'IGNORE'
@@ -324,6 +329,22 @@ scroll timeouts.
 If true (the default), L</repoint_uids()> will be called automatically to
 update any L<UIDs|Elastic::Model::UID> (which point at the old index) in
 indices other than the ones currently being reindexed.
+
+=item transform
+
+If you need to change the structure/data of your doc while reindexing, you
+can pass a C<transform> coderef.  This will be called before any changes
+have been made to the doc, and should return the new doc. For instance,
+to convert the single-value C<tag> field to an array of C<tags>:
+
+    $index->reindex(
+        'new_index',
+        'transform' => sub {
+            my $doc = shift;
+            $doc->{_source}{tags} = [ delete $doc->{_source}{tag} ];
+            return $doc
+        }
+    );
 
 =item on_conflict / on_error
 

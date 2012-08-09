@@ -26,7 +26,8 @@
             "Class::MOP" : "0",
             "Data::Dump" : "0",
             "DateTime" : "0",
-            "ElasticSearch" : "0.57",
+            "Devel::GlobalDestruction" : "0",
+            "ElasticSearch" : "0.58",
             "ElasticSearch::SearchBuilder" : "0",
             "ElasticSearchX::UniqueKey" : "0.03",
             "List::MoreUtils" : "0",
@@ -76,6 +77,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }
 

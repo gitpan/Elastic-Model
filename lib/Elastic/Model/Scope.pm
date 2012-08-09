@@ -1,12 +1,13 @@
 package Elastic::Model::Scope;
 {
-  $Elastic::Model::Scope::VERSION = '0.07';
+  $Elastic::Model::Scope::VERSION = '0.08';
 }
 
 use Moose;
 use namespace::autoclean;
 use MooseX::Types::Moose qw(:all);
 use Scalar::Util qw(refaddr);
+use Devel::GlobalDestruction;
 
 #===================================
 has '_objects' => (
@@ -106,6 +107,7 @@ sub delete_object {
 sub DEMOLISH {
 #===================================
     my $self = shift;
+    return if in_global_destruction;
     $self->model->detach_scope($self);
 }
 
@@ -121,7 +123,7 @@ Elastic::Model::Scope - Keeps objects alive and connected
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 DESCRIPTION
 
