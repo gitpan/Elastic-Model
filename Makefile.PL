@@ -60,7 +60,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.08",
+  "VERSION" => "0.09",
   "test" => {
     "TESTS" => "t/*.t t/00_setup/*.t t/10_typemaps/*.t t/20_namespace/*.t t/30_domain/*.t t/40_view/*.t t/50_scope/*.t t/60_reindex/*.t t/70_searchbuilder/*.t"
   }

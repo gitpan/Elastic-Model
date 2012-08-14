@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.08';
+  $Elastic::Model::Role::Doc::VERSION = '0.09';
 }
 
 use Moose::Role;
@@ -23,6 +23,7 @@ has 'uid' => (
     writer   => '_set_uid',
     traits   => ['Elastic::Model::Trait::Exclude'],
     exclude  => 1,
+    handles  => [ 'id', 'type' ]
 );
 
 #===================================
@@ -171,6 +172,20 @@ sub has_been_deleted {
     !$self->model->doc_exists( uid => $uid, @_ );
 }
 
+#===================================
+sub terms_indexed_for_field {
+#===================================
+    my $self  = shift;
+    my $field = shift or croak "Missing required param (fieldname)";
+    my $size  = shift || 20;
+
+    my $uid = $self->uid;
+    return $self->model->view->domain( $uid->index )->type( $uid->type )
+        ->filterb( _id => $uid->id )
+        ->facets( field => { terms => { field => $field, size => 20 } } )
+        ->size(0)->search->facet('field');
+}
+
 1;
 
 
@@ -183,7 +198,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
@@ -278,6 +293,27 @@ L<namespace|Elastic::Model::Namespace> contains multiple indices, it is up
 to you to ensure uniqueness.  Either leave the ID blank, in which case
 ElasticSearch will generate a unique ID, or ensure that the way you
 generate IDs will not cause a collision.
+
+=head2 type / id
+
+    $type = $doc->type;
+    $id   = $doc->id;
+
+C<type> and C<id> are provided as convenience, read-only accessors which
+call the equivalent accessor on L</uid>.
+
+You can defined your own C<id()> and C<type()> methods, in which case they
+won't be imported, or you can import them under a different name, eg:
+
+    package MyApp::User;
+    use Elastic::Doc;
+
+    with 'Elastic::Model::Role::Doc' => {
+        -alias => {
+            id   => 'doc_id',
+            type => 'doc_type',
+        }
+    };
 
 =head2 timestamp
 
@@ -459,6 +495,14 @@ been changed.
 
 Returns the original value that an attribute had before being changed, or
 C<undef>.
+
+=head2 terms_indexed_for_field()
+
+    $terms = $doc->terms_indexed_for_field( $fieldname, $size );
+
+This method is useful for debugging queries and analysis - it returns
+the actual terms (ie after analysis) that have been indexed for
+field C<$fieldname> in the current doc. C<$size> defaults to 20.
 
 =head2 Private methods
 

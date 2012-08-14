@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.08';
+  $Elastic::Model::VERSION = '0.09';
 }
 
 use Moose();
@@ -93,7 +93,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 

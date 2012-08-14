@@ -1,26 +1,12 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.08';
+  $Elastic::Model::SearchBuilder::VERSION = '0.09';
 }
 
 use strict;
 use warnings;
 use parent 'ElasticSearch::SearchBuilder';
 use Carp;
-
-#===================================
-sub _top_ElasticDocREF {
-#===================================
-    my ( $self, $type, $doc ) = @_;
-    $self->_uid_to_terms( $type, '', $doc->uid );
-}
-
-#===================================
-sub _top_ElasticUIDREF {
-#===================================
-    my ( $self, $type, $uid ) = @_;
-    $self->_uid_to_terms( $type, '', $uid );
-}
 
 #===================================
 sub _hashpair_ElasticDocREF {
@@ -79,11 +65,10 @@ sub _query_field_text {
 sub _uid_to_terms {
 #===================================
     my ( $self, $type, $k, $uid ) = @_;
-    $k = length $k ? $k . '.' : '';
     my @clauses;
     for (qw(index type id)) {
         my $val = $uid->$_ or croak "UID missing ($_)";
-        push @clauses, { term => { "${k}uid.$_" => $val } };
+        push @clauses, { term => { "${k}.uid.$_" => $val } };
     }
     return $type eq 'query'
         ? { bool => { must => \@clauses } }
@@ -136,7 +121,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 DESCRIPTION
 
@@ -246,16 +231,6 @@ You can use either the doc/object itself, or an L<Elastic::Model::UID> object:
 
     $view->queryb ( user => { '!=' => \@users })->search;
     $view->filterb( user => { '!=' => \@users })->search;
-
-=head2 Docs that contain the C<$user> in any field
-
-    $view->queryb ( $user )->search;
-    $view->filterb( $user )->search;
-
-=head2 Docs where C<status> is C<active> and any field contains C<$user>:
-
-    $view->queryb ( '' => $user, status => 'active' )->search
-    $view->filterb( '' => $user, status => 'active' )->search
 
 =head1 AUTHOR
 
