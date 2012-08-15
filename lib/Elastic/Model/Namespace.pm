@@ -1,6 +1,6 @@
 package Elastic::Model::Namespace;
 {
-  $Elastic::Model::Namespace::VERSION = '0.09';
+  $Elastic::Model::Namespace::VERSION = '0.10';
 }
 
 use Moose;
@@ -103,7 +103,7 @@ Elastic::Model::Namespace - Class-to-type map
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

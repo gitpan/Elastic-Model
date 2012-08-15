@@ -1,6 +1,6 @@
 package Elastic::Model::Store;
 {
-  $Elastic::Model::Store::VERSION = '0.09';
+  $Elastic::Model::Store::VERSION = '0.10';
 }
 
 use Moose;
@@ -19,7 +19,7 @@ Elastic::Model::Store - A default implementation of the ElasticSearch backend
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 DESCRIPTION
 

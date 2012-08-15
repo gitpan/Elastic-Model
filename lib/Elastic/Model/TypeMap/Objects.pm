@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Objects;
 {
-  $Elastic::Model::TypeMap::Objects::VERSION = '0.09';
+  $Elastic::Model::TypeMap::Objects::VERSION = '0.10';
 }
 
 use strict;
@@ -157,7 +157,7 @@ Elastic::Model::TypeMap::Objects - Type maps for objects and Moose classes
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 DESCRIPTION
 

@@ -1,6 +1,6 @@
 package Elastic::Model::Result;
 {
-  $Elastic::Model::Result::VERSION = '0.09';
+  $Elastic::Model::Result::VERSION = '0.10';
 }
 
 use Moose;
@@ -158,7 +158,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 

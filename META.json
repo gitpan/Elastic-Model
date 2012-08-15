@@ -28,7 +28,7 @@
             "DateTime" : "0",
             "Devel::GlobalDestruction" : "0",
             "ElasticSearch" : "0.58",
-            "ElasticSearch::SearchBuilder" : "0",
+            "ElasticSearch::SearchBuilder" : "v0.14.0",
             "ElasticSearchX::UniqueKey" : "0.03",
             "List::MoreUtils" : "0",
             "List::Util" : "0",
@@ -77,6 +77,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.09"
+   "version" : "0.10"
 }
 

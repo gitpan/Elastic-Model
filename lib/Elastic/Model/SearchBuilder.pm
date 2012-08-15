@@ -1,10 +1,11 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.09';
+  $Elastic::Model::SearchBuilder::VERSION = '0.10';
 }
 
 use strict;
 use warnings;
+use ElasticSearch::SearchBuilder v0.14;
 use parent 'ElasticSearch::SearchBuilder';
 use Carp;
 
@@ -121,7 +122,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 DESCRIPTION
 

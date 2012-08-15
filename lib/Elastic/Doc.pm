@@ -1,6 +1,6 @@
 package Elastic::Doc;
 {
-  $Elastic::Doc::VERSION = '0.09';
+  $Elastic::Doc::VERSION = '0.10';
 }
 
 use Moose();
@@ -33,7 +33,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
