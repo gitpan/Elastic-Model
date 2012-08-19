@@ -12,7 +12,7 @@ Elastic::Manual::NoSQL - Differences between relational DBs and NoSQL document s
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 THINK DIFFERENT
 

@@ -28,7 +28,7 @@
             "DateTime" : "0",
             "Devel::GlobalDestruction" : "0",
             "ElasticSearch" : "0.58",
-            "ElasticSearch::SearchBuilder" : "v0.14.0",
+            "ElasticSearch::SearchBuilder" : "0.14",
             "ElasticSearchX::UniqueKey" : "0.03",
             "List::MoreUtils" : "0",
             "List::Util" : "0",
@@ -46,7 +46,7 @@
             "Sub::Exporter" : "0",
             "Time::HiRes" : "0",
             "Try::Tiny" : "0",
-            "Variable::Magic" : "0",
+            "Variable::Magic" : "0.51",
             "namespace::autoclean" : "0",
             "parent" : "0",
             "strict" : "0",
@@ -77,6 +77,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.10"
+   "version" : "0.11"
 }
 

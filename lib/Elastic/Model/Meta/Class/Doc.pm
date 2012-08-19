@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Doc;
 {
-  $Elastic::Model::Meta::Class::Doc::VERSION = '0.10';
+  $Elastic::Model::Meta::Class::Doc::VERSION = '0.11';
 }
 
 use Moose::Role;
@@ -8,7 +8,7 @@ use Moose::Role;
 use MooseX::Types::Moose qw(Maybe HashRef);
 use Carp;
 use namespace::autoclean;
-use Variable::Magic qw(cast wizard);
+use Variable::Magic 0.51 qw(cast wizard dispell);
 
 my $wiz = wizard( map { $_ => \&_inflate } qw(fetch store exists delete) );
 my %exclude = map { $_ => 1 } qw(uid _can_inflate _source);
@@ -72,6 +72,8 @@ sub _inflate {
 #===================================
     my ( $obj, undef, $key ) = @_;
     return if $exclude{ $key || '' };
+
+    dispell %$obj, $wiz;
     $obj->_inflate_doc if $obj->{_can_inflate};
 }
 
@@ -87,7 +89,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 DESCRIPTION
 

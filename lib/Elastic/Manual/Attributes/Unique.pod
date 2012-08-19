@@ -14,7 +14,7 @@ Elastic::Manual::Attributes::Unique - Making attributes unique
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 INTRODUCTION
 

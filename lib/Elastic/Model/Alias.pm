@@ -1,6 +1,6 @@
 package Elastic::Model::Alias;
 {
-  $Elastic::Model::Alias::VERSION = '0.10';
+  $Elastic::Model::Alias::VERSION = '0.11';
 }
 
 use Carp;
@@ -99,7 +99,7 @@ Elastic::Model::Alias - Administer aliases in ElasticSearch
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 

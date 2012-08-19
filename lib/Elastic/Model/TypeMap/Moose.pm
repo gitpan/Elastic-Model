@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Moose;
 {
-  $Elastic::Model::TypeMap::Moose::VERSION = '0.10';
+  $Elastic::Model::TypeMap::Moose::VERSION = '0.11';
 }
 
 use strict;
@@ -203,7 +203,7 @@ Elastic::Model::TypeMap::Moose - Type maps for core Moose types
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 DESCRIPTION
 
