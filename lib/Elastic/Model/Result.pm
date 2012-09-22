@@ -1,6 +1,6 @@
 package Elastic::Model::Result;
 {
-  $Elastic::Model::Result::VERSION = '0.11';
+  $Elastic::Model::Result::VERSION = '0.12';
 }
 
 use Moose;
@@ -76,6 +76,15 @@ has 'object' => (
     builder => '_build_object'
 );
 
+#===================================
+has 'partial' => (
+#===================================
+    is      => 'ro',
+    does    => 'Elastic::Model::Role::Doc',
+    lazy    => 1,
+    builder => '_build_partial'
+);
+
 no Moose;
 
 #===================================
@@ -97,6 +106,16 @@ sub _build_object {
 }
 
 #===================================
+sub _build_partial {
+#===================================
+    my $self = shift;
+    $self->result->{_partial} ||= $self->model->new_partial_doc(
+        uid            => Elastic::Model::UID->new_partial( $self->result ),
+        partial_source => $self->field('_partial_doc')
+    );
+}
+
+#===================================
 sub highlight {
 #===================================
     my $self       = shift;
@@ -114,8 +133,7 @@ sub explain {
     my $explain = $result->{_explanation}
         || return "No explanation\n";
 
-    my $text = sprintf
-        "Doc: [%s|%s|%s], Shard: [%s|%d]:\n",
+    my $text = sprintf "Doc: [%s|%s|%s], Shard: [%s|%d]:\n",
         map { defined $_ ? $_ : 'undef' }
         @{$result}{qw(_index _type _id _node _shard)};
 
@@ -158,7 +176,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -166,6 +184,7 @@ version 0.11
 
     $object             = $result->object;
     $uid                = $result->uid;
+    $partial_obj        = $result->partial;
 
     \%all_highlights    = $result->highlights;
     @field_highlights   = $result->highlight('field_name');
@@ -211,6 +230,17 @@ Also see L<Elastic::Manual::Scoping>.
 The L<uid|Elastic::Model::UID> of the doc.  L<index|Elastic::Model::UID/index>,
 L<type|Elastic::Model::UID/type>, L<id|Elastic::Model::UID/id>
 and L<routing|Elastic::Model::UID/routing> are provided for convenience.
+
+=head2 partial
+
+    $partial_obj = $result->partial_object();
+
+If your objects are large, you may want to load only part of the object in your
+search results. You can specify which parts of the object to include or exclude
+using L<Elastic::Model::View/"include_paths / exclude_paths">.
+
+The partial objects returned by L</partial> function exactly as real objects,
+except that they cannot be saved.
 
 =head2 highlights
 
