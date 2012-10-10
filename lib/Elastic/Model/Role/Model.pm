@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Model;
 {
-  $Elastic::Model::Role::Model::VERSION = '0.12';
+  $Elastic::Model::Role::Model::VERSION = '0.13';
 }
 
 use Moose::Role;
@@ -635,7 +635,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

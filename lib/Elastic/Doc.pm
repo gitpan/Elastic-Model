@@ -1,6 +1,6 @@
 package Elastic::Doc;
 {
-  $Elastic::Doc::VERSION = '0.12';
+  $Elastic::Doc::VERSION = '0.13';
 }
 
 use Moose();
@@ -8,14 +8,21 @@ use Moose::Exporter;
 use namespace::autoclean;
 
 Moose::Exporter->setup_import_methods(
-    base_class_roles => ['Elastic::Model::Role::Doc'],
-    with_meta        => ['has_mapping'],
-    class_metaroles  => {
+    with_meta       => ['has_mapping'],
+    class_metaroles => {
         class     => ['Elastic::Model::Meta::Class::Doc'],
         attribute => ['Elastic::Model::Trait::Field'],
     },
     also => 'Moose',
 );
+
+#===================================
+sub init_meta {
+#===================================
+    shift;
+    my $meta = Moose->init_meta(@_);
+    Moose::Util::apply_all_roles( $meta, 'Elastic::Model::Role::Doc' );
+}
 
 #===================================
 sub has_mapping { shift->mapping(@_) }
@@ -33,7 +40,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

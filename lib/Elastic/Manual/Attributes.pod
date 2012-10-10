@@ -13,7 +13,7 @@ Elastic::Manual::Attributes - Fine-tuning how your attributes are indexed
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

@@ -1,9 +1,9 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.12';
+  $Elastic::Model::VERSION = '0.13';
 }
 
-use Moose();
+use Moose 2.06 ();
 use Moose::Exporter();
 use Carp;
 use namespace::autoclean;
@@ -15,9 +15,16 @@ Moose::Exporter->setup_import_methods(
             has_analyzer has_tokenizer has_filter has_char_filter
             has_unique_index)
     ],
-    base_class_roles => ['Elastic::Model::Role::Model'],
-    also             => 'Moose',
+    also => 'Moose',
 );
+
+#===================================
+sub init_meta {
+#===================================
+    shift;
+    my $meta = Moose->init_meta(@_);
+    Moose::Util::apply_all_roles( $meta, 'Elastic::Model::Role::Model' );
+}
 
 #===================================
 sub has_namespace {
@@ -93,7 +100,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

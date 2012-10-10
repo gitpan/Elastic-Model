@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Default;
 {
-  $Elastic::Model::TypeMap::Default::VERSION = '0.12';
+  $Elastic::Model::TypeMap::Default::VERSION = '0.13';
 }
 
 use strict;
@@ -26,7 +26,7 @@ Elastic::Model::TypeMap::Default - The default type map used by Elastic::Model
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 DESCRIPTION
 

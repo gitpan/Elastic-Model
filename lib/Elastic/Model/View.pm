@@ -1,6 +1,6 @@
 package Elastic::Model::View;
 {
-  $Elastic::Model::View::VERSION = '0.12';
+  $Elastic::Model::View::VERSION = '0.13';
 }
 
 use Moose;
@@ -488,7 +488,7 @@ Elastic::Model::View - Views to query your docs in ElasticSearch
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
