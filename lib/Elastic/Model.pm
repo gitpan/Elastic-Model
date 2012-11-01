@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.13';
+  $Elastic::Model::VERSION = '0.14';
 }
 
 use Moose 2.06 ();
@@ -100,7 +100,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -118,7 +118,7 @@ version 0.13
     # Setup custom analyzers
 
     has_filter 'edge_ngrams' => (
-        type     => 'edgeNGram',
+        type     => 'edge_ngram',
         min_gram => 2,
         max_gram => 10
     );
@@ -265,7 +265,7 @@ multiple token filters.  For instance, each term could be broken down into
 "edge ngrams" (eg 'foo' => 'f','fo','foo') for partial matching.
 
     has_filter 'my_ngrams' => (
-        type        => 'edgeNGram',
+        type        => 'edge_ngram',
         min_gram    => 1,
         max_gram    => 10,
     );
@@ -336,6 +336,10 @@ C<scrolled_results> C<----> L<Elastic::Model::Results::Scrolled>
 =item *
 
 C<result> C<--------------> L<Elastic::Model::Result>
+
+=item *
+
+C<bulk> C<----------------> L<Elastic::Model::Bulk>
 
 =back
 

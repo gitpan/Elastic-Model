@@ -3,7 +3,7 @@ NAME
     objects using ElasticSearch as a backend.
 
 VERSION
-    version 0.13
+    version 0.14
 
 SYNOPSIS
         package MyApp;
@@ -20,7 +20,7 @@ SYNOPSIS
         # Setup custom analyzers
 
         has_filter 'edge_ngrams' => (
-            type     => 'edgeNGram',
+            type     => 'edge_ngram',
             min_gram => 2,
             max_gram => 10
         );
@@ -149,7 +149,7 @@ USING ELASTIC::MODEL
     matching.
 
         has_filter 'my_ngrams' => (
-            type        => 'edgeNGram',
+            type        => 'edge_ngram',
             min_gram    => 1,
             max_gram    => 10,
         );
@@ -200,6 +200,8 @@ USING ELASTIC::MODEL
     *   "scrolled_results" "----" Elastic::Model::Results::Scrolled
 
     *   "result" "--------------" Elastic::Model::Result
+
+    *   "bulk" "----------------" Elastic::Model::Bulk
 
 SEE ALSO
     *   Elastic::Model::Role::Model

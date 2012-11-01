@@ -1,6 +1,6 @@
 package Elastic::Model::View;
 {
-  $Elastic::Model::View::VERSION = '0.13';
+  $Elastic::Model::View::VERSION = '0.14';
 }
 
 use Moose;
@@ -488,7 +488,7 @@ Elastic::Model::View - Views to query your docs in ElasticSearch
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -984,10 +984,6 @@ the delete to take place.
 Should a delete be done synchronously (ie waits until all nodes within
 the replcation group have run the delete) or asynchronously (returns
 immediately, and performs the delete in the background).
-
-=head1 TODO
-
-Possibly support L<partial fields|https://github.com/elasticsearch/elasticsearch/issues/1570>
 
 =head1 AUTHOR
 

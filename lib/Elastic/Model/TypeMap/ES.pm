@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::ES;
 {
-  $Elastic::Model::TypeMap::ES::VERSION = '0.13';
+  $Elastic::Model::TypeMap::ES::VERSION = '0.14';
 }
 
 use strict;
@@ -113,7 +113,7 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 DESCRIPTION
 
@@ -191,6 +191,12 @@ They are mapped as C<< { type => 'binary' } >>.
 Attributes of type L<Elastic::Model::Types/"Timestamp"> are deflated
 to epoch milliseconds, and inflated to epoch seconds (with floating-point
 milliseconds). It is mapped as C<< { type => 'date' } >>.
+
+B<Note:> When querying timestamp fields in a View you will need to express the
+comparison values as epoch milliseconds or as an RFC3339 datetime:
+
+    { my_timestamp => { '>' => 1351748867 * 1000      }}
+    { my_timestamp => { '>' => '2012-11-01T00:00:00Z' }}
 
 =head1 AUTHOR
 

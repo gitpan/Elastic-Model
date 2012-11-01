@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Base;
 {
-  $Elastic::Model::TypeMap::Base::VERSION = '0.13';
+  $Elastic::Model::TypeMap::Base::VERSION = '0.14';
 }
 
 use strict;
@@ -427,7 +427,7 @@ Elastic::Model::TypeMap::Base - A base class for all TypeMaps
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 

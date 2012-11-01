@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.13';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.14';
 }
 
 use Moose::Role;
@@ -64,6 +64,7 @@ has 'classes' => (
             results          => 'Elastic::Model::Results',
             scrolled_results => 'Elastic::Model::Results::Scrolled',
             result           => 'Elastic::Model::Result',
+            bulk             => 'Elastic::Model::Bulk'
         };
     },
     handles => {
@@ -136,7 +137,7 @@ sub analysis_for_mappings {
         for my $name ( _required_analyzers( $mappings->{$type} ) ) {
             next
                 if exists $analyzers{$name}
-                    || $self->is_default( 'analyzer', $name );
+                || $self->is_default( 'analyzer', $name );
             $analyzers{$name} = $self->analyzer($name)
                 or die "Unknown analyzer ($name) required by type ($type)";
         }
@@ -151,7 +152,7 @@ sub analysis_for_mappings {
             for my $name ( ref $vals ? @$vals : $vals ) {
                 next
                     if exists $defn{$name}
-                        || $self->is_default( $type, $name );
+                    || $self->is_default( $type, $name );
                 $defn{$name} = $self->$type($name)
                     or die
                     "Unknown $type ($name) required by analyzer '$analyzer_name'";
@@ -199,7 +200,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 DESCRIPTION
 
@@ -368,7 +369,7 @@ A hash ref containing all filters plus their configuration, eg:
 
     {
         my_filter => {
-            type        => 'edgeNGram',
+            type        => 'edge_ngram',
             min_gram    => 1,
             max_gram    => 20
         }

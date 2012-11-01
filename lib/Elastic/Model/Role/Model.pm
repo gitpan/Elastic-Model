@@ -1,12 +1,12 @@
 package Elastic::Model::Role::Model;
 {
-  $Elastic::Model::Role::Model::VERSION = '0.13';
+  $Elastic::Model::Role::Model::VERSION = '0.14';
 }
 
 use Moose::Role;
 use Carp;
 use Elastic::Model::Types qw(ES ES_UniqueKey);
-use ElasticSearch 0.58             ();
+use ElasticSearch 0.59             ();
 use ElasticSearchX::UniqueKey 0.03 ();
 use Class::Load qw(load_class);
 use Moose::Util qw(does_role);
@@ -19,7 +19,7 @@ use List::MoreUtils qw(uniq);
 use namespace::autoclean;
 my @wrapped_classes = qw(
     domain  namespace   store   view    scope
-    results scrolled_results    result
+    results scrolled_results    result  bulk
 );
 
 for my $class (@wrapped_classes) {
@@ -551,6 +551,10 @@ sub _delete_unique_keys {
 }
 
 #===================================
+sub bulk { shift->bulk_class->new(@_) }
+#===================================
+
+#===================================
 sub search { shift->store->search(@_) }
 #===================================
 
@@ -635,7 +639,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -821,13 +825,24 @@ Passes C<%args> through to L<Elastic::Model::Store/"search()">
     );
 
 Creates an instance of a partial doc (ie an object which contains only some of
-the values stored in elasticsearch). These partial docs are useful when
+the values stored in Elasticsearch). These partial docs are useful when
 your objects are large, and you need to display search results which
 require only a few attributes, instead of the whole object.
 
 Attempting to save a partial doc will cause an error to be thrown.
 
 You shouldn't need to call this method yourself.
+
+=head3 bulk()
+
+Returns a new instance of L<Elastic::Model::Bulk> for fast indexing
+of multiple docs in batches.
+
+    $bulk = $model->bulk(
+        size        => 1000,
+        on_conflict => sub {....},
+        on_error    => sub {....}
+    );
 
 =head2 Miscellaneous
 

@@ -12,7 +12,7 @@ Elastic::Manual::Analysis - Controlling how your attributes are indexed
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =encoding utf8
 

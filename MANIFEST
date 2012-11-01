@@ -24,6 +24,7 @@ lib/Elastic/Manual/Searching.pod
 lib/Elastic/Manual/Terminology.pod
 lib/Elastic/Model.pm
 lib/Elastic/Model/Alias.pm
+lib/Elastic/Model/Bulk.pm
 lib/Elastic/Model/Deleted.pm
 lib/Elastic/Model/Domain.pm
 lib/Elastic/Model/Index.pm
@@ -103,6 +104,9 @@ t/50_scope/04_search.t
 t/60_reindex/01_basic.t
 t/60_reindex/02_objects_with_uids.t
 t/60_reindex/03_transform.t
+t/65_bulk/01_bulk.t
+t/65_bulk/02_error_handlers.t
+t/65_bulk/03_scope.t
 t/70_searchbuilder/00-basic.t
 t/70_searchbuilder/01-filters-field-ops.t
 t/70_searchbuilder/02-filters-unary-ops.t

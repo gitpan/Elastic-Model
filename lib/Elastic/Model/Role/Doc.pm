@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.13';
+  $Elastic::Model::Role::Doc::VERSION = '0.14';
 }
 
 use Moose::Role;
@@ -198,7 +198,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -351,6 +351,8 @@ C<_old_value>. See L</"old_value()"> and L</"has_changed()">.
 Saves the C<$doc> to ElasticSearch. If this is a new doc, and a doc with the
 same type and ID already exists in the same index, then ElasticSearch
 will throw an exception.
+
+Also see L<Elastic::Model::Bulk> for bulk indexing of multiple docs.
 
 If the doc was previously loaded from ElasticSearch, then that doc will be
 updated. However, because ElasticSearch uses

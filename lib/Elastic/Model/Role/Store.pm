@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Store;
 {
-  $Elastic::Model::Role::Store::VERSION = '0.13';
+  $Elastic::Model::Role::Store::VERSION = '0.14';
 }
 
 use Moose::Role;
@@ -63,6 +63,13 @@ sub delete_doc {
     return $self->es->delete( %{ $uid->write_params }, %args );
 }
 
+#===================================
+sub bulk {
+#===================================
+    my ( $self, %args ) = @_;
+    return $self->es->bulk(%args);
+}
+
 1;
 
 
@@ -75,7 +82,7 @@ Elastic::Model::Role::Store - ElasticSearch backend for document read/write requ
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 DESCRIPTION
 
@@ -136,6 +143,18 @@ Deletes a doc in the ElasticSearch backend and returns the raw
 result. Any failure throws an exception.  If the L<version|Elastic::Model::UID/"version">
 number does not match what is stored in ElasticSearch, then a conflict exception
 will be thrown.  Any C<%args> will be passed to L<ElasticSearch/"delete()">.
+
+=head2 bulk()
+
+    $result = $store->bulk(
+        actions     => $actions,
+        on_conflict => sub {...},
+        on_error    => sub {...},
+        %args
+    );
+
+Performs several actions in a single request. Any %agrs will be passed to
+L<ElasticSearch/bulk()>.
 
 =head2 search()
 
