@@ -55,4 +55,4 @@ requires:
 resources:
   bugtracker: https://github.com/clintongormley/Elastic-Model/issues
   repository: git://github.com/clintongormley/Elastic-Model.git
-version: 0.14
+version: 0.15

@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Iterator;
 {
-  $Elastic::Model::Role::Iterator::VERSION = '0.14';
+  $Elastic::Model::Role::Iterator::VERSION = '0.15';
 }
 
 use Carp;
@@ -40,7 +40,9 @@ has 'wrapper' => (
     isa     => CodeRef,
     is      => 'rw',
     lazy    => 1,
-    default => sub { shift() },
+    default => sub {
+        sub { shift() }
+    },
 );
 
 #===================================
@@ -49,7 +51,9 @@ has 'multi_wrapper' => (
     isa     => CodeRef,
     is      => 'rw',
     lazy    => 1,
-    default => sub {@_},
+    default => sub {
+        sub {@_}
+    },
 );
 
 #===================================
@@ -348,7 +352,7 @@ Elastic::Model::Role::Iterator - A generic iterator role
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 

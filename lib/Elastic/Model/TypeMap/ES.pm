@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::ES;
 {
-  $Elastic::Model::TypeMap::ES::VERSION = '0.14';
+  $Elastic::Model::TypeMap::ES::VERSION = '0.15';
 }
 
 use strict;
@@ -113,7 +113,7 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 DESCRIPTION
 

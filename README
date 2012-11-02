@@ -3,7 +3,7 @@ NAME
     objects using ElasticSearch as a backend.
 
 VERSION
-    version 0.14
+    version 0.15
 
 SYNOPSIS
         package MyApp;

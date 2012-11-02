@@ -1,6 +1,6 @@
 package Elastic::Model::Results;
 {
-  $Elastic::Model::Results::VERSION = '0.14';
+  $Elastic::Model::Results::VERSION = '0.15';
 }
 
 use Carp;
@@ -23,7 +23,9 @@ no Moose;
 #===================================
 sub BUILD {
 #===================================
-    my $self   = shift;
+    my $self = shift;
+    return if $_[0]->{elements};
+
     my $result = $self->model->search( $self->search );
 
     my $hits = $result->{hits};
@@ -35,6 +37,20 @@ sub BUILD {
     $self->_set_facets( $result->{facets} || {} );
 
     #$self->_set_timed_out( !!$result->{timed_out} );
+}
+
+#===================================
+sub to_cache {
+#===================================
+    my $self = shift;
+    my %data = map { $_ => $self->$_ } qw(search total max_score facets took);
+
+    my @elements = @{ $self->elements };
+    for (@elements) {
+        delete @{$_}{ '_object', '_partial' };
+    }
+    $data{elements} = \@elements;
+    return \%data;
 }
 
 1;
@@ -49,7 +65,7 @@ Elastic::Model::Results - An iterator over bounded/finite search results
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
@@ -442,6 +458,19 @@ Also C<slice_results>, C<slice_objects>, C<slice_elements>, C<slice_partials>
 Returns all L</elements> as a list.
 
 Also C<all_results>, C<all_objects>, C<all_elements>, C<all_partials>
+
+=head1 CACHING RESULTSETS
+
+In a later release, caching of result sets will be integrated into
+Elastic::Model.  For now, you can do this yourself with:
+
+To deflate the data for caching:
+
+    $data = $results->to_cache;
+
+To reinflate a resultset from raw data:
+
+    $results = $model->result_class->new( $data )->as_results
 
 =head1 AUTHOR
 
