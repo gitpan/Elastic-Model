@@ -3,7 +3,7 @@ NAME
     objects using ElasticSearch as a backend.
 
 VERSION
-    version 0.15
+    version 0.16
 
 SYNOPSIS
         package MyApp;
@@ -196,6 +196,8 @@ USING ELASTIC::MODEL
     *   "scope" "---------------" Elastic::Model::Scope
 
     *   "results" "-------------" Elastic::Model::Results
+
+    *   "cached_results" "------" Elastic::Model::Results::Cached
 
     *   "scrolled_results" "----" Elastic::Model::Results::Scrolled
 

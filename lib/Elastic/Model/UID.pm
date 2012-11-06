@@ -1,10 +1,10 @@
 package Elastic::Model::UID;
 {
-  $Elastic::Model::UID::VERSION = '0.15';
+  $Elastic::Model::UID::VERSION = '0.16';
 }
 
 use Moose;
-use MooseX::Types::Moose qw(:all);
+use MooseX::Types::Moose qw(Str Int Maybe Bool);
 use namespace::autoclean;
 
 #===================================
@@ -167,7 +167,7 @@ Elastic::Model::UID - The Unique ID of a document in an ElasticSearch cluster
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 

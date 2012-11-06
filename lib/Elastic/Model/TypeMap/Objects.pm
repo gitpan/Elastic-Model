@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Objects;
 {
-  $Elastic::Model::TypeMap::Objects::VERSION = '0.15';
+  $Elastic::Model::TypeMap::Objects::VERSION = '0.16';
 }
 
 use strict;
@@ -98,8 +98,8 @@ sub _map_class {
 
     return ( type => 'object', enabled => 0 )
         if $attr->can('has_enabled')
-            && $attr->has_enabled
-            && !$attr->enabled;
+        && $attr->has_enabled
+        && !$attr->enabled;
 
     my $class = $tc->name;
     my $attrs = _class_attrs( $map, $class, $attr )
@@ -157,7 +157,7 @@ Elastic::Model::TypeMap::Objects - Type maps for objects and Moose classes
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 DESCRIPTION
 

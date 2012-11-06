@@ -1,11 +1,11 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.15';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.16';
 }
 
 use Moose::Role;
 use List::Util ();
-use MooseX::Types::Moose qw(:all);
+use MooseX::Types::Moose qw(HashRef Str);
 use Carp;
 use Data::Dump qw(pp);
 use namespace::autoclean;
@@ -62,6 +62,7 @@ has 'classes' => (
             view             => 'Elastic::Model::View',
             scope            => 'Elastic::Model::Scope',
             results          => 'Elastic::Model::Results',
+            cached_results   => 'Elastic::Model::Results::Cached',
             scrolled_results => 'Elastic::Model::Results::Scrolled',
             result           => 'Elastic::Model::Result',
             bulk             => 'Elastic::Model::Bulk'
@@ -200,7 +201,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 DESCRIPTION
 

@@ -1,12 +1,12 @@
 package Elastic::Model::Results::Scrolled;
 {
-  $Elastic::Model::Results::Scrolled::VERSION = '0.15';
+  $Elastic::Model::Results::Scrolled::VERSION = '0.16';
 }
 
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
-use MooseX::Types::Moose qw(:all);
+use MooseX::Types::Moose qw(Int);
 
 use namespace::autoclean;
 
@@ -90,7 +90,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 

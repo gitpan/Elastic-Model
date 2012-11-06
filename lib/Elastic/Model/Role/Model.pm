@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Model;
 {
-  $Elastic::Model::Role::Model::VERSION = '0.15';
+  $Elastic::Model::Role::Model::VERSION = '0.16';
 }
 
 use Moose::Role;
@@ -18,8 +18,8 @@ use List::MoreUtils qw(uniq);
 
 use namespace::autoclean;
 my @wrapped_classes = qw(
-    domain  namespace   store   view    scope
-    results scrolled_results    result  bulk
+    domain  namespace      store   view     scope
+    results cached_results scrolled_results result  bulk
 );
 
 for my $class (@wrapped_classes) {
@@ -639,7 +639,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
@@ -1028,6 +1028,10 @@ C<scope_class> C<---------------> L<Elastic::Model::Scope>
 =item *
 
 C<results_class> C<-------------> L<Elastic::Model::Results>
+
+=item *
+
+C<cached_results_class> C<------> L<Elastic::Model::Results::Cached>
 
 =item *
 

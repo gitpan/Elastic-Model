@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.15';
+  $Elastic::Model::VERSION = '0.16';
 }
 
 use Moose 2.06 ();
@@ -100,7 +100,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
@@ -328,6 +328,10 @@ C<scope> C<---------------> L<Elastic::Model::Scope>
 =item *
 
 C<results> C<-------------> L<Elastic::Model::Results>
+
+=item *
+
+C<cached_results> C<------> L<Elastic::Model::Results::Cached>
 
 =item *
 

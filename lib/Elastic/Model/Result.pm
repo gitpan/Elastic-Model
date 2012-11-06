@@ -1,13 +1,13 @@
 package Elastic::Model::Result;
 {
-  $Elastic::Model::Result::VERSION = '0.15';
+  $Elastic::Model::Result::VERSION = '0.16';
 }
 
 use Moose;
 
 use Carp;
 use Elastic::Model::Types qw(UID);
-use MooseX::Types::Moose qw(:all);
+use MooseX::Types::Moose qw(HashRef Maybe Num);
 
 use namespace::autoclean;
 
@@ -176,7 +176,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
@@ -201,7 +201,8 @@ version 0.15
 =head1 DESCRIPTION
 
 L<Elastic::Model::Result> wraps the individual result returned from
-L<Elastic::Model::Results> or L<Elastic::Model::Results::Scrolled>.
+L<Elastic::Model::Results>, L<Elastic::Model::Results::Cached>
+or L<Elastic::Model::Results::Scrolled>.
 
 =head1 ATTRIBUTES
 

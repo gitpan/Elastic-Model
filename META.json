@@ -31,6 +31,7 @@
             "ElasticSearch" : "0.59",
             "ElasticSearch::SearchBuilder" : "0.16",
             "ElasticSearchX::UniqueKey" : "0.03",
+            "JSON" : "0",
             "List::MoreUtils" : "0",
             "List::Util" : "0",
             "MIME::Base64" : "0",
@@ -56,6 +57,7 @@
       },
       "test" : {
          "requires" : {
+            "CHI" : "0",
             "ElasticSearch::TestServer" : "0",
             "Test::Deep" : "0",
             "Test::Differences" : "0",
@@ -78,6 +80,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.15"
+   "version" : "0.16"
 }
 

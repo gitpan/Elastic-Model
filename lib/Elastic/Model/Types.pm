@@ -1,6 +1,6 @@
 package Elastic::Model::Types;
 {
-  $Elastic::Model::Types::VERSION = '0.15';
+  $Elastic::Model::Types::VERSION = '0.16';
 }
 
 use strict;
@@ -8,7 +8,7 @@ use warnings;
 use ElasticSearch();
 use ElasticSearchX::UniqueKey();
 
-use MooseX::Types::Moose qw(:all);
+use MooseX::Types::Moose qw(HashRef ArrayRef Str Bool Num Int Defined Any);
 use MooseX::Types::Structured qw (Dict Optional Map);
 use namespace::autoclean;
 
@@ -214,7 +214,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 

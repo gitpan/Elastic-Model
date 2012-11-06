@@ -33,6 +33,7 @@ lib/Elastic/Model/Meta/Class/Model.pm
 lib/Elastic/Model/Namespace.pm
 lib/Elastic/Model/Result.pm
 lib/Elastic/Model/Results.pm
+lib/Elastic/Model/Results/Cached.pm
 lib/Elastic/Model/Results/Scrolled.pm
 lib/Elastic/Model/Role/Doc.pm
 lib/Elastic/Model/Role/Index.pm
@@ -95,8 +96,9 @@ t/40_view/01_view_attrs.t
 t/40_view/02_view_methods.t
 t/40_view/03_results.t
 t/40_view/04_scrolled_results.t
-t/40_view/05_result.t
-t/40_view/06_routing.t
+t/40_view/05_cached_results.t
+t/40_view/06_result.t
+t/40_view/07_routing.t
 t/50_scope/01_get.t
 t/50_scope/02_store.t
 t/50_scope/03_delete.t
