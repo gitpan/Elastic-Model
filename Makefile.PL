@@ -37,7 +37,7 @@ my %WriteMakefileArgs = (
     "Data::Dumper" => 0,
     "DateTime" => 0,
     "Devel::GlobalDestruction" => 0,
-    "ElasticSearch" => "0.59",
+    "ElasticSearch" => "0.61",
     "ElasticSearch::SearchBuilder" => "0.16",
     "ElasticSearchX::UniqueKey" => "0.03",
     "JSON" => 0,
@@ -63,7 +63,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.16",
+  "VERSION" => "0.17",
   "test" => {
     "TESTS" => "t/*.t t/00_setup/*.t t/10_typemaps/*.t t/20_namespace/*.t t/30_domain/*.t t/40_view/*.t t/50_scope/*.t t/60_reindex/*.t t/65_bulk/*.t t/70_searchbuilder/*.t"
   }

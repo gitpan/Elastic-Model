@@ -28,7 +28,7 @@
             "Data::Dumper" : "0",
             "DateTime" : "0",
             "Devel::GlobalDestruction" : "0",
-            "ElasticSearch" : "0.59",
+            "ElasticSearch" : "0.61",
             "ElasticSearch::SearchBuilder" : "0.16",
             "ElasticSearchX::UniqueKey" : "0.03",
             "JSON" : "0",
@@ -80,6 +80,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.16"
+   "version" : "0.17"
 }
 
