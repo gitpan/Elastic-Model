@@ -1,6 +1,6 @@
 package Elastic::Model::UID;
 {
-  $Elastic::Model::UID::VERSION = '0.17';
+  $Elastic::Model::UID::VERSION = '0.18';
 }
 
 use Moose;
@@ -155,6 +155,8 @@ sub _build_cache_key {
     return join ";", map { s/;/;;/g; $_ } map { $self->$_ } qw(type id);
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 
@@ -167,7 +169,7 @@ Elastic::Model::UID - The Unique ID of a document in an ElasticSearch cluster
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

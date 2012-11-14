@@ -1,6 +1,6 @@
 package Elastic::Model::Alias;
 {
-  $Elastic::Model::Alias::VERSION = '0.17';
+  $Elastic::Model::Alias::VERSION = '0.18';
 }
 
 use Carp;
@@ -87,6 +87,8 @@ sub _add_aliases {
     return %indices;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 
@@ -99,7 +101,7 @@ Elastic::Model::Alias - Administer aliases in ElasticSearch
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 SYNOPSIS
 

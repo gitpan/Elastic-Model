@@ -1,17 +1,26 @@
 package Elastic::Model::Meta::Class::Doc;
 {
-  $Elastic::Model::Meta::Class::Doc::VERSION = '0.17';
+  $Elastic::Model::Meta::Class::Doc::VERSION = '0.18';
 }
 
 use Moose::Role;
 
-use MooseX::Types::Moose qw(Maybe HashRef);
+use MooseX::Types::Moose qw(Maybe HashRef CodeRef);
 use Carp;
 use namespace::autoclean;
 use Variable::Magic 0.51 qw(cast wizard dispell);
 
 my $wiz = wizard( map { $_ => \&_inflate } qw(fetch store exists delete) );
 my %exclude = map { $_ => 1 } qw(uid _can_inflate _source);
+
+#===================================
+has 'stub_initializer' => (
+#===================================
+    isa     => CodeRef,
+    is      => 'ro',
+    lazy    => 1,
+    builder => '_build_stub_initializer'
+);
 
 #===================================
 has 'mapping' => (
@@ -35,12 +44,11 @@ sub new_stub {
 #===================================
     my ( $self, $uid, $source ) = @_;
 
-    my $obj = $self->get_meta_instance->create_instance;
-
-    croak "Invalid UID"
-        unless $uid && $uid->isa('Elastic::Model::UID') && $uid->from_store;
+    my $obj = $self->stub_initializer->();
 
     $obj->_set_uid($uid);
+    croak "Invalid UID" unless $uid->from_store;
+
     $obj->_set_source($source) if $source;
     $obj->_can_inflate(1);
     cast %$obj, $wiz;
@@ -68,6 +76,17 @@ sub _build_unique_keys {
 }
 
 #===================================
+sub _build_stub_initializer {
+#===================================
+    my $self = shift;
+    my $src  = 'sub {'
+        . $self->_inline_generate_instance( '$instance',
+        '"' . $self->name . '"' )
+        . 'return $instance' . '}';
+    return eval($src) or croak $@;
+}
+
+#===================================
 sub _inflate {
 #===================================
     my ( $obj, undef, $key ) = @_;
@@ -89,7 +108,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.17
+version 0.18
 
 =head1 DESCRIPTION
 
