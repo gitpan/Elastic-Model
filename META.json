@@ -26,7 +26,6 @@
             "Class::MOP" : "0",
             "Data::Dump" : "0",
             "Data::Dumper" : "0",
-            "DateTime" : "0",
             "Devel::GlobalDestruction" : "0",
             "ElasticSearch" : "0.61",
             "ElasticSearch::SearchBuilder" : "0.16",
@@ -58,6 +57,7 @@
       "test" : {
          "requires" : {
             "CHI" : "0",
+            "DateTime" : "0",
             "ElasticSearch::TestServer" : "0",
             "Test::Deep" : "0",
             "Test::Differences" : "0",
@@ -80,6 +80,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.18"
+   "version" : "0.19"
 }
 

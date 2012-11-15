@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.18';
+  $Elastic::Model::Role::Doc::VERSION = '0.19';
 }
 
 use Moose::Role;
@@ -120,13 +120,14 @@ sub _inflate_doc {
         or return bless( $self, 'Elastic::Model::Deleted' )->croak;
 
     $self->_can_inflate(0);
-    try {
+    eval {
         $self->model->inflate_object( $self, $source );
-    }
-    catch {
+        1
+    } or do {
+        my $error = $@;
         $self->_can_inflate(1);
-        die $_;
-    };
+        die $error
+    }
 }
 
 #===================================
@@ -198,7 +199,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 

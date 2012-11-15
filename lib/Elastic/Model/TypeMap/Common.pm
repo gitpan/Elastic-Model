@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Common;
 {
-  $Elastic::Model::TypeMap::Common::VERSION = '0.18';
+  $Elastic::Model::TypeMap::Common::VERSION = '0.19';
 }
 
 use strict;
@@ -12,17 +12,10 @@ use namespace::autoclean;
 #===================================
 has_type 'DateTime',
 #===================================
-    deflate_via {
-    require DateTime;
-    sub { $_[0]->set_time_zone('UTC')->iso8601 };
-    },
-
-    inflate_via {
-    sub {
-        my %args;
-        @args{ (qw(year month day hour minute second)) } = split /\D/, shift;
-        DateTime->new(%args);
-    };
+    deflate_via {'$val->set_time_zone("UTC")->iso8601'}, inflate_via {
+    'do { my %args;'
+        . '@args{ (qw(year month day hour minute second)) } = split /\D/, $val;'
+        . 'DateTime->new(%args);' . '}';
     },
 
     map_via { type => 'date' };
@@ -40,7 +33,7 @@ Elastic::Model::TypeMap::Common - Type maps for commonly used types
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 DESCRIPTION
 

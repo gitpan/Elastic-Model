@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Structured;
 {
-  $Elastic::Model::TypeMap::Structured::VERSION = '0.18';
+  $Elastic::Model::TypeMap::Structured::VERSION = '0.19';
 }
 
 use strict;
@@ -56,8 +56,9 @@ has_type 'MooseX::Types::Structured::Map',
 sub _deflate_tuple {
 #===================================
     my $dict = _tuple_to_dict(shift);
-    return \&_pass_through unless %$dict;
-    my $deflator = _flate_dict( 'deflator', $dict, @_, );
+    return '$val' unless %$dict;
+
+    my $deflator = _flate_dict( 'deflator', $dict, @_ );
 
     return sub {
         my $array = shift;
@@ -71,7 +72,7 @@ sub _deflate_tuple {
 sub _inflate_tuple {
 #===================================
     my $dict = _tuple_to_dict(shift);
-    return \&_pass_through unless %$dict;
+    return '$val' unless %$dict;
     my $inflator = _flate_dict( 'inflator', $dict, @_ );
     sub {
         my $hash = $inflator->(@_);
@@ -91,13 +92,19 @@ sub _flate_dict {
 #===================================
     my ( $type, $dict, $attr, $map ) = @_;
 
-    return \&_pass_through unless %$dict;
+    return '$val' unless %$dict;
 
     my %flators;
 
     for my $key ( keys %$dict ) {
-        $flators{$key} = $map->find( $type, $dict->{$key}, $attr )
+        my $flator = $map->find( $type, $dict->{$key}, $attr )
             || die "No $type found for key ($key)";
+
+        $flators{$key}
+            = ref $flator
+            ? $flator
+            : Eval::Closure::eval_closure(
+            source => [ 'sub { my $val = $_[0];', $flator, '}' ] );
     }
 
     sub {
@@ -141,10 +148,20 @@ sub _flate_map {
 
     my $content = $map->find( $type, $content_tc, $attr ) or return;
 
-    sub {
+    return sub {
         my $hash = shift;
         +{ map { $_ => $content->( $hash->{$_} ) } keys %$hash };
-    };
+        }
+        if ref $content;
+
+    'do { '
+        . 'my $hash = $val; '
+        . '+{map { '
+        . 'my $key = $_; my $val = $hash->{$_}; '
+        . '$key => '
+        . $content
+        . '} keys %$hash}}';
+
 }
 
 #===================================
@@ -166,7 +183,7 @@ sub _content_handler {
     return $tc->can('type_parameter')
         ? $map->find( $type, $tc->type_parameter, $attr )
         : $type eq 'mapper' ? ( type => 'object', enabled => 0 )
-        :                     \&_pass_through;
+        :                     '$val';
 }
 
 #===================================
@@ -185,7 +202,7 @@ Elastic::Model::TypeMap::Structured - Type maps for MooseX::Types::Structured
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 DESCRIPTION
 

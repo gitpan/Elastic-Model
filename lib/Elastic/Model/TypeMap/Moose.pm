@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Moose;
 {
-  $Elastic::Model::TypeMap::Moose::VERSION = '0.18';
+  $Elastic::Model::TypeMap::Moose::VERSION = '0.19';
 }
 
 use strict;
@@ -12,8 +12,8 @@ use namespace::autoclean;
 #===================================
 has_type 'Any',
 #===================================
-    deflate_via { \&_pass_through },
-    inflate_via { \&_pass_through },
+    deflate_via {'$val'},
+    inflate_via {'$val'},
     map_via { type => 'object', enabled => 0 };
 
 #===================================
@@ -44,14 +44,8 @@ has_type 'Int',
 #===================================
 has_type 'ScalarRef',
 #===================================
-    deflate_via {
-    sub { ${ $_[0] } }
-    },
-
-    inflate_via {
-    sub { \$_[0] }
-    },
-
+    deflate_via {'$$val'},
+    inflate_via {'\$val'},
     map_via { _content_handler( 'mapper', @_ ) };
 
 #===================================
@@ -100,8 +94,8 @@ has_type 'Maybe',
 #===================================
 has_type 'Moose::Meta::TypeConstraint::Enum',
 #===================================
-    deflate_via { \&_pass_through },    #
-    inflate_via { \&_pass_through },
+    deflate_via {'$val'},    #
+    inflate_via {'$val'},
     map_via {
     type                         => 'string',
     index                        => 'not_analyzed',
@@ -131,35 +125,45 @@ has_type 'Moose::Meta::TypeConstraint::Parameterized',
     map_via { _parameterized( 'mapper', @_ ) };
 
 #===================================
-sub _pass_through { $_[0] }
-#===================================
-
-#===================================
 sub _flate_array {
 #===================================
     my $content = _content_handler(@_) or return;
-    sub {
+    return sub {
         [ map { $content->($_) } @{ shift() } ];
-    };
+        }
+        if ref $content;
+
+    'do { [map { my $val = $_; ' . $content . '} @$val]}';
 }
 
 #===================================
 sub _flate_hash {
 #===================================
     my $content = _content_handler(@_) or return;
-    sub {
+    return sub {
         my $hash = shift;
         +{ map { $_ => $content->( $hash->{$_} ) } keys %$hash };
-    };
+        }
+        if ref $content;
+
+    'do { '
+        . 'my $hash = $val; '
+        . '+{map { '
+        . 'my $key = $_; my $val = $hash->{$_}; '
+        . '$key => '
+        . $content
+        . '} keys %$hash}}';
 }
 
 #===================================
 sub _flate_maybe {
 #===================================
     my $content = _content_handler(@_) or return;
-    sub {
+    return sub {
         return defined $_[0] ? $content->( $_[0] ) : undef;
-    };
+        }
+        if ref $content;
+    'defined $val ? ' . $content . ' : undef';
 }
 
 #===================================
@@ -188,7 +192,7 @@ sub _content_handler {
     return $tc->can('type_parameter')
         ? $map->find( $type, $tc->type_parameter, $attr )
         : $type eq 'mapper' ? ( type => 'object', enabled => 0 )
-        :                     \&_pass_through;
+        :                     '$val';
 }
 
 1;
@@ -203,7 +207,7 @@ Elastic::Model::TypeMap::Moose - Type maps for core Moose types
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 DESCRIPTION
 

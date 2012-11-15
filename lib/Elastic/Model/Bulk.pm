@@ -1,6 +1,6 @@
 package Elastic::Model::Bulk;
 {
-  $Elastic::Model::Bulk::VERSION = '0.18';
+  $Elastic::Model::Bulk::VERSION = '0.19';
 }
 
 use Moose;
@@ -215,7 +215,7 @@ Elastic::Model::Bulk - Bulk-saving of multiple docs for increased throughput
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 

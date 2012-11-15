@@ -1,6 +1,6 @@
 package Elastic::Model::Results;
 {
-  $Elastic::Model::Results::VERSION = '0.18';
+  $Elastic::Model::Results::VERSION = '0.19';
 }
 
 use Carp;
@@ -50,7 +50,7 @@ Elastic::Model::Results - An iterator over bounded/finite search results
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 
