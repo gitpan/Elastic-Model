@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Doc;
 {
-  $Elastic::Model::Meta::Class::Doc::VERSION = '0.19';
+  $Elastic::Model::Meta::Class::Doc::VERSION = '0.20';
 }
 
 use Moose::Role;
@@ -37,6 +37,14 @@ has 'unique_keys' => (
     isa     => Maybe [HashRef],
     lazy    => 1,
     builder => '_build_unique_keys'
+);
+
+#===================================
+has 'inflators' => (
+#===================================
+    is      => 'ro',
+    isa     => HashRef,
+    default => sub { {} }
 );
 
 #===================================
@@ -96,6 +104,13 @@ sub _inflate {
     $obj->_inflate_doc if $obj->{_can_inflate};
 }
 
+#===================================
+sub inflator_for {
+#===================================
+    my ( $self, $model, $name ) = @_;
+    $self->inflators->{$name} ||= $model->typemap->find_inflator(
+        $self->find_attribute_by_name($name) );
+}
 1;
 
 
@@ -108,7 +123,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 DESCRIPTION
 

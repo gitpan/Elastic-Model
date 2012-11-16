@@ -1,6 +1,6 @@
 package Elastic::Model::Results::Cached;
 {
-  $Elastic::Model::Results::Cached::VERSION = '0.19';
+  $Elastic::Model::Results::Cached::VERSION = '0.20';
 }
 
 use Carp;
@@ -45,14 +45,11 @@ has 'cache_key' => (
 
 no Moose;
 
-our $json;
 #===================================
 sub _build_cache_key {
 #===================================
     my $self = shift;
-    require JSON;
-    $json ||= JSON->new->canonical->utf8;
-    return $json->encode( $self->search );
+    return $self->model->json->encode( $self->search );
 }
 
 #===================================
@@ -99,7 +96,7 @@ Elastic::Model::Results::Cached - A cacheable iterator over bounded/finite searc
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 

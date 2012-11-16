@@ -1,6 +1,6 @@
 package Elastic::Doc;
 {
-  $Elastic::Doc::VERSION = '0.19';
+  $Elastic::Doc::VERSION = '0.20';
 }
 
 use Moose();
@@ -8,7 +8,7 @@ use Moose::Exporter;
 use namespace::autoclean;
 
 Moose::Exporter->setup_import_methods(
-    with_meta       => ['has_mapping'],
+    with_meta       => [ 'has_mapping', 'apply_field_settings' ],
     class_metaroles => {
         class     => ['Elastic::Model::Meta::Class::Doc'],
         attribute => ['Elastic::Model::Trait::Field'],
@@ -28,6 +28,37 @@ sub init_meta {
 sub has_mapping { shift->mapping(@_) }
 #===================================
 
+#===================================
+sub apply_field_settings {
+#===================================
+    my $meta = shift;
+
+    if ( @_ == 1 and $_[0] eq '-exclude' ) {
+        for ( $meta->get_all_attributes ) {
+            next
+                if $_->does('Elastic::Model::Trait::Field')
+                or $_->does('Elastic::Model::Trait::Exclude');
+            Moose::Util::apply_all_roles( $_,
+                'Elastic::Model::Trait::Exclude' );
+        }
+        return;
+    }
+
+    my %settings = @_ == 1 ? %{ shift() } : @_;
+    for my $name ( keys %settings ) {
+        my $attr = $meta->get_attribute($name)
+            or die "Couldn't find attr ($name) in class ("
+            . $meta->name
+            . ") in apply_field_settings()";
+        Moose::Util::ensure_all_roles( $attr,
+            'Elastic::Model::Trait::Field' );
+        my $params = $settings{$name};
+        for ( keys %$params ) {
+            $attr->$_( $params->{$_} );
+        }
+    }
+}
+
 1;
 
 
@@ -40,7 +71,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 
@@ -64,7 +95,7 @@ version 0.19
     use Elastic::Doc;
 
     has_mapping {
-        _ttl => {                   # delete documents/object after 2 hours
+        _ttl => {                       # delete documents/object after 2 hours
             enabled => 1,
             default => '2h'
         }
@@ -78,13 +109,13 @@ version 0.19
     has 'title' => (
         is       => 'rw',
         isa      => 'Str',
-        analyzer => 'edge_ngrams'   # use custom analyzer
+        analyzer => 'edge_ngrams'       # use custom analyzer
     );
 
     has 'body' => (
         is       => 'rw',
         isa      => 'Str',
-        analyzer => 'english',      # use builtin analyzer
+        analyzer => 'english',          # use builtin analyzer
     );
 
     has 'created' => (
@@ -96,7 +127,7 @@ version 0.19
     has 'tag' => (
         is      => 'ro',
         isa     => 'Str',
-        index   => 'not_analyzed'   # index exact value
+        index   => 'not_analyzed'       # index exact value
     );
 
     no Elastic::Doc;
@@ -140,7 +171,7 @@ L<Elastic::Doc> module itself.
 
 =head1 EXPORTED FUNCTIONS
 
-=head3 has_mapping
+=head2 has_mapping
 
 C<has_mapping> can be used to customize the special "meta-fields" (ie not
 attr/field-specific) in the type mapping. For instance:
@@ -165,6 +196,49 @@ certain settings to be active to work correctly.
 See the "Fields" section in L<Mapping|http://www.elasticsearch.org/guide/reference/mapping/> and
 L<Root object type|http://www.elasticsearch.org/guide/reference/mapping/root-object-type.html>
 for more information about what options can be configured.
+
+=head2 apply_field_settings
+
+    package MyApp::User;
+
+    use Elastic::Doc;
+    with 'MyApp::Role::Foo';
+
+    apply_field_settings {
+        field_1 => { type    => 'string' },
+        field_2 => { exclude => 1        }
+    };
+
+When you apply a role to your Elastic::Doc class, you may not be able to
+configure the attributes directly in the role (eg if the role comes from
+CPAN).
+
+You can use C<apply_field_settings> in your doc class to add any of the
+settings specified in L<Elastic::Manual::Attributes>.  Alternatively,
+if you don't want any of the imported attributes to be persisted to
+Elasticsearch, then you can specify:
+
+    apply_field_settings '-exclude';
+
+B<Note:> the C<-exclude> is applied to all attributes applied thus far, which
+don't already do L<Elastic::Model::Trait::Field>. So you
+can then apply other roles and have another C<apply_field_settings> statement
+later in your module.
+
+If you DO have access to the role, then the preferred way to configure
+attributes is with the C<ElasticField> trait:
+
+    package MyApp::Role::Foo;
+
+    use Moose::Role;
+
+    has 'name' => (
+        traits  => ['ElasticField'],
+        is      => 'rw',
+        index   => 'not_analyzed'
+    );
+
+C<ElasticField> is the short name for L<Elastic::Model::Trait::Field>.
 
 =head1 SEE ALSO
 

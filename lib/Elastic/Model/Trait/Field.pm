@@ -1,9 +1,11 @@
 package Elastic::Model::Trait::Field;
 {
-  $Elastic::Model::Trait::Field::VERSION = '0.19';
+  $Elastic::Model::Trait::Field::VERSION = '0.20';
 }
 
 use Moose::Role;
+Moose::Util::meta_attribute_alias('ElasticField');
+
 use MooseX::Types::Moose qw(
     Str HashRef ArrayRef Bool Num Int CodeRef
 );
@@ -16,72 +18,10 @@ use Carp;
 use namespace::autoclean;
 
 #===================================
-around '_inline_instance_clear' => sub {
-#===================================
-    my ( $orig, $attr, $instance, @args ) = @_;
-    my $inline = $attr->$orig( $instance, @args );
-    unless ( $attr->exclude ) {
-        my $name       = $attr->name;
-        my $inline_has = $attr->_inline_instance_has($instance);
-        my $inline_get = $attr->_inline_instance_get($instance);
-        $inline = <<"INLINE"
-    do {
-        my \@val = $inline_get;
-        $inline_has && $instance->has_changed('$name',\@val);
-        $inline
-    }
-INLINE
-    }
-    return $inline;
-};
-
-#===================================
-around 'clear_value' => sub {
-#===================================
-    my ( $orig, $attr, $instance, @args ) = @_;
-    unless ( $attr->exclude ) {
-        my @val = $attr->get_value($instance);
-        $attr->has_value($instance)
-            && $instance->has_changed( $attr->name, @val );
-    }
-    return $attr->$orig( $instance, @args );
-};
-
-#===================================
-before '_process_options' => sub {
-#===================================
-    my ( $class, $name, $opts ) = @_;
-    if ( my $orig = $opts->{trigger} ) {
-        ( 'CODE' eq ref $orig )
-            || $class->throw_error(
-            "Trigger must be a CODE ref on attribute ($name)",
-            data => $opts->{trigger} );
-        $opts->{trigger} = sub {
-            my $self = shift;
-            no warnings 'uninitialized';
-            unless ( @_ == 2 && $_[1] eq $_[0] ) {
-                $self->has_changed( $name, $_[1] );
-            }
-            $self->$orig(@_);
-        };
-    }
-    else {
-
-        $opts->{trigger} = sub {
-            my $self = shift;
-            no warnings 'uninitialized';
-            unless ( @_ == 2 && $_[1] eq $_[0] ) {
-                $self->has_changed( $name, $_[1] );
-            }
-        };
-    }
-};
-
-#===================================
 has 'type' => (
 #===================================
     isa       => FieldType,
-    is        => 'ro',
+    is        => 'rw',
     predicate => 'has_type'
 );
 
@@ -89,35 +29,35 @@ has 'type' => (
 has 'mapping' => (
 #===================================
     isa => HashRef [Str],
-    is => 'ro'
+    is => 'rw'
 );
 
 #===================================
 has 'exclude' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'include_in_all' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'index' => (
 #===================================
     isa => IndexMapping,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'store' => (
 #===================================
     isa    => StoreMapping,
-    is     => 'ro',
+    is     => 'rw',
     coerce => 1
 );
 
@@ -125,35 +65,35 @@ has 'store' => (
 has 'multi' => (
 #===================================
     isa => MultiFields,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'index_name' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'boost' => (
 #===================================
     isa => Num,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'null_value' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'unique_key' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # strings
@@ -162,49 +102,49 @@ has 'unique_key' => (
 has 'analyzer' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'index_analyzer' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'search_analyzer' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'search_quote_analyzer' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'omit_norms' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'omit_term_freq_and_positions' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'term_vector' => (
 #===================================
     isa => TermVectorMapping,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # dates
@@ -213,14 +153,14 @@ has 'term_vector' => (
 has 'format' => (
 #===================================
     isa => Str,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'precision_step' => (
 #===================================
     isa => Int,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # geo-point
@@ -229,21 +169,21 @@ has 'precision_step' => (
 has 'geohash' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'lat_lon' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'geohash_precision' => (
 #===================================
     isa => Int,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # object
@@ -252,7 +192,7 @@ has 'geohash_precision' => (
 has 'enabled' => (
 #===================================
     isa       => Bool,
-    is        => 'ro',
+    is        => 'rw',
     predicate => 'has_enabled'
 );
 
@@ -260,14 +200,14 @@ has 'enabled' => (
 has 'dynamic' => (
 #===================================
     isa => DynamicMapping,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'path' => (
 #===================================
     isa => PathMapping,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # nested
@@ -276,14 +216,14 @@ has 'path' => (
 has 'include_in_parent' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'include_in_root' => (
 #===================================
     isa => Bool,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # deflation
@@ -292,14 +232,14 @@ has 'include_in_root' => (
 has 'deflator' => (
 #===================================
     isa => CodeRef,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 #===================================
 has 'inflator' => (
 #===================================
     isa => CodeRef,
-    is  => 'ro'
+    is  => 'rw'
 );
 
 # esdocs
@@ -308,14 +248,14 @@ has 'inflator' => (
 has 'include_attrs' => (
 #===================================
     isa => ArrayRef [Str],
-    is => 'ro'
+    is => 'rw'
 );
 
 #===================================
 has 'exclude_attrs' => (
 #===================================
     isa => ArrayRef [Str],
-    is => 'ro'
+    is => 'rw'
 );
 
 1;
@@ -330,7 +270,7 @@ Elastic::Model::Trait::Field - Add ElasticSearch specific keywords to your attri
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 DESCRIPTION
 

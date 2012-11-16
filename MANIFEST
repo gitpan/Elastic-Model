@@ -59,6 +59,7 @@ lib/Elastic/Model/View.pm
 t/00_setup/01_strict.t
 t/00_setup/02_load.t
 t/00_setup/03_domain.t
+t/00_setup/04_roles.t
 t/10_typemaps/01_map_moose.t
 t/10_typemaps/02_map_moosex.t
 t/10_typemaps/03_map_structured.t
@@ -144,6 +145,12 @@ t/lib/MyApp/Post.pm
 t/lib/MyApp/UniqUser.pm
 t/lib/MyApp/User.pm
 t/lib/MyAppUniq.pm
+t/lib/RoleTest.pm
+t/lib/RoleTest/Class.pm
+t/lib/RoleTest/RoleFour.pm
+t/lib/RoleTest/RoleOne.pm
+t/lib/RoleTest/RoleThree.pm
+t/lib/RoleTest/RoleTwo.pm
 t/lib/TypeTest.pm
 t/lib/TypeTest/Common.pm
 t/lib/TypeTest/ES.pm

@@ -1,6 +1,6 @@
 package Elastic::Model::UID;
 {
-  $Elastic::Model::UID::VERSION = '0.19';
+  $Elastic::Model::UID::VERSION = '0.20';
 }
 
 use Moose;
@@ -169,7 +169,7 @@ Elastic::Model::UID - The Unique ID of a document in an ElasticSearch cluster
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 SYNOPSIS
 

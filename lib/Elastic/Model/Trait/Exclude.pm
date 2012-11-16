@@ -1,6 +1,6 @@
 package Elastic::Model::Trait::Exclude;
 {
-  $Elastic::Model::Trait::Exclude::VERSION = '0.19';
+  $Elastic::Model::Trait::Exclude::VERSION = '0.20';
 }
 
 use Moose::Role;
@@ -28,7 +28,7 @@ Elastic::Model::Trait::Exclude - An internal use trait
 
 =head1 VERSION
 
-version 0.19
+version 0.20
 
 =head1 DESCRIPTION
 
