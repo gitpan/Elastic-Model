@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.20';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.21';
 }
 
 use Moose::Role;
@@ -24,7 +24,7 @@ for my $k (qw(namespace char_filter analyzer filter tokenizer)) {
         is      => 'ro',
         traits  => ['Hash'],
         isa     => HashRef,
-        default => sub { \%default },
+        default => sub { +{%default} },
         handles => {
             $k          => 'get',
             "add_${k}"  => 'set',
@@ -201,7 +201,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.20
+version 0.21
 
 =head1 DESCRIPTION
 
