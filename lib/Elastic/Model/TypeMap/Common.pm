@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Common;
 {
-  $Elastic::Model::TypeMap::Common::VERSION = '0.21';
+  $Elastic::Model::TypeMap::Common::VERSION = '0.22';
 }
 
 use strict;
@@ -33,7 +33,7 @@ Elastic::Model::TypeMap::Common - Type maps for commonly used types
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 DESCRIPTION
 

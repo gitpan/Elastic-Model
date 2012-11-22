@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Structured;
 {
-  $Elastic::Model::TypeMap::Structured::VERSION = '0.21';
+  $Elastic::Model::TypeMap::Structured::VERSION = '0.22';
 }
 
 use strict;
@@ -202,7 +202,7 @@ Elastic::Model::TypeMap::Structured - Type maps for MooseX::Types::Structured
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 DESCRIPTION
 

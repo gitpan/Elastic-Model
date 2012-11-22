@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Iterator;
 {
-  $Elastic::Model::Role::Iterator::VERSION = '0.21';
+  $Elastic::Model::Role::Iterator::VERSION = '0.22';
 }
 
 use Carp;
@@ -352,7 +352,7 @@ Elastic::Model::Role::Iterator - A generic iterator role
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

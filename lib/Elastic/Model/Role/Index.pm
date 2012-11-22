@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Index;
 {
-  $Elastic::Model::Role::Index::VERSION = '0.21';
+  $Elastic::Model::Role::Index::VERSION = '0.22';
 }
 
 use Moose::Role;
@@ -155,7 +155,7 @@ Elastic::Model::Role::Index - Provides admin methods common to indices and alias
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

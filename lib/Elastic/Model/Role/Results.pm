@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Results;
 {
-  $Elastic::Model::Role::Results::VERSION = '0.21';
+  $Elastic::Model::Role::Results::VERSION = '0.22';
 }
 
 use Carp;
@@ -280,7 +280,7 @@ Elastic::Model::Role::Results - An iterator role for search results
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 DESCRIPTION
 

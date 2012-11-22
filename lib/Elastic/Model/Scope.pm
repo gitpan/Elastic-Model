@@ -1,6 +1,6 @@
 package Elastic::Model::Scope;
 {
-  $Elastic::Model::Scope::VERSION = '0.21';
+  $Elastic::Model::Scope::VERSION = '0.22';
 }
 
 use Moose;
@@ -123,7 +123,7 @@ Elastic::Model::Scope - Keeps objects alive and connected
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 DESCRIPTION
 

@@ -1,6 +1,6 @@
 package Elastic::Model::Results::Cached;
 {
-  $Elastic::Model::Results::Cached::VERSION = '0.21';
+  $Elastic::Model::Results::Cached::VERSION = '0.22';
 }
 
 use Carp;
@@ -96,7 +96,7 @@ Elastic::Model::Results::Cached - A cacheable iterator over bounded/finite searc
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 

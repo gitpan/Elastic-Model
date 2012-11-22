@@ -1,6 +1,6 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.21';
+  $Elastic::Model::SearchBuilder::VERSION = '0.22';
 }
 
 use strict;
@@ -122,7 +122,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 DESCRIPTION
 
