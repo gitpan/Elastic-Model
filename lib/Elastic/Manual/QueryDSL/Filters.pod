@@ -12,7 +12,7 @@ Elastic::Manual::QueryDSL::Filters - Overview of the filters available in Elasti
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 INTRODUCTION
 

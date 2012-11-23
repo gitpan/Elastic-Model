@@ -1,12 +1,11 @@
 package Elastic::Model::Role::Iterator;
 {
-  $Elastic::Model::Role::Iterator::VERSION = '0.22';
+  $Elastic::Model::Role::Iterator::VERSION = '0.23';
 }
 
 use Carp;
 use Moose::Role;
 use MooseX::Types::Moose qw(ArrayRef Int CodeRef);
-use MooseX::Attribute::Chained;
 use namespace::autoclean;
 
 #===================================
@@ -352,7 +351,7 @@ Elastic::Model::Role::Iterator - A generic iterator role
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 SYNOPSIS
 

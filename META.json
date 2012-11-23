@@ -39,7 +39,6 @@
             "Moose::Role" : "0",
             "Moose::Util" : "0",
             "Moose::Util::TypeConstraints" : "0",
-            "MooseX::Attribute::Chained" : "0",
             "MooseX::Types" : "0",
             "MooseX::Types::Moose" : "0",
             "MooseX::Types::Structured" : "0",
@@ -80,6 +79,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.22"
+   "version" : "0.23"
 }
 
