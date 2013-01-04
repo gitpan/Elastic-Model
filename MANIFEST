@@ -93,6 +93,7 @@ t/20_namespace/05_namespace_for_domain.t
 t/30_domain/01_crud.t
 t/30_domain/02_conflict.t
 t/30_domain/03_uniques.t
+t/30_domain/04_nested_has_changed.t
 t/40_view/01_view_attrs.t
 t/40_view/02_view_methods.t
 t/40_view/03_results.t
@@ -141,10 +142,12 @@ t/lib/IndexConfig/BadAnalyzer.pm
 t/lib/IndexConfig/BadTokenizer.pm
 t/lib/IndexConfig/NoAnalyzer.pm
 t/lib/MyApp.pm
+t/lib/MyApp/MultiUser.pm
 t/lib/MyApp/Post.pm
 t/lib/MyApp/UniqUser.pm
 t/lib/MyApp/User.pm
 t/lib/MyAppUniq.pm
+t/lib/Nested.pm
 t/lib/RoleTest.pm
 t/lib/RoleTest/Class.pm
 t/lib/RoleTest/RoleFour.pm

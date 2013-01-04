@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Doc;
 {
-  $Elastic::Model::Role::Doc::VERSION = '0.23';
+  $Elastic::Model::Role::Doc::VERSION = '0.24';
 }
 
 use Moose::Role;
@@ -80,7 +80,7 @@ sub old_values {
     my $json     = $self->model->json;
     my %old;
 
-    my ( $o, $c );
+    my ( $o, $c, $o_str, $c_str );
     my $meta  = Class::MOP::class_of($self);
     my $model = $self->model;
     for my $key ( keys %$current ) {
@@ -89,11 +89,11 @@ sub old_values {
             next;
         }
         no warnings 'uninitialized';
-        ( $o, $c )
-            = map { ref $_ ? $json->encode($_) : $_ }
-            ( delete $original{$key}, $current->{$key} );
+        ( $o, $c ) = ( delete $original{$key}, $current->{$key} );
+        ( $o_str, $c_str )
+            = map { ref $_ ? $json->encode($_) : $_ } ( $o, $c );
 
-        if ( $o ne $c ) {
+        if ( $o_str ne $c_str ) {
             $old{$key} = $meta->inflator_for( $model, $key )->($o);
         }
     }
@@ -205,7 +205,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 
@@ -521,7 +521,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Clinton Gormley.
+This software is copyright (c) 2013 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

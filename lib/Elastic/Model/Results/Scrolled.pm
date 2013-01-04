@@ -1,6 +1,6 @@
 package Elastic::Model::Results::Scrolled;
 {
-  $Elastic::Model::Results::Scrolled::VERSION = '0.23';
+  $Elastic::Model::Results::Scrolled::VERSION = '0.24';
 }
 
 use Carp;
@@ -90,7 +90,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 SYNOPSIS
 
@@ -435,7 +435,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Clinton Gormley.
+This software is copyright (c) 2013 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

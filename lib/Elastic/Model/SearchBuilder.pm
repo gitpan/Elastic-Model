@@ -1,11 +1,11 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.23';
+  $Elastic::Model::SearchBuilder::VERSION = '0.24';
 }
 
 use strict;
 use warnings;
-use ElasticSearch::SearchBuilder 0.16;
+use ElasticSearch::SearchBuilder 0.18;
 use parent 'ElasticSearch::SearchBuilder';
 use Carp;
 
@@ -122,7 +122,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.23
+version 0.24
 
 =head1 DESCRIPTION
 
@@ -239,7 +239,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Clinton Gormley.
+This software is copyright (c) 2013 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
