@@ -2,8 +2,8 @@ package Elastic::Manual::QueryDSL::Filters;
 
 # ABSTRACT: Overview of the filters available in ElasticSearch
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -12,7 +12,7 @@ Elastic::Manual::QueryDSL::Filters - Overview of the filters available in Elasti
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 INTRODUCTION
 
@@ -528,4 +528,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

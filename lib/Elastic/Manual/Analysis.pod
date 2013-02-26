@@ -2,8 +2,8 @@ package Elastic::Manual::Analysis;
 
 # ABSTRACT: Controlling how your attributes are indexed
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -12,7 +12,7 @@ Elastic::Manual::Analysis - Controlling how your attributes are indexed
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =encoding utf8
 
@@ -302,4 +302,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

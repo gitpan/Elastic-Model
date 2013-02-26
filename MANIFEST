@@ -56,7 +56,6 @@ lib/Elastic/Model/TypeMap/Structured.pm
 lib/Elastic/Model/Types.pm
 lib/Elastic/Model/UID.pm
 lib/Elastic/Model/View.pm
-t/00_setup/01_strict.t
 t/00_setup/02_load.t
 t/00_setup/03_domain.t
 t/00_setup/04_roles.t
@@ -122,6 +121,7 @@ t/70_searchbuilder/07-raw_dsl.t
 t/70_searchbuilder/08-misc.t
 t/70_searchbuilder/10_object_filters.t
 t/70_searchbuilder/11_object_queries.t
+t/author-strict.t
 t/lib/FieldTest.pm
 t/lib/FieldTest/Binary.pm
 t/lib/FieldTest/Boolean.pm

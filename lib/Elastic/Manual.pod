@@ -2,7 +2,7 @@ package Elastic::Manual;
 
 # ABSTRACT: What is Elastic::Model and how do I use it?
 
-
+__END__
 
 =pod
 
@@ -12,7 +12,7 @@ Elastic::Manual - What is Elastic::Model and how do I use it?
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 WHAT IS ELASTIC::MODEL?
 
@@ -215,7 +215,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

@@ -1,6 +1,6 @@
 package Elastic::Model::Namespace;
 {
-  $Elastic::Model::Namespace::VERSION = '0.24';
+  $Elastic::Model::Namespace::VERSION = '0.25';
 }
 
 use Moose;
@@ -93,8 +93,6 @@ sub mappings {
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -103,7 +101,7 @@ Elastic::Model::Namespace - Class-to-type map
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -297,7 +295,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Index;
 {
-  $Elastic::Model::Role::Index::VERSION = '0.24';
+  $Elastic::Model::Role::Index::VERSION = '0.25';
 }
 
 use Moose::Role;
@@ -148,8 +148,6 @@ sub delete_mapping {
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -158,7 +156,7 @@ Elastic::Model::Role::Index - Provides admin methods common to indices and alias
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -363,7 +361,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

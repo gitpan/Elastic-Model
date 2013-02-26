@@ -19,7 +19,6 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::Moose" => 0,
     "Test::More" => "0.96",
-    "Test::Strict" => 0,
     "utf8" => 0
   },
   "CONFIGURE_REQUIRES" => {
@@ -61,7 +60,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.24",
+  "VERSION" => "0.25",
   "test" => {
     "TESTS" => "t/*.t t/00_setup/*.t t/10_typemaps/*.t t/20_namespace/*.t t/30_domain/*.t t/40_view/*.t t/50_scope/*.t t/60_reindex/*.t t/65_bulk/*.t t/70_searchbuilder/*.t"
   }

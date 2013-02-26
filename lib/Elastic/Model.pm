@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.24';
+  $Elastic::Model::VERSION = '0.25';
 }
 
 use Moose 2.06 ();
@@ -89,9 +89,8 @@ sub has_char_filter {
 
 # ABSTRACT: A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.
 
-
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -100,7 +99,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -377,4 +376,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

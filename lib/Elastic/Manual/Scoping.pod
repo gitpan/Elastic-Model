@@ -2,7 +2,7 @@ package Elastic::Manual::Scoping;
 
 # ABSTRACT: An optional in-memory cache, essential for keeping weak refs live
 
-
+__END__
 
 =pod
 
@@ -12,7 +12,7 @@ Elastic::Manual::Scoping - An optional in-memory cache, essential for keeping we
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 Warning
 
@@ -220,7 +220,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

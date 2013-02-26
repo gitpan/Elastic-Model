@@ -1,6 +1,6 @@
 package Elastic::Model::View;
 {
-  $Elastic::Model::View::VERSION = '0.24';
+  $Elastic::Model::View::VERSION = '0.25';
 }
 
 use Moose;
@@ -522,8 +522,6 @@ sub _build_delete {
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -532,7 +530,7 @@ Elastic::Model::View - Views to query your docs in ElasticSearch
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -830,8 +828,10 @@ B<Note:> Sorting cannot be combined with L</scan()>.
 
     $from     = $view->from;
 
-By default, results are returned from the first result. If you would like to
-start at a later result (eg for paging), you can set L</from>.
+By default, results are returned from the first result. Think of it as
+I<"the number of docs to skip">, so setting C<from> to C<0> would start from
+the first result. Setting C<from> to C<10> would skip the first 10 results
+and return docs from result number 11 onwards.
 
 =head2 size
 
@@ -1105,7 +1105,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

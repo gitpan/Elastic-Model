@@ -1,6 +1,6 @@
 package Elastic::Model::Types;
 {
-  $Elastic::Model::Types::VERSION = '0.24';
+  $Elastic::Model::Types::VERSION = '0.25';
 }
 
 use strict;
@@ -204,8 +204,6 @@ coerce UID, from HashRef, via { Elastic::Model::UID->new($_) };
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -214,7 +212,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -309,7 +307,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

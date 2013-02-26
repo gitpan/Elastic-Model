@@ -1,6 +1,6 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.24';
+  $Elastic::Model::SearchBuilder::VERSION = '0.25';
 }
 
 use strict;
@@ -112,8 +112,8 @@ sub _refkind {
 
 # ABSTRACT: An Elastic::Model specific subclass of L<ElasticSearch::SearchBuilder>
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -122,7 +122,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -245,4 +245,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

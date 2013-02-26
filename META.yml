@@ -10,12 +10,11 @@ build_requires:
   Test::Exception: 0
   Test::Moose: 0
   Test::More: 0.96
-  Test::Strict: 0
   utf8: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300021, CPAN::Meta::Converter version 2.120630'
+generated_by: 'Dist::Zilla version 4.300030, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -55,4 +54,4 @@ requires:
 resources:
   bugtracker: https://github.com/clintongormley/Elastic-Model/issues
   repository: git://github.com/clintongormley/Elastic-Model.git
-version: 0.24
+version: 0.25

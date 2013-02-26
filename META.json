@@ -4,7 +4,7 @@
       "Clinton Gormley <drtech@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300021, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Dist::Zilla version 4.300030, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -17,6 +17,11 @@
       "configure" : {
          "requires" : {
             "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::Pod" : "1.41"
          }
       },
       "runtime" : {
@@ -62,7 +67,6 @@
             "Test::Exception" : "0",
             "Test::Moose" : "0",
             "Test::More" : "0.96",
-            "Test::Strict" : "0",
             "utf8" : "0"
          }
       }
@@ -78,6 +82,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.24"
+   "version" : "0.25"
 }
 

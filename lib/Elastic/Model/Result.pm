@@ -1,6 +1,6 @@
 package Elastic::Model::Result;
 {
-  $Elastic::Model::Result::VERSION = '0.24';
+  $Elastic::Model::Result::VERSION = '0.25';
 }
 
 use Moose;
@@ -166,8 +166,6 @@ sub explain {
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -176,7 +174,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -329,7 +327,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

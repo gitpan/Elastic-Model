@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Model;
 {
-  $Elastic::Model::Meta::Class::Model::VERSION = '0.24';
+  $Elastic::Model::Meta::Class::Model::VERSION = '0.25';
 }
 
 use Moose::Role;
@@ -191,8 +191,6 @@ sub wrapped_class_name {
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -201,7 +199,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -404,7 +402,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

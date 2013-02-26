@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Structured;
 {
-  $Elastic::Model::TypeMap::Structured::VERSION = '0.24';
+  $Elastic::Model::TypeMap::Structured::VERSION = '0.25';
 }
 
 use strict;
@@ -192,8 +192,6 @@ sub _pass_through { $_[0] }
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -202,7 +200,7 @@ Elastic::Model::TypeMap::Structured - Type maps for MooseX::Types::Structured
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -272,7 +270,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

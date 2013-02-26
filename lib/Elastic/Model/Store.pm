@@ -1,6 +1,6 @@
 package Elastic::Model::Store;
 {
-  $Elastic::Model::Store::VERSION = '0.24';
+  $Elastic::Model::Store::VERSION = '0.25';
 }
 
 use Moose;
@@ -8,8 +8,6 @@ with 'Elastic::Model::Role::Store';
 use namespace::autoclean;
 
 1;
-
-
 
 =pod
 
@@ -19,7 +17,7 @@ Elastic::Model::Store - A default implementation of the ElasticSearch backend
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -58,7 +56,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

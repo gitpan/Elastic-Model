@@ -1,6 +1,6 @@
 package Elastic::Model::Alias;
 {
-  $Elastic::Model::Alias::VERSION = '0.24';
+  $Elastic::Model::Alias::VERSION = '0.25';
 }
 
 use Carp;
@@ -91,8 +91,6 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -101,7 +99,7 @@ Elastic::Model::Alias - Administer aliases in ElasticSearch
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 SYNOPSIS
 
@@ -247,7 +245,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

@@ -2,7 +2,7 @@ package Elastic::Manual::Searching;
 
 # ABSTRACT: Which search method to use with a View, and how to use the results.
 
-
+__END__
 
 =pod
 
@@ -12,7 +12,7 @@ Elastic::Manual::Searching - Which search method to use with a View, and how to 
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -403,7 +403,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

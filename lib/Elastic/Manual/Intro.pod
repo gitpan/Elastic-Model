@@ -2,6 +2,7 @@ package Elastic::Manual::Intro;
 
 # ABSTRACT: An introduction to Elastic::Model
 
+__END__
 
 =pod
 
@@ -11,7 +12,7 @@ Elastic::Manual::Intro - An introduction to Elastic::Model
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 INSTALLING REQUIREMENTS
 
@@ -21,8 +22,8 @@ You need a recent version of Java installed, then download the current
 stable release of ElasticSearch from L<http://www.elasticsearch.org/download/>.
 For instance:
 
-    curl -L -O https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.11.tar.gz
-    tar -xzf elasticsearch-0.19.11.tar.gz
+    curl -L -O https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.20.5.tar.gz
+    tar -xzf elasticsearch-0.20.5.tar.gz
 
 B<Note: The minimum required version of ElasticSearch is 0.19.11.>
 
@@ -37,7 +38,7 @@ against a local ElasticSearch cluster.
 
 =head2 Start ElasticSearch
 
-    cd elasticsearch-0.19.11/
+    cd elasticsearch-0.20.5/
     ./bin/elasticsearch -f      # -f starts the server in the foreground
 
 You now have a running ElasticSearch cluster with one node. You can test that
@@ -314,7 +315,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

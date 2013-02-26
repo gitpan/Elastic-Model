@@ -2,8 +2,8 @@ package Elastic::Manual::NoSQL;
 
 # ABSTRACT: Differences between relational DBs and NoSQL document stores
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -12,7 +12,7 @@ Elastic::Manual::NoSQL - Differences between relational DBs and NoSQL document s
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 THINK DIFFERENT
 
@@ -145,4 +145,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

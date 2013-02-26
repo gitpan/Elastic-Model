@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Default;
 {
-  $Elastic::Model::TypeMap::Default::VERSION = '0.24';
+  $Elastic::Model::TypeMap::Default::VERSION = '0.25';
 }
 
 use strict;
@@ -16,8 +16,6 @@ use Elastic::Model::TypeMap::Base qw(
 
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -26,7 +24,7 @@ Elastic::Model::TypeMap::Default - The default type map used by Elastic::Model
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -115,7 +113,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __END__
 

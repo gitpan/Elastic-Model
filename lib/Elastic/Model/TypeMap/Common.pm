@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Common;
 {
-  $Elastic::Model::TypeMap::Common::VERSION = '0.24';
+  $Elastic::Model::TypeMap::Common::VERSION = '0.25';
 }
 
 use strict;
@@ -23,8 +23,8 @@ has_type 'DateTime',
 
 # ABSTRACT: Type maps for commonly used types
 
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -33,7 +33,7 @@ Elastic::Model::TypeMap::Common - Type maps for commonly used types
 
 =head1 VERSION
 
-version 0.24
+version 0.25
 
 =head1 DESCRIPTION
 
@@ -60,4 +60,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
