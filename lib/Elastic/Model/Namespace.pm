@@ -1,6 +1,6 @@
 package Elastic::Model::Namespace;
 {
-  $Elastic::Model::Namespace::VERSION = '0.25';
+  $Elastic::Model::Namespace::VERSION = '0.26';
 }
 
 use Moose;
@@ -46,7 +46,10 @@ sub all_domains {
 #===================================
     my $self    = shift;
     my @domains = ( $self->name, @{ $self->fixed_domains } );
-    my $aliases = $self->model->es->get_aliases( index => \@domains );
+    my $aliases = $self->model->es->get_aliases(
+        index          => \@domains,
+        ignore_missing => 1
+    ) || {};
     for ( keys %$aliases ) {
         push @domains, ( $_, keys %{ $aliases->{$_}{aliases} } );
     }
@@ -58,7 +61,10 @@ sub all_live_indices {
 #===================================
     my $self    = shift;
     my @domains = ( $self->name, @{ $self->fixed_domains } );
-    my $aliases = $self->model->es->get_aliases( index => \@domains );
+    my $aliases = $self->model->es->get_aliases(
+        index          => \@domains,
+        ignore_missing => 1
+    ) || {};
     return keys %$aliases;
 }
 
@@ -101,7 +107,7 @@ Elastic::Model::Namespace - Class-to-type map
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

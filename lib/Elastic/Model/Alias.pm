@@ -1,6 +1,6 @@
 package Elastic::Model::Alias;
 {
-  $Elastic::Model::Alias::VERSION = '0.25';
+  $Elastic::Model::Alias::VERSION = '0.26';
 }
 
 use Carp;
@@ -18,9 +18,11 @@ sub to {
 
     my $name    = $self->name;
     my $es      = $self->es;
-    my %indices = ( (
-            map { $_ => { remove => { index => $_, alias => $name } } }
-                keys %{ $es->get_aliases( index => $name ) }
+    my %indices = (
+        (   map { $_ => { remove => { index => $_, alias => $name } } }
+                keys %{
+                $es->get_aliases( index => $name, ignore_missing => 1 ) || {}
+                }
         ),
         $self->_add_aliases(@_)
     );
@@ -55,9 +57,13 @@ sub remove {
 #===================================
 sub aliased_to {
 #===================================
-    my $self    = shift;
-    my $name    = $self->name;
-    my $indices = $self->es->get_aliases( index => $name );
+    my $self = shift;
+    my $name = $self->name;
+
+    my $indices = $self->es->get_aliases(
+        index          => $name,
+        ignore_missing => 1
+    ) || {};
     croak "($name) is an index, not an alias"
         if $indices->{$name};
 
@@ -99,7 +105,7 @@ Elastic::Model::Alias - Administer aliases in ElasticSearch
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

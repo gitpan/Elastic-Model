@@ -1,12 +1,12 @@
 package Elastic::Model::Role::Model;
 {
-  $Elastic::Model::Role::Model::VERSION = '0.25';
+  $Elastic::Model::Role::Model::VERSION = '0.26';
 }
 
 use Moose::Role;
 use Carp;
 use Elastic::Model::Types qw(ES ES_UniqueKey);
-use ElasticSearch 0.61             ();
+use ElasticSearch 0.65             ();
 use ElasticSearchX::UniqueKey 0.03 ();
 use Class::Load qw(load_class);
 use Moose::Util qw(does_role);
@@ -639,7 +639,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

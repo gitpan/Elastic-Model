@@ -1,6 +1,6 @@
 package Elastic::Model::Role::Index;
 {
-  $Elastic::Model::Role::Index::VERSION = '0.25';
+  $Elastic::Model::Role::Index::VERSION = '0.26';
 }
 
 use Moose::Role;
@@ -102,9 +102,10 @@ sub update_analyzers {
 #===================================
 sub is_alias {
 #===================================
-    my $self    = shift;
-    my $name    = $self->name;
-    my $indices = $self->es->get_aliases( index => $name );
+    my $self = shift;
+    my $name = $self->name;
+    my $indices
+        = $self->es->get_aliases( index => $name, ignore_missing => 1 ) || {};
     return !!( %$indices && !$indices->{$name} );
 }
 
@@ -113,7 +114,9 @@ sub is_index {
 #===================================
     my $self = shift;
     my $name = $self->name;
-    return !!$self->es->get_aliases( index => $name )->{$name};
+    my $aliases
+        = $self->es->get_aliases( index => $name, ignore_missing => 1 ) || {};
+    return !!$aliases->{$name};
 }
 
 #===================================
@@ -156,7 +159,7 @@ Elastic::Model::Role::Index - Provides admin methods common to indices and alias
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

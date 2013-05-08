@@ -1,6 +1,6 @@
 package Elastic::Model::Index;
 {
-  $Elastic::Model::Index::VERSION = '0.25';
+  $Elastic::Model::Index::VERSION = '0.26';
 }
 
 use Carp;
@@ -277,7 +277,7 @@ Elastic::Model::Index - Create and administer indices in ElasticSearch
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

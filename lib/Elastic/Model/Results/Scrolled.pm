@@ -1,6 +1,6 @@
 package Elastic::Model::Results::Scrolled;
 {
-  $Elastic::Model::Results::Scrolled::VERSION = '0.25';
+  $Elastic::Model::Results::Scrolled::VERSION = '0.26';
 }
 
 use Carp;
@@ -88,7 +88,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 SYNOPSIS
 

@@ -12,7 +12,7 @@ Elastic::Manual::Intro - An introduction to Elastic::Model
 
 =head1 VERSION
 
-version 0.25
+version 0.26
 
 =head1 INSTALLING REQUIREMENTS
 
