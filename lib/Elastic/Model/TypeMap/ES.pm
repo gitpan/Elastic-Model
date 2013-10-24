@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::ES;
 {
-  $Elastic::Model::TypeMap::ES::VERSION = '0.26';
+  $Elastic::Model::TypeMap::ES::VERSION = '0.27';
 }
 
 use strict;
@@ -97,12 +97,12 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
 L<Elastic::Model::TypeMap::ES> provides mapping, inflation and deflation
-for ElasticSearch specific types.
+for Elasticsearch specific types.
 
 =head1 TYPES
 

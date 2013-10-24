@@ -5,7 +5,9 @@ META.json
 META.yml
 Makefile.PL
 README
+cpanfile
 dist.ini
+elasticsearch-0.90.zip
 lib/Elastic/Doc.pm
 lib/Elastic/Manual.pod
 lib/Elastic/Manual/Analysis.pod

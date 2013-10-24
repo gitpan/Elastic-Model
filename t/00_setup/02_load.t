@@ -33,7 +33,7 @@ my %classes = (
 );
 
 for my $m ( $model, $model_2 ) {
-    for ( keys %classes ) {
+    for ( sort keys %classes ) {
         ok my $class = $m->$_, "Has $_";
         isa_ok $class, $classes{$_}, $_;
         is $class->model, $m, "$_ has correct model";
@@ -64,8 +64,8 @@ note 'View';
 isa_ok $model->view, 'Elastic::Model::View', 'View';
 
 note 'Other';
-isa_ok $model->store, 'Elastic::Model::Store', 'store';
-isa_ok $model->es,    'ElasticSearch',         'es';
+isa_ok $model->store, 'Elastic::Model::Store',         'store';
+isa_ok $model->es,    'Elasticsearch::Client::Compat', 'es';
 
 done_testing;
 

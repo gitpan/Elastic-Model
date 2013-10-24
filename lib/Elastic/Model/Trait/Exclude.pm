@@ -1,6 +1,6 @@
 package Elastic::Model::Trait::Exclude;
 {
-  $Elastic::Model::Trait::Exclude::VERSION = '0.26';
+  $Elastic::Model::Trait::Exclude::VERSION = '0.27';
 }
 
 use Moose::Role;
@@ -26,12 +26,12 @@ Elastic::Model::Trait::Exclude - An internal use trait
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
 This trait is used by Elastic::Model doc attributes which shouldn't be
-stored in ElasticSearch. It implements just the
+stored in Elasticsearch. It implements just the
 L<Elastic::Model::Trait::Field/"exclude"> keyword.
 
 =head1 AUTHOR

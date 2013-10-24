@@ -1,6 +1,6 @@
 package Elastic::Model::Results::Scrolled;
 {
-  $Elastic::Model::Results::Scrolled::VERSION = '0.26';
+  $Elastic::Model::Results::Scrolled::VERSION = '0.27';
 }
 
 use Carp;
@@ -13,7 +13,7 @@ use namespace::autoclean;
 #===================================
 has '_scroll' => (
 #===================================
-    isa    => 'ElasticSearch::ScrolledSearch',
+    isa    => 'Elasticsearch::Compat::ScrolledSearch',
     is     => 'ro',
     writer => '_set_scroll',
 );
@@ -88,7 +88,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -110,7 +110,7 @@ All active users:
 An L<Elastic::Model::Results::Scrolled> object is returned when you call
 L<Elastic::Model::View/scroll()> or L<Elastic::Model::View/scan()>,
 and is intended for searches that could potentially retrieve many results.
-Results are retrieved from ElasticSearch in chunks.
+Results are retrieved from Elasticsearch in chunks.
 
 A C<$results> object can iterate through L<Elastic::Model::Result> objects
 (with all the result metadata), or just the DocClass object itself
@@ -152,13 +152,13 @@ will decrease, while the L</total> will remain the same.
 
     $total_matching = $results->total
 
-The total number of matching docs found by ElasticSearch.
+The total number of matching docs found by Elasticsearch.
 
 =head2 max_score
 
     $max_score = $results->max_score
 
-The highest score (relevance) found by ElasticSearch. B<Note:> if you
+The highest score (relevance) found by Elasticsearch. B<Note:> if you
 are sorting by a field other than C<_score> then you will need
 to set L<Elastic::Model::View/track_scores> to true to retrieve the
 L</max_score>.
@@ -281,7 +281,7 @@ eg C<MyApp::User>
     $results->as_elements()
 
 Sets the "short" accessors (eg L</next>, L</prev>) to return the raw result
-returned by ElasticSearch.
+returned by Elasticsearch.
 
 =head1 ELEMENT ACCESSORS
 
@@ -301,7 +301,7 @@ an instance of C<MyApp::User>
 
 =item *
 
-Element, eg C<next_element> which returns the raw hashref from ElasticSearch
+Element, eg C<next_element> which returns the raw hashref from Elasticsearch
 
 =item *
 

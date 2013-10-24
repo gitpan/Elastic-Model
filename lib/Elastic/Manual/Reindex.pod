@@ -12,7 +12,7 @@ Elastic::Manual::Reindex - How to reindex your data from an old index to a new i
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 INTRODUCTION
 
@@ -51,7 +51,7 @@ When you need to change your mapping, you can just reindex to a new index:
 =head1 UPDATING UIDS
 
 Imagine you have a C<$post> object which has a C<user> attribute.  The
-L<UID|Elastic::Model::UID> of the user is stored in ElasticSearch, which
+L<UID|Elastic::Model::UID> of the user is stored in Elasticsearch, which
 includes the index name.
 
 When you reindex your data from C<myapp_v1> to C<myapp_v2>,

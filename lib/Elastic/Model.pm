@@ -1,6 +1,6 @@
 package Elastic::Model;
 {
-  $Elastic::Model::VERSION = '0.26';
+  $Elastic::Model::VERSION = '0.27';
 }
 
 use Moose 2.06 ();
@@ -87,7 +87,7 @@ sub has_char_filter {
 
 1;
 
-# ABSTRACT: A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.
+# ABSTRACT: A NoSQL document store with full text search for Moose objects using Elasticsearch as a backend.
 
 __END__
 
@@ -95,11 +95,11 @@ __END__
 
 =head1 NAME
 
-Elastic::Model - A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.
+Elastic::Model - A NoSQL document store with full text search for Moose objects using Elasticsearch as a backend.
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -132,11 +132,11 @@ version 0.26
 =head1 DESCRIPTION
 
 Elastic::Model is a framework to store your Moose objects, which uses
-ElasticSearch as a NoSQL document store and flexible search engine.
+Elasticsearch as a NoSQL document store and flexible search engine.
 
-It is designed to make it easy to start using ElasticSearch with minimal extra
+It is designed to make it easy to start using Elasticsearch with minimal extra
 code, but allows you full access to the rich feature set available in
-ElasticSearch as soon as you are ready to use it.
+Elasticsearch as soon as you are ready to use it.
 
 =head1 INTRODUCTION TO Elastic::Model
 
@@ -146,10 +146,29 @@ L<Elastic::Manual::Intro>.
 The rest of the documentation on this page explains how to use the
 L<Elastic::Model> module itself.
 
+=head1 IMPORTANT
+
+This version of Elastic::Model has been updated to work with
+L<Elasticsearch::Compat>, a compatibility layer over the new official
+Elasticsearch Perl client: L<Elasticsearch>.
+
+In the near future, I will be releasing a version of Elastic::Model that
+works with L<Elasticsearch> directly, without need for the compatibility
+layer.  In the meantime, you should be able to continue using Elastic::Model
+as normal by simply changing:
+
+    use ElasticSearch;
+    my $es = ElasticSearch->new(...);
+
+to:
+
+    use Elasticsearch::Compat;
+    my $es = Elasticsearch::Compat->new(...);
+
 =head1 USING ELASTIC::MODEL
 
 Your application needs a C<model> class to handle the relationship between
-your object classes and the ElasticSearch cluster.
+your object classes and the Elasticsearch cluster.
 
 Your model class is most easily defined as follows:
 
@@ -175,13 +194,13 @@ handled by which of your classes.  So the above declaration says:
 
 I<"For all L<indices|Elastic::Model::Terminology/Index> which belong to namespace
 C<myapp>, objects of class C<MyApp::User> will be stored under the
-L<type|Elastic::Model::Terminology/Type> C<user> in ElasticSearch.">
+L<type|Elastic::Model::Terminology/Type> C<user> in Elasticsearch.">
 
 =head2 Custom TypeMap
 
 Elastic::Model uses a L<TypeMap|Elastic::Model::TypeMap::Default> to figure
 out how to inflate and deflate your objects, and how to configure them
-in ElasticSearch.
+in Elasticsearch.
 
 You can specify your own TypeMap using:
 
@@ -204,7 +223,7 @@ The default value is C<unique_key>.
 
 Analysis is the process of converting full text into C<terms> or C<tokens> and
 is one of the things that gives full text search its power.  When storing text
-in the ElasticSearch index, the text is first analyzed into terms/tokens.
+in the Elasticsearch index, the text is first analyzed into terms/tokens.
 Then, when searching, search keywords go through the same analysis process
 to produce the terms/tokens which are then searched for in the index.
 

@@ -1,6 +1,6 @@
 package Elastic::Model::SearchBuilder;
 {
-  $Elastic::Model::SearchBuilder::VERSION = '0.26';
+  $Elastic::Model::SearchBuilder::VERSION = '0.27';
 }
 
 use strict;
@@ -122,7 +122,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
@@ -163,7 +163,7 @@ We can create a comment as follows:
         }
     );
 
-The C<comment> object would be stored in ElasticSearch as something like this:
+The C<comment> object would be stored in Elasticsearch as something like this:
 
     {
         text    => "I like Elastic::Model",

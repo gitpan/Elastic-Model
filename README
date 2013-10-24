@@ -1,9 +1,9 @@
 NAME
     Elastic::Model - A NoSQL document store with full text search for Moose
-    objects using ElasticSearch as a backend.
+    objects using Elasticsearch as a backend.
 
 VERSION
-    version 0.26
+    version 0.27
 
 SYNOPSIS
         package MyApp;
@@ -34,11 +34,11 @@ SYNOPSIS
 
 DESCRIPTION
     Elastic::Model is a framework to store your Moose objects, which uses
-    ElasticSearch as a NoSQL document store and flexible search engine.
+    Elasticsearch as a NoSQL document store and flexible search engine.
 
-    It is designed to make it easy to start using ElasticSearch with minimal
+    It is designed to make it easy to start using Elasticsearch with minimal
     extra code, but allows you full access to the rich feature set available
-    in ElasticSearch as soon as you are ready to use it.
+    in Elasticsearch as soon as you are ready to use it.
 
 INTRODUCTION TO Elastic::Model
     If you are not familiar with Elastic::Model, you should start by reading
@@ -47,9 +47,27 @@ INTRODUCTION TO Elastic::Model
     The rest of the documentation on this page explains how to use the
     Elastic::Model module itself.
 
+IMPORTANT
+    This version of Elastic::Model has been updated to work with
+    Elasticsearch::Compat, a compatibility layer over the new official
+    Elasticsearch Perl client: Elasticsearch.
+
+    In the near future, I will be releasing a version of Elastic::Model that
+    works with Elasticsearch directly, without need for the compatibility
+    layer. In the meantime, you should be able to continue using
+    Elastic::Model as normal by simply changing:
+
+        use ElasticSearch;
+        my $es = ElasticSearch->new(...);
+
+    to:
+
+        use Elasticsearch::Compat;
+        my $es = Elasticsearch::Compat->new(...);
+
 USING ELASTIC::MODEL
     Your application needs a "model" class to handle the relationship
-    between your object classes and the ElasticSearch cluster.
+    between your object classes and the Elasticsearch cluster.
 
     Your model class is most easily defined as follows:
 
@@ -73,11 +91,11 @@ USING ELASTIC::MODEL
     which of your classes. So the above declaration says:
 
     *"For all indices which belong to namespace "myapp", objects of class
-    "MyApp::User" will be stored under the type "user" in ElasticSearch."*
+    "MyApp::User" will be stored under the type "user" in Elasticsearch."*
 
   Custom TypeMap
     Elastic::Model uses a TypeMap to figure out how to inflate and deflate
-    your objects, and how to configure them in ElasticSearch.
+    your objects, and how to configure them in Elasticsearch.
 
     You can specify your own TypeMap using:
 
@@ -97,7 +115,7 @@ USING ELASTIC::MODEL
   Custom analyzers
     Analysis is the process of converting full text into "terms" or "tokens"
     and is one of the things that gives full text search its power. When
-    storing text in the ElasticSearch index, the text is first analyzed into
+    storing text in the Elasticsearch index, the text is first analyzed into
     terms/tokens. Then, when searching, search keywords go through the same
     analysis process to produce the terms/tokens which are then searched for
     in the index.

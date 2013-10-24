@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.",
+  "ABSTRACT" => "A NoSQL document store with full text search for Moose objects using Elasticsearch as a backend.",
   "AUTHOR" => "Clinton Gormley <drtech\@cpan.org>",
   "BUILD_REQUIRES" => {
     "Test::Strict" => 0
@@ -28,9 +28,10 @@ my %WriteMakefileArgs = (
     "Data::Dump" => 0,
     "Data::Dumper" => 0,
     "Devel::GlobalDestruction" => 0,
-    "ElasticSearch" => "0.65",
     "ElasticSearch::SearchBuilder" => "0.18",
     "ElasticSearchX::UniqueKey" => "0.03",
+    "Elasticsearch" => "0.75",
+    "Elasticsearch::Compat" => "0.02",
     "JSON" => 0,
     "List::MoreUtils" => 0,
     "List::Util" => 0,
@@ -56,14 +57,14 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "CHI" => 0,
     "DateTime" => 0,
-    "ElasticSearch::TestServer" => 0,
     "Test::Deep" => 0,
     "Test::Exception" => 0,
     "Test::Moose" => 0,
     "Test::More" => "0.96",
+    "lib" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.26",
+  "VERSION" => "0.27",
   "test" => {
     "TESTS" => "t/*.t t/00_setup/*.t t/10_typemaps/*.t t/20_namespace/*.t t/30_domain/*.t t/40_view/*.t t/50_scope/*.t t/60_reindex/*.t t/65_bulk/*.t t/70_searchbuilder/*.t"
   }

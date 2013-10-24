@@ -1,6 +1,6 @@
 package Elastic::Model::Domain;
 {
-  $Elastic::Model::Domain::VERSION = '0.26';
+  $Elastic::Model::Domain::VERSION = '0.27';
 }
 
 use Carp;
@@ -158,7 +158,7 @@ Elastic::Model::Domain - The domain (index or alias) where your docs are stored.
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 

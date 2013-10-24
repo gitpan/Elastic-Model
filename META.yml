@@ -1,21 +1,21 @@
 ---
-abstract: 'A NoSQL document store with full text search for Moose objects using ElasticSearch as a backend.'
+abstract: 'A NoSQL document store with full text search for Moose objects using Elasticsearch as a backend.'
 author:
   - 'Clinton Gormley <drtech@cpan.org>'
 build_requires:
   CHI: 0
   DateTime: 0
-  ElasticSearch::TestServer: 0
   Test::Deep: 0
   Test::Exception: 0
   Test::Moose: 0
   Test::More: 0.96
   Test::Strict: 0
+  lib: 0
   utf8: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.130880'
+generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -28,9 +28,10 @@ requires:
   Data::Dump: 0
   Data::Dumper: 0
   Devel::GlobalDestruction: 0
-  ElasticSearch: 0.65
   ElasticSearch::SearchBuilder: 0.18
   ElasticSearchX::UniqueKey: 0.03
+  Elasticsearch: 0.75
+  Elasticsearch::Compat: 0.02
   JSON: 0
   List::MoreUtils: 0
   List::Util: 0
@@ -55,4 +56,4 @@ requires:
 resources:
   bugtracker: https://github.com/clintongormley/Elastic-Model/issues
   repository: git://github.com/clintongormley/Elastic-Model.git
-version: 0.26
+version: 0.27

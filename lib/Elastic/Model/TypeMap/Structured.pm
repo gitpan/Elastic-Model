@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Structured;
 {
-  $Elastic::Model::TypeMap::Structured::VERSION = '0.26';
+  $Elastic::Model::TypeMap::Structured::VERSION = '0.27';
 }
 
 use strict;
@@ -200,7 +200,7 @@ Elastic::Model::TypeMap::Structured - Type maps for MooseX::Types::Structured
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
@@ -219,7 +219,7 @@ and the value would be passed through unaltered when deflating/inflating.
 
 =head2 Tuple
 
-Because array refs are interpreted by ElasticSearch as multiple values
+Because array refs are interpreted by Elasticsearch as multiple values
 of the same type, tuples are converted to hash refs whose keys are
 the index number.  For instance, a field C<foo> with C<Tuple[Int,Str]>
 and value C<[5,'foo']> will be deflated to C<< { 0 => 5, 1 => 'foo' } >>.

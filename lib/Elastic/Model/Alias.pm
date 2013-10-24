@@ -1,6 +1,6 @@
 package Elastic::Model::Alias;
 {
-  $Elastic::Model::Alias::VERSION = '0.26';
+  $Elastic::Model::Alias::VERSION = '0.27';
 }
 
 use Carp;
@@ -101,11 +101,11 @@ __PACKAGE__->meta->make_immutable;
 
 =head1 NAME
 
-Elastic::Model::Alias - Administer aliases in ElasticSearch
+Elastic::Model::Alias - Administer aliases in Elasticsearch
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -127,7 +127,7 @@ See also L<Elastic::Model::Role::Index/SYNOPSIS>.
 =head1 DESCRIPTION
 
 L<Elastic::Model::Alias> objects are used to create and administer
-L<index aliases|Elastic::Manual::Terminology/Alias> in an ElasticSearch cluster.
+L<index aliases|Elastic::Manual::Terminology/Alias> in an Elasticsearch cluster.
 
 See L<Elastic::Model::Role::Index> for more about usage.
 See L<Elastic::Manual::Scaling> for more about how aliases can be used in your
@@ -254,5 +254,5 @@ the same terms as the Perl 5 programming language system itself.
 
 __END__
 
-# ABSTRACT: Administer aliases in ElasticSearch
+# ABSTRACT: Administer aliases in Elasticsearch
 

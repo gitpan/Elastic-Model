@@ -1,6 +1,6 @@
 package Elastic::Model::Meta::Class::Doc;
 {
-  $Elastic::Model::Meta::Class::Doc::VERSION = '0.26';
+  $Elastic::Model::Meta::Class::Doc::VERSION = '0.27';
 }
 
 use Moose::Role;
@@ -91,7 +91,7 @@ sub _build_stub_initializer {
         . $self->_inline_generate_instance( '$instance',
         '"' . $self->name . '"' )
         . 'return $instance' . '}';
-    return eval($src) or croak $@;
+    return eval($src) || croak $@;
 }
 
 #===================================
@@ -121,7 +121,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
@@ -155,7 +155,7 @@ are no unique keys, returns C<undef>.
 Creates a stub instance of the class, which auto-inflates when any accessor
 is called.  If the C<$source> param is defined, then it is used to inflate
 the attributes of the instance, otherwise the attributes are fetched from
-ElasticSearch when an attribute is accessed.
+Elasticsearch when an attribute is accessed.
 
 =head1 AUTHOR
 

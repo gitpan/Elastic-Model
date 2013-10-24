@@ -1,6 +1,6 @@
 package Elastic::Model::Deleted;
 {
-  $Elastic::Model::Deleted::VERSION = '0.26';
+  $Elastic::Model::Deleted::VERSION = '0.27';
 }
 
 use Moose;
@@ -48,7 +48,7 @@ Elastic::Model::Deleted - A class to represent deleted doc objects which are sti
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
@@ -77,7 +77,7 @@ The original UID of the deleted doc.
 
     1 == $deleted->has_been_deleted()
 
-Returns true without checking ElasticSearch. This method is provided
+Returns true without checking Elasticsearch. This method is provided
 so that it can be called in an L<Elastic::Model::Role::Doc/on_conflict>
 handler.
 

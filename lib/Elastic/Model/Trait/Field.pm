@@ -1,6 +1,6 @@
 package Elastic::Model::Trait::Field;
 {
-  $Elastic::Model::Trait::Field::VERSION = '0.26';
+  $Elastic::Model::Trait::Field::VERSION = '0.27';
 }
 
 use Moose::Role;
@@ -264,18 +264,18 @@ has 'exclude_attrs' => (
 
 =head1 NAME
 
-Elastic::Model::Trait::Field - Add ElasticSearch specific keywords to your attribute definitions.
+Elastic::Model::Trait::Field - Add Elasticsearch specific keywords to your attribute definitions.
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
 L<Elastic::Model::Trait::Field> is automatically applied to all of your
 attributes when you include C<use Elastic::Doc;> at the top of your doc
 classes. This trait adds keywords to allow you to configure how each attribute
-is indexed in ElasticSearch.
+is indexed in Elasticsearch.
 
 It also wraps all attribute accessors to ensure that Elastic::Doc objects
 are properly inflated before any attribute is accessed.
@@ -362,5 +362,5 @@ the same terms as the Perl 5 programming language system itself.
 
 __END__
 
-# ABSTRACT: Add ElasticSearch specific keywords to your attribute definitions.
+# ABSTRACT: Add Elasticsearch specific keywords to your attribute definitions.
 

@@ -1,6 +1,6 @@
 package Elastic::Model::TypeMap::Default;
 {
-  $Elastic::Model::TypeMap::Default::VERSION = '0.26';
+  $Elastic::Model::TypeMap::Default::VERSION = '0.27';
 }
 
 use strict;
@@ -24,19 +24,19 @@ Elastic::Model::TypeMap::Default - The default type map used by Elastic::Model
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
 Moose's L<type constraints|Moose::Util::TypeConstraints> and introspection
 allows Elastic::Model to figure out how to map your data model to the
-ElasticSearch backend with the minimum of effort on your part.
+Elasticsearch backend with the minimum of effort on your part.
 
 What YOU need to do is: B<Be specific about the type constraint for each attribute.>
 
 For instance,  if you have an attribute called C<count>, then specify the
 type constraint C<< isa => 'Int' >>.
-That way, we know how to define the field in ElasticSearch, and how to deflate
+That way, we know how to define the field in Elasticsearch, and how to deflate
 and inflate the value.
 
 Type constraints can inherit their mapping, inflator and deflator from
@@ -59,7 +59,7 @@ existing index.
 =item *
 
 how Elastic::Model will deflate and inflate each attribute when saving or
-retrieving docs stored in ElasticSearch.
+retrieving docs stored in Elasticsearch.
 
 =back
 

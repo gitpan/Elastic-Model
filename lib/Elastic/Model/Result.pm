@@ -1,6 +1,6 @@
 package Elastic::Model::Result;
 {
-  $Elastic::Model::Result::VERSION = '0.26';
+  $Elastic::Model::Result::VERSION = '0.27';
 }
 
 use Moose;
@@ -174,7 +174,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -212,7 +212,7 @@ The object associated with the result.  By default, the L</source> field is
 returned in search results, meaning that we can inflate the object directly from
 the search results.  B<Note:> If you set L<Elastic::Model::View/fields> and you
 don't include C<'_source'> then you will be unable to inflate your object
-without a separate (but automatic) step to retrieve it from ElasticSearch.
+without a separate (but automatic) step to retrieve it from Elasticsearch.
 
 Also see L<Elastic::Manual::Scoping>.
 
@@ -302,18 +302,18 @@ L<http://www.lucenetutorial.com/advanced-topics/scoring.html>.
 
     \%raw_result = $result->result
 
-The raw result hashref as returned by ElasticSearch.
+The raw result hashref as returned by Elasticsearch.
 
 =head2 source
 
     \%source_field = $result->source
 
 The C<_source> field (ie the hashref which represents your object in
-ElasticSearch). This value is returned by default with any search, and is
+Elasticsearch). This value is returned by default with any search, and is
 used to inflate your L</object> without having to retrieve it in a separate
 step. B<Note:> If you set L<Elastic::Model::View/fields> and you don't include
 C<'_source'> then you will be unable to inflate your object without a separate
-(but automatic) step to retrieve it from ElasticSearch.
+(but automatic) step to retrieve it from Elasticsearch.
 
 =head1 AUTHOR
 

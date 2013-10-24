@@ -1,6 +1,6 @@
 package Elastic::Model::Store;
 {
-  $Elastic::Model::Store::VERSION = '0.26';
+  $Elastic::Model::Store::VERSION = '0.27';
 }
 
 use Moose;
@@ -13,16 +13,16 @@ use namespace::autoclean;
 
 =head1 NAME
 
-Elastic::Model::Store - A default implementation of the ElasticSearch backend
+Elastic::Model::Store - A default implementation of the Elasticsearch backend
 
 =head1 VERSION
 
-version 0.26
+version 0.27
 
 =head1 DESCRIPTION
 
 This is an empty class which provides the default implementation of
-the ElasticSearch backend as implemented in L<Elastic::Model::Role::Store>.
+the Elasticsearch backend as implemented in L<Elastic::Model::Role::Store>.
 
 =head1 IMPORTED ATTRIBUTES
 
@@ -59,5 +59,5 @@ the same terms as the Perl 5 programming language system itself.
 
 __END__
 
-# ABSTRACT: A default implementation of the ElasticSearch backend
+# ABSTRACT: A default implementation of the Elasticsearch backend
 
