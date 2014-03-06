@@ -1,8 +1,5 @@
 package Elastic::Model;
-{
-  $Elastic::Model::VERSION = '0.27';
-}
-
+$Elastic::Model::VERSION = '0.28';
 use Moose 2.06 ();
 use Moose::Exporter();
 use Carp;
@@ -93,13 +90,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model - A NoSQL document store with full text search for Moose objects using Elasticsearch as a backend.
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -149,8 +148,8 @@ L<Elastic::Model> module itself.
 =head1 IMPORTANT
 
 This version of Elastic::Model has been updated to work with
-L<Elasticsearch::Compat>, a compatibility layer over the new official
-Elasticsearch Perl client: L<Elasticsearch>.
+L<Search::Elasticsearch::Compat>, a compatibility layer over the new official
+Elasticsearch Perl client: L<Search::Elasticsearch>.
 
 In the near future, I will be releasing a version of Elastic::Model that
 works with L<Elasticsearch> directly, without need for the compatibility
@@ -162,8 +161,8 @@ as normal by simply changing:
 
 to:
 
-    use Elasticsearch::Compat;
-    my $es = Elasticsearch::Compat->new(...);
+    use Search::Elasticsearch::Compat;
+    my $es = Search::Elasticsearch::Compat->new(...);
 
 =head1 USING ELASTIC::MODEL
 
@@ -389,7 +388,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

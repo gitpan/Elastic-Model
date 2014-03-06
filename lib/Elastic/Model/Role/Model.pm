@@ -1,14 +1,11 @@
 package Elastic::Model::Role::Model;
-{
-  $Elastic::Model::Role::Model::VERSION = '0.27';
-}
-
+$Elastic::Model::Role::Model::VERSION = '0.28';
 use Moose::Role;
 use Carp;
 use Elastic::Model::Types qw(ES ES_UniqueKey);
-use Elasticsearch 0.75             ();
-use Elasticsearch::Compat 0.02     ();
-use ElasticSearchX::UniqueKey 0.03 ();
+use Search::Elasticsearch 1.10         ();
+use Search::Elasticsearch::Compat 0.10 ();
+use ElasticSearchX::UniqueKey 0.05     ();
 use Class::Load qw(load_class);
 use Moose::Util qw(does_role);
 use MooseX::Types::Moose qw(:all);
@@ -144,7 +141,7 @@ has 'current_scope' => (
 #===================================
 sub BUILD        { shift->doc_class_wrappers }
 sub _build_store { $_[0]->store_class->new( es => $_[0]->es ) }
-sub _build_es    { Elasticsearch::Compat->new }
+sub _build_es    { Search::Elasticsearch::Compat->new }
 #===================================
 
 #===================================
@@ -634,19 +631,21 @@ sub json {$JSON}
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
     use MyApp;
 
-    my $es         = Elasticsearch::Compat->new( servers => 'es.domain.com:9200' );
+    my $es         = Search::Elasticsearch::Compat->new( servers => 'es.domain.com:9200' );
     my $model      = MyApp->new( es => $es );
 
     my $namespace  = $model->namespace('myapp');
@@ -673,12 +672,12 @@ See L<Elastic::Model> for more about how to setup your Model class.
 =head2 new()
 
 Usually, the only parameter that you need to pass to C<new()> is C<es>,
-which contains your L<Elasticsearch> connection.
+which contains your L<Search::Elasticsearch::Compat> connection.
 
-    $es    = Elasticsearch::Compat->new( servers => 'es1.domain.com:9200' );
+    $es    = Search::Elasticsearch::Compat->new( servers => 'es1.domain.com:9200' );
     $model = MyApp->new( es => $es );
 
-If the C<es> parameter is omitted, then it will default to an L<Elasticsearch>
+If the C<es> parameter is omitted, then it will default to a L<Search::Elasticsearch::Compat>
 connection to C<localhost:9200>.
 
     $model = MyApp->new();   # localhost:9200
@@ -873,7 +872,7 @@ known to the model.
 
     $es = $model->es
 
-Returns the L<Elasticsearch> instance that was passed to L</"new()">.
+Returns the L<Search::Elasticsearch::Compat> instance that was passed to L</"new()">.
 
 =head3 es_unique
 
@@ -1086,7 +1085,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

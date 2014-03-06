@@ -3,7 +3,7 @@ NAME
     objects using Elasticsearch as a backend.
 
 VERSION
-    version 0.27
+    version 0.28
 
 SYNOPSIS
         package MyApp;
@@ -49,8 +49,8 @@ INTRODUCTION TO Elastic::Model
 
 IMPORTANT
     This version of Elastic::Model has been updated to work with
-    Elasticsearch::Compat, a compatibility layer over the new official
-    Elasticsearch Perl client: Elasticsearch.
+    Search::Elasticsearch::Compat, a compatibility layer over the new
+    official Elasticsearch Perl client: Search::Elasticsearch.
 
     In the near future, I will be releasing a version of Elastic::Model that
     works with Elasticsearch directly, without need for the compatibility
@@ -62,8 +62,8 @@ IMPORTANT
 
     to:
 
-        use Elasticsearch::Compat;
-        my $es = Elasticsearch::Compat->new(...);
+        use Search::Elasticsearch::Compat;
+        my $es = Search::Elasticsearch::Compat->new(...);
 
 USING ELASTIC::MODEL
     Your application needs a "model" class to handle the relationship
@@ -234,7 +234,7 @@ AUTHOR
     Clinton Gormley <drtech@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2013 by Clinton Gormley.
+    This software is copyright (c) 2014 by Clinton Gormley.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

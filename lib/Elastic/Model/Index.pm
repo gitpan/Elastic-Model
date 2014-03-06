@@ -1,8 +1,5 @@
 package Elastic::Model::Index;
-{
-  $Elastic::Model::Index::VERSION = '0.27';
-}
-
+$Elastic::Model::Index::VERSION = '0.28';
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Index';
@@ -271,13 +268,15 @@ __PACKAGE__->meta->make_immutable;
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Index - Create and administer indices in Elasticsearch
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -314,7 +313,7 @@ generated from the attributes of your doc classes listed in the
 L<namespace|Elastic::Model::Namespace>.  Similarly, any
 L<custom analyzers|Elastic::Model/"Custom analyzers"> required
 by your classes are added to the index
-L<\%settings|http://www.Elasticsearch.org/guide/reference/api/admin-indices-update-settings.html>
+L<\%settings|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html>
 that you pass in:
 
     $index->create( settings => {number_of_shards => 1} );
@@ -416,7 +415,7 @@ callback, or ignore them by by setting C<on_conflict> to C<'IGNORE'>:
 Similarly, you can pass an C<on_error> handler which will handle other errors,
 or all errors if no C<on_conflict> handler is defined.
 
-See L<Elasticsearch/Error handlers> for more.
+See L<Search::Elasticsearch::Compat/Error handlers> for more.
 
 =item uid_on_conflict / uid_on_error
 
@@ -589,7 +588,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,11 +1,8 @@
 package Elastic::Model::Types;
-{
-  $Elastic::Model::Types::VERSION = '0.27';
-}
-
+$Elastic::Model::Types::VERSION = '0.28';
 use strict;
 use warnings;
-use Elasticsearch::Compat();
+use Search::Elasticsearch::Compat();
 use ElasticSearchX::UniqueKey();
 
 use MooseX::Types::Moose qw(HashRef ArrayRef Str Bool Num Int Defined Any);
@@ -80,17 +77,17 @@ while ( my $type = shift @enums ) {
 }
 
 #===================================
-class_type ES, { class => 'Elasticsearch::Client::Compat' };
+class_type ES, { class => 'Search::Elasticsearch::Client::Compat' };
 #===================================
-coerce ES, from HashRef, via { Elasticsearch::Compat->new($_) };
+coerce ES, from HashRef, via { Search::Elasticsearch::Compat->new($_) };
 coerce ES, from Str, via {
     s/^:/127.0.0.1:/;
-    Elasticsearch::Compat->new( servers => $_ );
+    Search::Elasticsearch::Compat->new( servers => $_ );
 };
 coerce ES, from ArrayRef, via {
     my @servers = @$_;
     s/^:/127.0.0.1:/ for @servers;
-    Elasticsearch::Compat->new( servers => \@servers );
+    Search::Elasticsearch::Compat->new( servers => \@servers );
 };
 
 #===================================
@@ -206,13 +203,15 @@ coerce UID, from HashRef, via { Elastic::Model::UID->new($_) };
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -291,9 +290,8 @@ C<Str> with C<"$lat,$lon">.
         isa => Timestamp
     );
 
-A C<Timestamp> is a C<Num> which holds floating epoch seconds, with milliseconds
-as decimal places. It is automatically mapped as a C<date> field in
-Elasticsearch.
+A C<Timestamp> is a C<Num> which holds floating point epoch seconds, with milliseconds resolution.
+It is automatically mapped as a C<date> field in Elasticsearch.
 
 =head1 AUTHOR
 
@@ -301,7 +299,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

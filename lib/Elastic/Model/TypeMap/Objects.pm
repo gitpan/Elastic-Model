@@ -1,8 +1,5 @@
 package Elastic::Model::TypeMap::Objects;
-{
-  $Elastic::Model::TypeMap::Objects::VERSION = '0.27';
-}
-
+$Elastic::Model::TypeMap::Objects::VERSION = '0.28';
 use strict;
 use warnings;
 use Elastic::Model::TypeMap::Base qw(:all);
@@ -151,13 +148,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::TypeMap::Objects - Type maps for objects and Moose classes
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 DESCRIPTION
 
@@ -254,7 +253,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

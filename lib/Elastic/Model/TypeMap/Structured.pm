@@ -1,8 +1,5 @@
 package Elastic::Model::TypeMap::Structured;
-{
-  $Elastic::Model::TypeMap::Structured::VERSION = '0.27';
-}
-
+$Elastic::Model::TypeMap::Structured::VERSION = '0.28';
 use strict;
 use warnings;
 
@@ -194,13 +191,15 @@ sub _pass_through { $_[0] }
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::TypeMap::Structured - Type maps for MooseX::Types::Structured
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 DESCRIPTION
 
@@ -264,7 +263,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

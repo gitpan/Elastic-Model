@@ -1,13 +1,11 @@
 package Elastic::Model::TypeMap::Base;
-{
-  $Elastic::Model::TypeMap::Base::VERSION = '0.27';
-}
-
+$Elastic::Model::TypeMap::Base::VERSION = '0.28';
 use strict;
 use warnings;
 
 use Sub::Exporter qw(build_exporter);
 use Class::MOP();
+use Class::Load();
 use List::MoreUtils qw(uniq);
 use Moose::Util qw(does_role);
 use Scalar::Util qw(blessed);
@@ -30,8 +28,8 @@ sub import {
         unshift @{ $callee . '::ISA' }, __PACKAGE__;
     }
 
-    build_exporter( {
-            into    => $callee,
+    build_exporter(
+        {   into    => $callee,
             exports => [
                 qw(deflate_via inflate_via map_via),
                 has_type => sub {
@@ -43,7 +41,7 @@ sub import {
 
     for (@args) {
         next if /^[:-]/;
-        Class::MOP::load_class($_);
+        Class::Load::load_class($_);
         $callee->import_types( $_->typemap );
     }
 }
@@ -488,13 +486,15 @@ sub import_types {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::TypeMap::Base - A base class for all TypeMaps
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -796,7 +796,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

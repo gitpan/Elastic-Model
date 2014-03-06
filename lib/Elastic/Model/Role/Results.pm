@@ -1,8 +1,5 @@
 package Elastic::Model::Role::Results;
-{
-  $Elastic::Model::Role::Results::VERSION = '0.27';
-}
-
+$Elastic::Model::Role::Results::VERSION = '0.28';
 use Carp;
 use Moose::Role;
 
@@ -272,13 +269,15 @@ sub slice_partials {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Role::Results - An iterator role for search results
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 DESCRIPTION
 
@@ -454,7 +453,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

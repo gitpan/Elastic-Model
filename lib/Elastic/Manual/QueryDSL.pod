@@ -1,10 +1,12 @@
 package Elastic::Manual::QueryDSL;
-
+$Elastic::Manual::QueryDSL::VERSION = '0.28';
 # ABSTRACT: How to use the Elasticsearch Query DSL
 
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -12,12 +14,12 @@ Elastic::Manual::QueryDSL - How to use the Elasticsearch Query DSL
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 INTRODUCTION
 
 Elasticsearch provides a rich query language, known as the
-L<Query DSL|http://www.Elasticsearch.org/guide/reference/query-dsl/> which
+L<Query DSL|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html> which
 exposes much of the power of Lucene through a simple JSON interface.
 It is tuned for full text search, but is in no way limited just
 to that. It also provides very fast and flexible filters, ranges, geo-location
@@ -203,7 +205,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

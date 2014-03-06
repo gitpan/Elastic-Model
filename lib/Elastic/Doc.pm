@@ -1,8 +1,5 @@
 package Elastic::Doc;
-{
-  $Elastic::Doc::VERSION = '0.27';
-}
-
+$Elastic::Doc::VERSION = '0.28';
 use Moose();
 use Moose::Exporter;
 use namespace::autoclean;
@@ -63,13 +60,15 @@ sub apply_field_settings {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -191,8 +190,8 @@ attr/field-specific) in the type mapping. For instance:
 B<Warning:> Use C<has_mapping> with caution. L<Elastic::Model> requires
 certain settings to be active to work correctly.
 
-See the "Fields" section in L<Mapping|http://www.Elasticsearch.org/guide/reference/mapping/> and
-L<Root object type|http://www.Elasticsearch.org/guide/reference/mapping/root-object-type.html>
+See the "Fields" section in L<Mapping|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-fields.html> and
+L<Root object type|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-root-object-type.html>
 for more information about what options can be configured.
 
 =head2 apply_field_settings
@@ -286,7 +285,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,8 +1,5 @@
 package Elastic::Model::Role::Iterator;
-{
-  $Elastic::Model::Role::Iterator::VERSION = '0.27';
-}
-
+$Elastic::Model::Role::Iterator::VERSION = '0.28';
 use Carp;
 use Moose::Role;
 use MooseX::Types::Moose qw(ArrayRef Int CodeRef);
@@ -343,13 +340,15 @@ sub _fetch_until { }
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Role::Iterator - A generic iterator role
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -626,7 +625,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

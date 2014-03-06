@@ -1,10 +1,12 @@
 package Elastic::Manual;
-
+$Elastic::Manual::VERSION = '0.28';
 # ABSTRACT: What is Elastic::Model and how do I use it?
 
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -12,7 +14,7 @@ Elastic::Manual - What is Elastic::Model and how do I use it?
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 WHAT IS ELASTIC::MODEL?
 
@@ -26,7 +28,7 @@ Elasticsearch as soon as you are ready to use it.
 For a brief example of how Elastic::Model works, you should start by reading
 L<Elastic::Manual::Intro>.
 
-=head1 WHAT IS Elasticsearch?
+=head1 WHAT IS ELASTICSEARCH?
 
 L<Elasticsearch|http://www.Elasticsearch.org> is an open-source
 L<Lucene|http://lucene.apache.org/core/>-based full-text search engine,
@@ -209,7 +211,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

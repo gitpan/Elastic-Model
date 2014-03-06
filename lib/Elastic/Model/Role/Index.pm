@@ -1,8 +1,5 @@
 package Elastic::Model::Role::Index;
-{
-  $Elastic::Model::Role::Index::VERSION = '0.27';
-}
-
+$Elastic::Model::Role::Index::VERSION = '0.28';
 use Moose::Role;
 use MooseX::Types::Moose qw(Str);
 use Carp;
@@ -29,7 +26,7 @@ has 'namespace' => (
 has 'es' => (
 #===================================
     is      => 'ro',
-    isa     => 'Elasticsearch::Client::Compat',
+    isa     => 'Search::Elasticsearch::Client::Compat',
     lazy    => 1,
     builder => '_build_es'
 );
@@ -153,13 +150,15 @@ sub delete_mapping {
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Elastic::Model::Role::Index - Provides admin methods common to indices and aliases
 
 =head1 VERSION
 
-version 0.27
+version 0.28
 
 =head1 SYNOPSIS
 
@@ -207,7 +206,7 @@ L<Elastic::Model::Index> or L<Elastic::Model::Alias> object.
 
 =head2 es
 
-The same L<Elasticsearch> connection as L<Elastic::Model::Role::Model/es>.
+The same L<Search::Elasticsearch::Compat> connection as L<Elastic::Model::Role::Model/es>.
 
 =head1 METHODS
 
@@ -217,7 +216,7 @@ The same L<Elasticsearch> connection as L<Elastic::Model::Role::Model/es>.
     $admin = $admin->delete( %args );
 
 Deletes the index (or indices pointed to by alias ) L</name>. Any
-C<%args> are passed directly to L<Elasticsearch/delete_index()>.
+C<%args> are passed directly to L<Search::Elasticsearch::Compat/delete_index()>.
 For example:
 
     $admin->delete( ignore_missing => 1 );
@@ -259,7 +258,7 @@ L<Elastic::Model::Index/create_index()>.
 
     $admin = $admin->update_settings( %settings );
 
-Updates the L<index settings|http://www.Elasticsearch.org/guide/reference/api/admin-indices-update-settings.html>
+Updates the L<index settings|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html>
 for the the index (or indices pointed to by alias ) L</name>.
 
 For example, if you want to rebuild an index, you could disable refresh
@@ -299,7 +298,7 @@ update all types known to the L</namespace>.
 
 Any optional args passed
 as a hashref as the final parameter will be passed to
-L<Elasticsearch/put_mapping()>
+L<Search::Elasticsearch::Compat/put_mapping()>
 
 =head2 delete_mapping();
 
@@ -309,7 +308,7 @@ L<Elasticsearch/put_mapping()>
 Deletes the type mapping B<AND THE DOCUMENTS> for the listed types in the index
 (or the indices pointed to by alias) L</name>. Any optional args passed
 as a hashref as the final parameter will be passed to
-L<Elasticsearch/delete_mapping()>.
+L<Search::Elasticsearch::Compat/delete_mapping()>.
 
 =head2 exists()
 
@@ -358,7 +357,7 @@ Clinton Gormley <drtech@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Clinton Gormley.
+This software is copyright (c) 2014 by Clinton Gormley.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
