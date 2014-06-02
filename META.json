@@ -4,7 +4,7 @@
       "Clinton Gormley <drtech@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.013, CPAN::Meta::Converter version 2.133380",
+   "generated_by" : "Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640",
    "license" : [
       "perl_5"
    ],
@@ -40,7 +40,6 @@
             "Data::Dumper" : "0",
             "Devel::GlobalDestruction" : "0",
             "ElasticSearch::SearchBuilder" : "0.18",
-            "ElasticSearchX::UniqueKey" : "0.05",
             "JSON" : "0",
             "List::MoreUtils" : "0",
             "List::Util" : "0",
@@ -54,8 +53,7 @@
             "MooseX::Types::Moose" : "0",
             "MooseX::Types::Structured" : "0",
             "Scalar::Util" : "0",
-            "Search::Elasticsearch" : "1.10",
-            "Search::Elasticsearch::Compat" : "0.10",
+            "Search::Elasticsearch" : "1.12",
             "Sub::Exporter" : "0",
             "Time::HiRes" : "0",
             "Try::Tiny" : "0",
@@ -79,7 +77,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/clintongormley/Elastic-Model/issues"
@@ -90,6 +88,6 @@
          "web" : "https://github.com/clintongormley/Elastic-Model"
       }
    },
-   "version" : "0.28"
+   "version" : "0.29_1"
 }
 

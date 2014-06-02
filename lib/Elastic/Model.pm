@@ -1,5 +1,5 @@
 package Elastic::Model;
-$Elastic::Model::VERSION = '0.28';
+$Elastic::Model::VERSION = '0.29_1'; # TRIAL
 use Moose 2.06 ();
 use Moose::Exporter();
 use Carp;
@@ -98,7 +98,7 @@ Elastic::Model - A NoSQL document store with full text search for Moose objects 
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 

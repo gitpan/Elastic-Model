@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::Objects;
-$Elastic::Model::TypeMap::Objects::VERSION = '0.28';
+$Elastic::Model::TypeMap::Objects::VERSION = '0.29_1'; # TRIAL
 use strict;
 use warnings;
 use Elastic::Model::TypeMap::Base qw(:all);
@@ -156,7 +156,7 @@ Elastic::Model::TypeMap::Objects - Type maps for objects and Moose classes
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 DESCRIPTION
 
@@ -205,8 +205,7 @@ the L<Elastic::Model::Trait::Field> trait:
     has 'foo' => (
         is              => 'rw,
         isa             => 'Str',
-        trait           => ['Elastic::Model::Trait::Field'],
-        omit_norms      => 1
+        trait           => ['Elastic::Model::Trait::Field']
     );
 
 =head2 Elastic::Doc classes

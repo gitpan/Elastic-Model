@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Doc;
-$Elastic::Model::Role::Doc::VERSION = '0.28';
+$Elastic::Model::Role::Doc::VERSION = '0.29_1'; # TRIAL
 use Moose::Role;
 
 use Elastic::Model::Trait::Exclude;
@@ -110,8 +110,8 @@ sub _get_source {
 #===================================
     my $self = shift;
     $self->model->get_doc_source(
-        uid            => $self->uid,
-        ignore_missing => 1,
+        uid    => $self->uid,
+        ignore => 404,
         @_
     );
 }
@@ -202,7 +202,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 

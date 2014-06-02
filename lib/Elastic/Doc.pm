@@ -1,5 +1,5 @@
 package Elastic::Doc;
-$Elastic::Doc::VERSION = '0.28';
+$Elastic::Doc::VERSION = '0.29_1'; # TRIAL
 use Moose();
 use Moose::Exporter;
 use namespace::autoclean;
@@ -68,7 +68,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 
@@ -175,7 +175,6 @@ attr/field-specific) in the type mapping. For instance:
 
     has_mapping {
         _source => {
-            compress    => 1,
             includes    => ['path1.*','path2.*'],
             excludes    => ['path3.*']
         },

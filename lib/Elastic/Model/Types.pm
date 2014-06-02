@@ -1,9 +1,8 @@
 package Elastic::Model::Types;
-$Elastic::Model::Types::VERSION = '0.28';
+$Elastic::Model::Types::VERSION = '0.29_1'; # TRIAL
 use strict;
 use warnings;
-use Search::Elasticsearch::Compat();
-use ElasticSearchX::UniqueKey();
+use Search::Elasticsearch();
 
 use MooseX::Types::Moose qw(HashRef ArrayRef Str Bool Num Int Defined Any);
 use MooseX::Types::Structured qw (Dict Optional Map);
@@ -16,7 +15,6 @@ use MooseX::Types -declare => [ qw(
         CoreFieldType
         DynamicMapping
         ES
-        ES_UniqueKey
         FieldType
         GeoPoint
         HighlightArgs
@@ -77,22 +75,18 @@ while ( my $type = shift @enums ) {
 }
 
 #===================================
-class_type ES, { class => 'Search::Elasticsearch::Client::Compat' };
+class_type ES, { class => 'Search::Elasticsearch::Client::Direct' };
 #===================================
-coerce ES, from HashRef, via { Search::Elasticsearch::Compat->new($_) };
+coerce ES, from HashRef, via { Search::Elasticsearch->new($_) };
 coerce ES, from Str, via {
     s/^:/127.0.0.1:/;
-    Search::Elasticsearch::Compat->new( servers => $_ );
+    Search::Elasticsearch->new( nodes => $_ );
 };
 coerce ES, from ArrayRef, via {
-    my @servers = @$_;
-    s/^:/127.0.0.1:/ for @servers;
-    Search::Elasticsearch::Compat->new( servers => \@servers );
+    my @nodes = @$_;
+    s/^:/127.0.0.1:/ for @nodes;
+    Search::Elasticsearch->new( servers => \@nodes );
 };
-
-#===================================
-class_type ES_UniqueKey, { class => 'ElasticSearchX::UniqueKey' };
-#===================================
 
 #===================================
 subtype StoreMapping, as enum( [ 'yes', 'no' ] );
@@ -102,23 +96,21 @@ coerce StoreMapping, from Any, via { $_ ? 'yes' : 'no' };
 #===================================
 subtype MultiField, as Dict [
 #===================================
-    type                         => Optional [CoreFieldType],
-    index                        => Optional [IndexMapping],
-    index_name                   => Optional [Str],
-    boost                        => Optional [Num],
-    null_value                   => Optional [Str],
-    analyzer                     => Optional [Str],
-    index_analyzer               => Optional [Str],
-    search_analyzer              => Optional [Str],
-    search_quote_analyzer        => Optional [Str],
-    omit_norms                   => Optional [Bool],
-    omit_term_freq_and_positions => Optional [Bool],
-    term_vector                  => Optional [TermVectorMapping],
-    geohash                      => Optional [Bool],
-    lat_lon                      => Optional [Bool],
-    geohash_precision            => Optional [Int],
-    precision_step               => Optional [Int],
-    format                       => Optional [Str],
+    type                  => Optional [CoreFieldType],
+    index                 => Optional [IndexMapping],
+    index_name            => Optional [Str],
+    boost                 => Optional [Num],
+    null_value            => Optional [Str],
+    analyzer              => Optional [Str],
+    index_analyzer        => Optional [Str],
+    search_analyzer       => Optional [Str],
+    search_quote_analyzer => Optional [Str],
+    term_vector           => Optional [TermVectorMapping],
+    geohash               => Optional [Bool],
+    lat_lon               => Optional [Bool],
+    geohash_precision     => Optional [Int],
+    precision_step        => Optional [Int],
+    format                => Optional [Str],
 
 ];
 
@@ -211,7 +203,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 

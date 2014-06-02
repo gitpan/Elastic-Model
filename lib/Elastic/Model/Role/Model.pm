@@ -1,11 +1,9 @@
 package Elastic::Model::Role::Model;
-$Elastic::Model::Role::Model::VERSION = '0.28';
+$Elastic::Model::Role::Model::VERSION = '0.29_1'; # TRIAL
 use Moose::Role;
 use Carp;
-use Elastic::Model::Types qw(ES ES_UniqueKey);
-use Search::Elasticsearch 1.10         ();
-use Search::Elasticsearch::Compat 0.10 ();
-use ElasticSearchX::UniqueKey 0.05     ();
+use Elastic::Model::Types qw(ES);
+use Search::Elasticsearch 1.12 ();
 use Class::Load qw(load_class);
 use Moose::Util qw(does_role);
 use MooseX::Types::Moose qw(:all);
@@ -69,12 +67,12 @@ has 'es' => (
 );
 
 #===================================
-has 'es_unique' => (
+has '_unique_index' => (
 #===================================
-    isa     => ES_UniqueKey,
+    isa     => Str,
     is      => 'ro',
     lazy    => 1,
-    builder => '_build_es_unique',
+    builder => '_build_unique_index',
 );
 
 #===================================
@@ -141,20 +139,16 @@ has 'current_scope' => (
 #===================================
 sub BUILD        { shift->doc_class_wrappers }
 sub _build_store { $_[0]->store_class->new( es => $_[0]->es ) }
-sub _build_es    { Search::Elasticsearch::Compat->new }
+sub _build_es    { Search::Elasticsearch->new }
 #===================================
 
 #===================================
-sub _build_es_unique {
+sub _build_unique_index {
 #===================================
     my $self  = shift;
     my $index = Class::MOP::class_of($self)->unique_index;
-    my $uniq  = ElasticSearchX::UniqueKey->new(
-        es    => $self->es,
-        index => $index
-    );
-    $uniq->bootstrap;
-    return $uniq;
+    $self->store->bootstrap_uniques( index => $index );
+    return $index;
 }
 
 #===================================
@@ -456,9 +450,12 @@ sub _update_unique_keys {
         $new{$unique_key} = $new if length $new;
     }
 
-    my $uniq = $self->es_unique;
+    my $uniq  = $self->_unique_index;
+    my $store = $self->store;
 
-    if ( my %failed = $uniq->multi_create(%new) ) {
+    if ( my %failed
+        = $store->create_unique_keys( index => $uniq, keys => \%new ) )
+    {
         if ($on_unique) {
             $on_unique->( $doc, \%failed );
             return;
@@ -468,8 +465,12 @@ sub _update_unique_keys {
 
     }
     return {
-        commit   => sub { $uniq->multi_delete(%old); },
-        rollback => sub { $uniq->multi_delete(%new); }
+        commit => sub {
+            $store->delete_unique_keys( index => $uniq, keys => \%old );
+        },
+        rollback => sub {
+            $store->delete_unique_keys( index => $uniq, keys => \%new );
+        },
     };
 }
 
@@ -481,10 +482,10 @@ sub _handle_error {
 
     die $error
         unless $on_conflict
-        and $error =~ /\[Conflict\]/;
+        and $error->is('Conflict');
 
     my $new;
-    if ( my $current_version = $error->{-vars}{current_version} ) {
+    if ( my $current_version = $error->{vars}{current_version} ) {
         my $uid = Elastic::Model::UID->new(
             %{ $original->uid->read_params },
             version    => $current_version,
@@ -528,7 +529,7 @@ sub _delete_unique_keys {
 #===================================
     my ( $self, $uid ) = @_;
 
-    my $doc = $self->get_doc( uid => $uid, ignore_missing => 1 )
+    my $doc = $self->get_doc( uid => $uid, ignore => 404 )
         or return $noops;
 
     my $meta = Class::MOP::class_of($doc);
@@ -540,9 +541,15 @@ sub _delete_unique_keys {
         my $old = $doc->_source->{$key};
         $old{ $uniques->{$key} } = $old if length $old;
     }
-    my $uniq = $self->es_unique;
+    my $uniq  = $self->_unique_index;
+    my $store = $self->store;
     return {
-        commit => sub { $uniq->multi_delete(%old) }
+        commit => sub {
+            $store->delete_unique_keys(
+                index => $uniq,
+                keys  => \%old
+            );
+        },
     };
 }
 
@@ -618,8 +625,7 @@ sub map_class {
         _timestamp        => { enabled => 1, path => 'timestamp' },
         numeric_detection => 1,
     );
-
-    $mapping{_source}{compress} = 1;
+    delete $mapping{type};
     return \%mapping;
 }
 
@@ -639,7 +645,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 
@@ -745,7 +751,7 @@ Normally, you want to use L<Elastic::Model::Domain/"get()"> rather than this
 method.
 
     $doc = $model->get_doc(uid => $uid);
-    $doc = $model->get_doc(uid => $uid, ignore_missing => 1, ...);
+    $doc = $model->get_doc(uid => $uid, ignore => 404, ...);
 
 C<get_doc()> tries to retrieve the object corresponding to the
 L<$uid|Elastic::Model::UID>, first from the L</current_scope()> (if there is one)
@@ -763,7 +769,7 @@ Any other args are passed on to L<Elastic::Model::Store/get_doc()>.
 =head3 get_doc_source()
 
     $doc = $model->get_doc_source(uid => $uid);
-    $doc = $model->get_doc_source(uid => $uid, ignore_missing => 1, ...);
+    $doc = $model->get_doc_source(uid => $uid, ignore => 404, ...);
 
 Calls L<Elastic::Model::Store/"get_doc()"> and returns the raw source hashref
 as stored in Elasticsearch for the doc with the corresponding
@@ -801,7 +807,7 @@ L<Elastic::Model::Role::Doc/on_unique> parameters.
 
 =head3 delete_doc()
 
-    $uid = $model->delete_doc(uid => $uid, ignore_missing => 1, ...)
+    $uid = $model->delete_doc(uid => $uid, ignore => 404, ...)
 
 Calls L<Elastic::Model::Store/delete_doc()> and returns the updated
 L<Elastic::Model::UID> object. Throws an error if it doesn't exist.

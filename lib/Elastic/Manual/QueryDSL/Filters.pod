@@ -1,5 +1,5 @@
 package Elastic::Manual::QueryDSL::Filters;
-$Elastic::Manual::QueryDSL::Filters::VERSION = '0.28';
+$Elastic::Manual::QueryDSL::Filters::VERSION = '0.29_1'; # TRIAL
 # ABSTRACT: Overview of the filters available in Elasticsearch
 
 __END__
@@ -14,7 +14,7 @@ Elastic::Manual::QueryDSL::Filters - Overview of the filters available in Elasti
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 INTRODUCTION
 

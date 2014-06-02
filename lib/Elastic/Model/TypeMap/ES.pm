@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::ES;
-$Elastic::Model::TypeMap::ES::VERSION = '0.28';
+$Elastic::Model::TypeMap::ES::VERSION = '0.29_1'; # TRIAL
 use strict;
 use warnings;
 
@@ -21,14 +21,8 @@ has_type 'Elastic::Model::Types::UID',
     },
 
     map_via {
-    my %props = map {
-        $_ => {
-            type                         => 'string',
-            index                        => 'not_analyzed',
-            omit_norms                   => 1,
-            omit_term_freq_and_positions => 1,
-            }
-    } qw(index type id routing);
+    my %props = map { $_ => { type => 'string', index => 'not_analyzed', } }
+        qw(index type id routing);
 
     $props{routing}{index} = 'no';
     delete $props{routing}{index_name};
@@ -46,10 +40,8 @@ has_type 'Elastic::Model::Types::UID',
 has_type 'Elastic::Model::Types::Keyword',
 #===================================
     map_via {
-    type                         => 'string',
-    index                        => 'not_analyzed',
-    omit_norms                   => 1,
-    omit_term_freq_and_positions => 1,
+    type  => 'string',
+    index => 'not_analyzed'
     };
 
 #===================================
@@ -96,7 +88,7 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 DESCRIPTION
 
@@ -112,9 +104,7 @@ via L<Elastic::Model::TypeMap::Moose/Any> and are mapped as:
 
     {
         type                         => 'string',
-        index                        => 'not_analyzed',
-        omit_norms                   => 1,
-        omit_term_freq_and_positions => 1,
+        index                        => 'not_analyzed'
     }
 
 It is a suitable type to use for string attributes which should not
@@ -133,27 +123,19 @@ via L<Elastic::Model::UID/"new_from_store()">. It is mapped as:
         properties  => {
             index   => {
                 type                         => 'string',
-                index                        => 'not_analyzed',
-                omit_norms                   => 1,
-                omit_term_freq_and_positions => 1,
+                index                        => 'not_analyzed'
             },
             type => {
                 type                         => 'string',
-                index                        => 'not_analyzed',
-                omit_norms                   => 1,
-                omit_term_freq_and_positions => 1,
+                index                        => 'not_analyzed'
             },
             id   => {
                 type                         => 'string',
-                index                        => 'not_analyzed',
-                omit_norms                   => 1,
-                omit_term_freq_and_positions => 1,
+                index                        => 'not_analyzed'
             },
             routing   => {
                 type                         => 'string',
-                index                        => 'no',
-                omit_norms                   => 1,
-                omit_term_freq_and_positions => 1,
+                index                        => 'no'
             },
         }
     }

@@ -1,5 +1,5 @@
 package Elastic::Manual::Attributes::Unique;
-$Elastic::Manual::Attributes::Unique::VERSION = '0.28';
+$Elastic::Manual::Attributes::Unique::VERSION = '0.29_1'; # TRIAL
 1;
 
 # ABSTRACT: Making attributes unique
@@ -16,7 +16,7 @@ Elastic::Manual::Attributes::Unique - Making attributes unique
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 INTRODUCTION
 

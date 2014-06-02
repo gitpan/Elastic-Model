@@ -1,5 +1,5 @@
 package Elastic::Model::Results::Cached;
-$Elastic::Model::Results::Cached::VERSION = '0.28';
+$Elastic::Model::Results::Cached::VERSION = '0.29_1'; # TRIAL
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -93,7 +93,7 @@ Elastic::Model::Results::Cached - A cacheable iterator over bounded/finite searc
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 

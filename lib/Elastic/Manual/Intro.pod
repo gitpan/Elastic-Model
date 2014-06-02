@@ -1,5 +1,5 @@
 package Elastic::Manual::Intro;
-$Elastic::Manual::Intro::VERSION = '0.28';
+$Elastic::Manual::Intro::VERSION = '0.29_1'; # TRIAL
 # ABSTRACT: An introduction to Elastic::Model
 
 __END__
@@ -14,7 +14,7 @@ Elastic::Manual::Intro - An introduction to Elastic::Model
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 INSTALLING REQUIREMENTS
 
@@ -24,7 +24,7 @@ You need a recent version of Java installed, then download the current
 stable release of Elasticsearch from L<http://www.Elasticsearch.org/download/>.
 For instance:
 
-    curl -L -O https://github.com/downloads/Elasticsearch/Elasticsearch/elasticsearch-0.20.5.tar.gz
+    curl -L -O https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.20.5.tar.gz
     tar -xzf elasticsearch-0.20.5.tar.gz
 
 B<Note: The minimum required version of Elasticsearch is 0.19.11.>

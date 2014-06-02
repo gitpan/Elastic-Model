@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::Moose;
-$Elastic::Model::TypeMap::Moose::VERSION = '0.28';
+$Elastic::Model::TypeMap::Moose::VERSION = '0.29_1'; # TRIAL
 use strict;
 use warnings;
 
@@ -99,10 +99,8 @@ has_type 'Moose::Meta::TypeConstraint::Enum',
     deflate_via {'$val'},    #
     inflate_via {'$val'},
     map_via {
-    type                         => 'string',
-    index                        => 'not_analyzed',
-    omit_norms                   => 1,
-    omit_term_freq_and_positions => 1
+    type  => 'string',
+    index => 'not_analyzed',
     };
 
 #===================================
@@ -209,7 +207,7 @@ Elastic::Model::TypeMap::Moose - Type maps for core Moose types
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 DESCRIPTION
 
@@ -278,9 +276,7 @@ Values are passed through without inflation/deflation. Mapped as:
 
     {
         type                         => 'string',
-        index                        => 'not_analyzed',
-        omit_norms                   => 1,
-        omit_term_freq_and_positions => 1
+        index                        => 'not_analyzed'
     }
 
 =head2 Num

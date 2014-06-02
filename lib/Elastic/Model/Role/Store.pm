@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Store;
-$Elastic::Model::Role::Store::VERSION = '0.28';
+$Elastic::Model::Role::Store::VERSION = '0.29_1'; # TRIAL
 use Moose::Role;
 
 use Elastic::Model::Types qw(ES);
@@ -13,18 +13,57 @@ has 'es' => (
     required => 1,
 );
 
+my @Top_Level = qw(
+    index       type        lenient
+    preference  routing     scroll
+    search_type timeout     version
+);
+
 #===================================
-sub search          { shift->es->search(@_) }
-sub scrolled_search { shift->es->scrolled_search(@_) }
-sub delete_by_query { shift->es->delete_by_query(@_) }
+sub search {
 #===================================
+    my $self = shift;
+    my $args = _tidy_search(@_);
+    $self->es->search($args);
+}
+
+#===================================
+sub scrolled_search {
+#===================================
+    my $self = shift;
+    my $args = _tidy_search(@_);
+    $self->es->scroll_helper($args);
+}
+
+#===================================
+sub _tidy_search {
+#===================================
+    my %body = ref $_[0] eq 'HASH' ? %{ shift() } : @_;
+    my %args;
+    for (@Top_Level) {
+        my $val = delete $body{$_};
+        if ( defined $val ) {
+            $args{$_} = $val;
+        }
+    }
+    $args{body} = \%body;
+    return \%args;
+}
+#===================================
+sub delete_by_query {
+#===================================
+    my $self = shift;
+    my $args = _tidy_search(@_);
+    $self->es->delete_by_query($args);
+}
 
 #===================================
 sub get_doc {
 #===================================
     my ( $self, $uid, %args ) = @_;
     return $self->es->get(
-        fields => [qw(_routing _parent _source)],
+        fields  => [qw(_routing _parent)],
+        _source => 1,
         %{ $uid->read_params },
         %args,
     );
@@ -47,7 +86,7 @@ sub _write_doc {
 #===================================
     my ( $self, $action, $uid, $data, %args ) = @_;
     return $self->es->$action(
-        data => $data,
+        body => $data,
         %{ $uid->write_params },
         %args
     );
@@ -56,7 +95,9 @@ sub _write_doc {
 #===================================
 sub delete_doc {
 #===================================
-    my ( $self, $uid, %args ) = @_;
+    my $self = shift;
+    my $uid  = shift;
+    my %args = _cleanup(@_);
     return $self->es->delete( %{ $uid->write_params }, %args );
 }
 
@@ -65,6 +106,205 @@ sub bulk {
 #===================================
     my ( $self, %args ) = @_;
     return $self->es->bulk(%args);
+}
+
+#===================================
+sub index_exists {
+#===================================
+    my ( $self, %args ) = @_;
+    return $self->es->indices->exists(%args);
+}
+
+#===================================
+sub create_index {
+#===================================
+    my ( $self, %args ) = @_;
+    $args{body} = {
+        settings => ( delete( $args{settings} ) || {} ),
+        mappings => ( delete( $args{mappings} ) || {} ),
+    };
+    return $self->es->indices->create(%args);
+}
+
+#===================================
+sub delete_index {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->delete(%args);
+}
+
+#===================================
+sub refresh_index {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->refresh(%args);
+}
+
+#===================================
+sub open_index {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->open(%args);
+}
+
+#===================================
+sub close_index {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->close(%args);
+}
+
+#===================================
+sub update_index_settings {
+#===================================
+    my ( $self, %args ) = @_;
+    $args{body} = { settings => delete $args{settings} };
+    return $self->es->indices->put_settings(%args);
+}
+
+#===================================
+sub get_aliases {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->get_aliases( ignore => 404, %args ) || {};
+}
+
+#===================================
+sub put_aliases {
+#===================================
+    my ( $self, %args ) = @_;
+    $args{body} = { actions => delete $args{actions} };
+    return $self->es->indices->update_aliases(%args);
+}
+
+#===================================
+sub get_mapping {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->get_mapping(%args);
+}
+
+#===================================
+sub put_mapping {
+#===================================
+    my ( $self, %args ) = @_;
+    $args{body} = delete $args{mapping};
+    return $self->es->indices->put_mapping(%args);
+}
+
+#===================================
+sub delete_mapping {
+#===================================
+    my $self = shift;
+    my %args = _cleanup(@_);
+    return $self->es->indices->delete_mapping(%args);
+}
+
+#===================================
+sub reindex {
+#===================================
+    my ( $self, %args ) = @_;
+    my %params = (
+        max_count   => delete $args{bulk_size},
+        on_conflict => delete $args{on_conflict},
+        on_error    => delete $args{on_error},
+        verbose     => delete $args{verbose},
+    );
+    for ( keys %params ) {
+        delete $params{$_} unless defined $params{$_};
+    }
+    my $bulk = $self->es->bulk_helper(%params);
+    $bulk->reindex( %args, version_type => 'external', );
+}
+
+#===================================
+sub bootstrap_uniques {
+#===================================
+    my ( $self, %args ) = @_;
+
+    my $es = $self->es;
+    return if $es->indices->exists( index => $args{index} );
+
+    $es->indices->create(
+        index => $args{index},
+        body  => {
+            settings => { number_of_shards => 1 },
+            mappings => {
+                _default_ => {
+                    _all    => { enabled => 0 },
+                    _source => { enabled => 0 },
+                    _type   => { index   => 'no' },
+                    enabled => 0,
+                }
+            }
+        }
+    );
+}
+
+#===================================
+sub create_unique_keys {
+#===================================
+    my ( $self, %args ) = @_;
+    my %keys = %{ $args{keys} };
+
+    my %failed;
+    my $bulk = $self->es->bulk_helper(
+        index       => $args{index},
+        on_conflict => sub {
+            my ( $action, $doc ) = @_;
+            $failed{ $doc->{_type} } = $doc->{_id};
+        },
+        on_error => sub {
+            die "Error creating multi unique keys: $_[2]";
+        }
+    );
+    $bulk->create(
+        map { +{ _type => $_, _id => $keys{$_}, _source => {} } }
+            keys %keys
+    );
+    $bulk->flush;
+    if (%failed) {
+        delete @keys{ keys %failed };
+        $self->delete_unique_keys( index => $args{index}, keys => \%keys );
+    }
+    return %failed;
+}
+
+#===================================
+sub delete_unique_keys {
+#===================================
+    my ( $self, %args ) = @_;
+    my %keys = %{ $args{keys} };
+
+    my $bulk = $self->es->bulk_helper(
+        index    => $args{index},
+        on_error => sub {
+            die "Error deleting multi unique keys: $_[2]";
+        }
+    );
+    $bulk->delete( map { { type => $_, id => $keys{$_} } } keys %keys );
+    $bulk->flush;
+    return 1;
+}
+
+our %Warned;
+
+#===================================
+sub _cleanup {
+#===================================
+    my (%args) = @_;
+    if ( delete $args{ignore_missing} ) {
+        warn "(ignore_missing) is deprecated. use { ignore => 404 } instead"
+            unless $Warned{ignore_missing}++;
+        $args{ignore} = 404;
+    }
+    return (%args);
 }
 
 1;
@@ -79,7 +319,7 @@ Elastic::Model::Role::Store - Elasticsearch backend for document read/write requ
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 DESCRIPTION
 

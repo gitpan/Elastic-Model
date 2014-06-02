@@ -1,5 +1,5 @@
 package Elastic::Manual::Scoping;
-$Elastic::Manual::Scoping::VERSION = '0.28';
+$Elastic::Manual::Scoping::VERSION = '0.29_1'; # TRIAL
 # ABSTRACT: An optional in-memory cache, essential for keeping weak refs live
 
 __END__
@@ -14,7 +14,7 @@ Elastic::Manual::Scoping - An optional in-memory cache, essential for keeping we
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 Warning
 

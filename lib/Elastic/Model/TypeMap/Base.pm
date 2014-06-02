@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::Base;
-$Elastic::Model::TypeMap::Base::VERSION = '0.28';
+$Elastic::Model::TypeMap::Base::VERSION = '0.29_1'; # TRIAL
 use strict;
 use warnings;
 
@@ -244,20 +244,18 @@ sub class_inflator {
 
 our %Allowed_Attrs = (
     string => {
-        'index_name'                   => 1,
-        'store'                        => 1,
-        'index'                        => 1,
-        'term_vector'                  => 1,
-        'boost'                        => 1,
-        'null_value'                   => 1,
-        'omit_norms'                   => 1,
-        'omit_term_freq_and_positions' => 1,
-        'analyzer'                     => 1,
-        'index_analyzer'               => 1,
-        'search_analyzer'              => 1,
-        'search_quote_analyzer'        => 1,
-        'include_in_all'               => 1,
-        'multi'                        => 1,
+        'index_name'            => 1,
+        'store'                 => 1,
+        'index'                 => 1,
+        'term_vector'           => 1,
+        'boost'                 => 1,
+        'null_value'            => 1,
+        'analyzer'              => 1,
+        'index_analyzer'        => 1,
+        'search_analyzer'       => 1,
+        'search_quote_analyzer' => 1,
+        'include_in_all'        => 1,
+        'multi'                 => 1,
     },
     integer => {
         'index_name'     => 1,
@@ -494,7 +492,7 @@ Elastic::Model::TypeMap::Base - A base class for all TypeMaps
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 

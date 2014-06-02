@@ -1,5 +1,5 @@
 package Elastic::Model::Domain;
-$Elastic::Model::Domain::VERSION = '0.28';
+$Elastic::Model::Domain::VERSION = '0.29_1'; # TRIAL
 use Carp;
 use Moose;
 use namespace::autoclean;
@@ -37,11 +37,9 @@ no Moose;
 #===================================
 sub _get_default_routing {
 #===================================
-    my $self = shift;
-    my $name = $self->name;
-    my $aliases
-        = $self->model->es->get_aliases( index => $name, ignore_missing => 1 )
-        || {};
+    my $self    = shift;
+    my $name    = $self->name;
+    my $aliases = $self->model->store->get_aliases( index => $name );
 
     croak "Domain ($name) doesn't exist either as an index or an alias"
         unless %$aliases;
@@ -97,7 +95,7 @@ sub get {
 }
 
 #===================================
-sub try_get { shift->get( @_, ignore_missing => 1 ) }
+sub try_get { shift->get( @_, ignore => 404 ) }
 #===================================
 
 #===================================
@@ -135,7 +133,7 @@ sub delete {
 }
 
 #===================================
-sub try_delete { shift->delete( @_, ignore_missing => 1 ) }
+sub try_delete { shift->delete( @_, ignore => 404 ) }
 #===================================
 
 #===================================
@@ -157,7 +155,7 @@ Elastic::Model::Domain - The domain (index or alias) where your docs are stored.
 
 =head1 VERSION
 
-version 0.28
+version 0.29_1
 
 =head1 SYNOPSIS
 
