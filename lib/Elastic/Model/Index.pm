@@ -1,5 +1,5 @@
 package Elastic::Model::Index;
-$Elastic::Model::Index::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Index::VERSION = '0.29_2'; # TRIAL
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Index';
@@ -272,7 +272,7 @@ Elastic::Model::Index - Create and administer indices in Elasticsearch
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

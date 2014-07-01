@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::ES;
-$Elastic::Model::TypeMap::ES::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::TypeMap::ES::VERSION = '0.29_2'; # TRIAL
 use strict;
 use warnings;
 
@@ -88,7 +88,7 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

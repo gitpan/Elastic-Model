@@ -1,5 +1,5 @@
 package Elastic::Manual;
-$Elastic::Manual::VERSION = '0.29_1'; # TRIAL
+$Elastic::Manual::VERSION = '0.29_2'; # TRIAL
 # ABSTRACT: What is Elastic::Model and how do I use it?
 
 __END__
@@ -14,7 +14,7 @@ Elastic::Manual - What is Elastic::Model and how do I use it?
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 WHAT IS ELASTIC::MODEL?
 

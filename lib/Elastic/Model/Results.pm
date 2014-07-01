@@ -1,5 +1,5 @@
 package Elastic::Model::Results;
-$Elastic::Model::Results::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Results::VERSION = '0.29_2'; # TRIAL
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -47,7 +47,7 @@ Elastic::Model::Results - An iterator over bounded/finite search results
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

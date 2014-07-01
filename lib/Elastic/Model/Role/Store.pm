@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Store;
-$Elastic::Model::Role::Store::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Role::Store::VERSION = '0.29_2'; # TRIAL
 use Moose::Role;
 
 use Elastic::Model::Types qw(ES);
@@ -319,7 +319,7 @@ Elastic::Model::Role::Store - Elasticsearch backend for document read/write requ
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

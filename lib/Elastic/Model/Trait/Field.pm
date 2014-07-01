@@ -1,5 +1,5 @@
 package Elastic::Model::Trait::Field;
-$Elastic::Model::Trait::Field::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Trait::Field::VERSION = '0.29_2'; # TRIAL
 use Moose::Role;
 Moose::Util::meta_attribute_alias('ElasticField');
 
@@ -253,7 +253,7 @@ Elastic::Model::Trait::Field - Add Elasticsearch specific keywords to your attri
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

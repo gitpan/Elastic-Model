@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Model;
-$Elastic::Model::Role::Model::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Role::Model::VERSION = '0.29_2'; # TRIAL
 use Moose::Role;
 use Carp;
 use Elastic::Model::Types qw(ES);
@@ -645,7 +645,7 @@ Elastic::Model::Role::Model - The role applied to your Model
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

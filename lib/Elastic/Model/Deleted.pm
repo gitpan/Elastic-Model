@@ -1,5 +1,5 @@
 package Elastic::Model::Deleted;
-$Elastic::Model::Deleted::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Deleted::VERSION = '0.29_2'; # TRIAL
 use Moose;
 use strict;
 use warnings;
@@ -47,7 +47,7 @@ Elastic::Model::Deleted - A class to represent deleted doc objects which are sti
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

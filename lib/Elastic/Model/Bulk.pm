@@ -1,5 +1,5 @@
 package Elastic::Model::Bulk;
-$Elastic::Model::Bulk::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Bulk::VERSION = '0.29_2'; # TRIAL
 use Moose;
 use namespace::autoclean;
 use Data::Dumper;
@@ -205,7 +205,7 @@ Elastic::Model::Bulk - Bulk-saving of multiple docs for increased throughput
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

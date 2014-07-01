@@ -1,5 +1,5 @@
 package Elastic::Doc;
-$Elastic::Doc::VERSION = '0.29_1'; # TRIAL
+$Elastic::Doc::VERSION = '0.29_2'; # TRIAL
 use Moose();
 use Moose::Exporter;
 use namespace::autoclean;
@@ -68,7 +68,7 @@ Elastic::Doc - Adds Elastic::Model functionality to your object classes
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

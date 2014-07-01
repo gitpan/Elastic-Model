@@ -1,5 +1,5 @@
 package Elastic::Model::Result;
-$Elastic::Model::Result::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Result::VERSION = '0.29_2'; # TRIAL
 use Moose;
 
 use Carp;
@@ -188,7 +188,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,5 @@
 package Elastic::Model::Types;
-$Elastic::Model::Types::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Types::VERSION = '0.29_2'; # TRIAL
 use strict;
 use warnings;
 use Search::Elasticsearch();
@@ -15,6 +15,8 @@ use MooseX::Types -declare => [ qw(
         CoreFieldType
         DynamicMapping
         ES
+        ES_1x
+        ES_90
         FieldType
         GeoPoint
         HighlightArgs
@@ -74,8 +76,11 @@ while ( my $type = shift @enums ) {
     );
 }
 
+class_type ES_1x, { class => 'Search::Elasticsearch::Client::Direct' };
+class_type ES_90, { class => 'Search::Elasticsearch::Client::0_90::Direct' };
+
 #===================================
-class_type ES, { class => 'Search::Elasticsearch::Client::Direct' };
+subtype ES(), as ES_1x | ES_90;
 #===================================
 coerce ES, from HashRef, via { Search::Elasticsearch->new($_) };
 coerce ES, from Str, via {
@@ -203,7 +208,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,5 @@
 package Elastic::Model::View;
-$Elastic::Model::View::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::View::VERSION = '0.29_2'; # TRIAL
 use Moose;
 
 use Carp;
@@ -526,7 +526,7 @@ Elastic::Model::View - Views to query your docs in Elasticsearch
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

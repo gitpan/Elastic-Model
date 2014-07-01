@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Results;
-$Elastic::Model::Role::Results::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Role::Results::VERSION = '0.29_2'; # TRIAL
 use Carp;
 use Moose::Role;
 
@@ -307,7 +307,7 @@ Elastic::Model::Role::Results - An iterator role for search results
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

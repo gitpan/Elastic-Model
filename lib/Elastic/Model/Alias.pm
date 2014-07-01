@@ -1,5 +1,5 @@
 package Elastic::Model::Alias;
-$Elastic::Model::Alias::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Alias::VERSION = '0.29_2'; # TRIAL
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Index';
@@ -101,7 +101,7 @@ Elastic::Model::Alias - Administer aliases in Elasticsearch
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,5 @@
 package Elastic::Model::Store;
-$Elastic::Model::Store::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Store::VERSION = '0.29_2'; # TRIAL
 use Moose;
 with 'Elastic::Model::Role::Store';
 use namespace::autoclean;
@@ -16,7 +16,7 @@ Elastic::Model::Store - A default implementation of the Elasticsearch backend
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

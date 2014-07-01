@@ -1,5 +1,5 @@
 package Elastic::Model::SearchBuilder;
-$Elastic::Model::SearchBuilder::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::SearchBuilder::VERSION = '0.29_2'; # TRIAL
 use strict;
 use warnings;
 use ElasticSearch::SearchBuilder 0.18;
@@ -121,7 +121,7 @@ Elastic::Model::SearchBuilder - An Elastic::Model specific subclass of L<Elastic
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 DESCRIPTION
 

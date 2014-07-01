@@ -1,5 +1,5 @@
 package Elastic::Model::Results::Scrolled;
-$Elastic::Model::Results::Scrolled::VERSION = '0.29_1'; # TRIAL
+$Elastic::Model::Results::Scrolled::VERSION = '0.29_2'; # TRIAL
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -87,7 +87,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.29_1
+version 0.29_2
 
 =head1 SYNOPSIS
 
