@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::Moose;
-$Elastic::Model::TypeMap::Moose::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::TypeMap::Moose::VERSION = '0.50';
 use strict;
 use warnings;
 
@@ -207,7 +207,7 @@ Elastic::Model::TypeMap::Moose - Type maps for core Moose types
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 
@@ -275,8 +275,8 @@ Mapped as C<< { type => 'string' } >>. In/deflation via L</"Any">.
 Values are passed through without inflation/deflation. Mapped as:
 
     {
-        type                         => 'string',
-        index                        => 'not_analyzed'
+        type   => 'string',
+        index  => 'not_analyzed'
     }
 
 =head2 Num

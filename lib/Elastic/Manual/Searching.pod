@@ -1,5 +1,5 @@
 package Elastic::Manual::Searching;
-$Elastic::Manual::Searching::VERSION = '0.29_2'; # TRIAL
+$Elastic::Manual::Searching::VERSION = '0.50';
 # ABSTRACT: Which search method to use with a View, and how to use the results.
 
 __END__
@@ -14,7 +14,7 @@ Elastic::Manual::Searching - Which search method to use with a View, and how to 
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 
@@ -62,7 +62,7 @@ which works pretty much like any iterator, eg:
 
     $it->size;          # number of elements in $it
     $it->total;         # total number of matching docs
-    $it->facets;        # any facets that were requested
+    $it->aggs;          # any aggregations that were requested
 
 =head2 What elements can the iterator return?
 

@@ -1,5 +1,5 @@
 package Elastic::Model::Results::Cached;
-$Elastic::Model::Results::Cached::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Results::Cached::VERSION = '0.50';
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -76,6 +76,7 @@ sub BUILD {
 
     $self->_set_took( $result->{took} || 0 );
     $self->_set_facets( $result->{facets} || {} );
+    $self->_set_aggs($result->{aggregations} || {});
 
     $cache->set( $cache_key, $result, $cache_opts )
         unless $cached;
@@ -93,7 +94,7 @@ Elastic::Model::Results::Cached - A cacheable iterator over bounded/finite searc
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 

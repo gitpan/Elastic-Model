@@ -1,5 +1,5 @@
 package Elastic::Model::Trait::Field;
-$Elastic::Model::Trait::Field::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Trait::Field::VERSION = '0.50';
 use Moose::Role;
 Moose::Util::meta_attribute_alias('ElasticField');
 
@@ -25,8 +25,8 @@ has 'type' => (
 #===================================
 has 'mapping' => (
 #===================================
-    isa => HashRef [Str],
-    is => 'rw'
+    isa => HashRef,
+    is  => 'rw'
 );
 
 #===================================
@@ -253,7 +253,7 @@ Elastic::Model::Trait::Field - Add Elasticsearch specific keywords to your attri
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 
@@ -284,9 +284,9 @@ keywords.
 
 =head2 L<multi|Elastic::Manual::Attributes/multi>
 
-=head2 L<index_name|Elastic::Manual::Attributes/index_name>
+=head2 L<index_name|Elastic::Manual::Attributes/index_name> [DEPRECATED]
 
-=head2 L<boost|Elastic::Manual::Attributes/boost>
+=head2 L<boost|Elastic::Manual::Attributes/boost> [DEPRECATED]
 
 =head2 L<null_value|Elastic::Manual::Attributes/null_value>
 
@@ -302,8 +302,6 @@ keywords.
 
 =head2 L<format|Elastic::Manual::Attributes/format>
 
-=head2 L<precision_step|Elastic::Manual::Attributes/precision_step>
-
 =head2 L<geohash|Elastic::Manual::Attributes/geohash>
 
 =head2 L<lat_lon|Elastic::Manual::Attributes/lat_lon>
@@ -314,7 +312,7 @@ keywords.
 
 =head2 L<dynamic|Elastic::Manual::Attributes/dynamic>
 
-=head2 L<path|Elastic::Manual::Attributes/path>
+=head2 L<path|Elastic::Manual::Attributes/path> [DEPRECATED]
 
 =head2 L<include_in_parent|Elastic::Manual::Attributes/include_in_parent>
 

@@ -1,5 +1,5 @@
 package Elastic::Model::Role::Doc;
-$Elastic::Model::Role::Doc::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Role::Doc::VERSION = '0.50';
 use Moose::Role;
 
 use Elastic::Model::Trait::Exclude;
@@ -202,7 +202,7 @@ Elastic::Model::Role::Doc - The role applied to your Doc classes
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 

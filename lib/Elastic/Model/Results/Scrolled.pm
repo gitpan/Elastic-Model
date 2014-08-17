@@ -1,5 +1,5 @@
 package Elastic::Model::Results::Scrolled;
-$Elastic::Model::Results::Scrolled::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Results::Scrolled::VERSION = '0.50';
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -35,7 +35,8 @@ sub BUILD {
 
     $self->_set_total( $scroll->total );
     $self->_set_virtual_size( $scroll->total );
-    $self->_set_facets( $scroll->facets || {} );
+    $self->_set_facets( $scroll->facets       || {} );
+    $self->_set_aggs( $scroll->aggregations   || {} );
     $self->_set_max_score( $scroll->max_score || 0 );
 }
 
@@ -87,7 +88,7 @@ Elastic::Model::Results::Scrolled - An iterator over unbounded search results
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 

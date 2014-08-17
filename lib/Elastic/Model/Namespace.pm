@@ -1,5 +1,5 @@
 package Elastic::Model::Namespace;
-$Elastic::Model::Namespace::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Namespace::VERSION = '0.50';
 use Moose;
 use MooseX::Types::Moose qw(Str HashRef ArrayRef);
 use Elastic::Model::Index();
@@ -100,7 +100,7 @@ Elastic::Model::Namespace - Class-to-type map
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 

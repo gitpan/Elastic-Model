@@ -1,5 +1,5 @@
 package Elastic::Model::Scope;
-$Elastic::Model::Scope::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Scope::VERSION = '0.50';
 use Moose;
 use namespace::autoclean;
 use MooseX::Types::Moose qw(HashRef);
@@ -120,7 +120,7 @@ Elastic::Model::Scope - Keeps objects alive and connected
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 

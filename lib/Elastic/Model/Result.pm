@@ -1,5 +1,5 @@
 package Elastic::Model::Result;
-$Elastic::Model::Result::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Result::VERSION = '0.50';
 use Moose;
 
 use Carp;
@@ -188,7 +188,7 @@ Elastic::Model::Result - A wrapper for individual search results
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 
@@ -254,6 +254,13 @@ using L<Elastic::Model::View/"include_paths / exclude_paths">.
 
 The partial objects returned by L</partial> function exactly as real objects,
 except that they cannot be saved.
+
+=head2 is_partial
+
+    $bool = $result->is_partial;
+
+Return C<true> or C<false> to indicate whether the currently loaded
+C<_source> field is partial or not.
 
 =head2 highlights
 

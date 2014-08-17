@@ -3,7 +3,7 @@ NAME
     objects using Elasticsearch as a backend.
 
 VERSION
-    version 0.29_2
+    version 0.50
 
 SYNOPSIS
         package MyApp;
@@ -47,23 +47,16 @@ INTRODUCTION TO Elastic::Model
     The rest of the documentation on this page explains how to use the
     Elastic::Model module itself.
 
-IMPORTANT
-    This version of Elastic::Model has been updated to work with
-    Search::Elasticsearch::Compat, a compatibility layer over the new
-    official Elasticsearch Perl client: Search::Elasticsearch.
+BACKWARDS COMPATIBILITY BREAK
+    NOTE: This version of Elastic::Model uses Search::Elasticsearch and is
+    intended for Elasticsearch 1.0 and above. However, it can be used with
+    Elasticsearch 0.90.x in "compatibility mode".
 
-    In the near future, I will be releasing a version of Elastic::Model that
-    works with Elasticsearch directly, without need for the compatibility
-    layer. In the meantime, you should be able to continue using
-    Elastic::Model as normal by simply changing:
+    You can no longer use the old Search::Elasticsearch::Compat. See
+    Elastic::Manual::Delta for instructions.
 
-        use ElasticSearch;
-        my $es = ElasticSearch->new(...);
-
-    to:
-
-        use Search::Elasticsearch::Compat;
-        my $es = Search::Elasticsearch::Compat->new(...);
+    For a version of Elastic::Model which uses Search::Elasticsearch::Compat
+    please see <https://metacpan.org/release/DRTECH/Elastic-Model-0.28>.
 
 USING ELASTIC::MODEL
     Your application needs a "model" class to handle the relationship

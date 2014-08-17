@@ -1,5 +1,5 @@
 package Elastic::Model::Results;
-$Elastic::Model::Results::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Results::VERSION = '0.50';
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Results';
@@ -30,8 +30,9 @@ sub BUILD {
     $self->_set_elements( $hits->{hits} );
     $self->_set_max_score( $hits->{max_score} || 0 );
 
-    $self->_set_took( $result->{took} || 0 );
-    $self->_set_facets( $result->{facets} || {} );
+    $self->_set_took( $result->{took}         || 0 );
+    $self->_set_facets( $result->{facets}     || {} );
+    $self->_set_aggs( $result->{aggregations} || {} );
 
 }
 
@@ -47,7 +48,7 @@ Elastic::Model::Results - An iterator over bounded/finite search results
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 
@@ -90,6 +91,16 @@ of 2012, with highlighted snippets, plus the most popular tags:
     while ( my $result = $results->next ) {
         say "Title:"      . $result->object->title;
         say "Highlights:" .join ', ', $result->highlight('content');
+    }
+
+=head2 Aggregations
+
+    my $tags  = $results->agg('tags');
+    my $terms = $tags->{buckets};
+
+    say "Popular tags: ";
+    for ( @$terms ) {
+        say "$_->{key}:  $_->{doc_count}";
     }
 
 =head2 Facets
@@ -162,6 +173,15 @@ The highest score (relevance) found by Elasticsearch. B<Note:> if you
 are sorting by a field other than C<_score> then you will need
 to set L<Elastic::Model::View/track_scores> to true to retrieve the
 L</max_score>.
+
+=head2 aggs
+
+=head2 agg
+
+    $aggs = $results->aggs
+    $agg  = $results->agg($agg_name)
+
+Aggregation results, if any were requested with L<Elastic::Model::View/aggs>.
 
 =head2 facets
 

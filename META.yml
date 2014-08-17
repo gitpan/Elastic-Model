@@ -13,14 +13,19 @@ build_requires:
   lib: '0'
   utf8: '0'
 configure_requires:
-  ExtUtils::MakeMaker: '6.30'
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
 name: Elastic-Model
+no_index:
+  directory:
+    - t
+    - xt
+    - bench
 requires:
   Carp: '0'
   Class::Load: '0'
@@ -54,4 +59,4 @@ requires:
 resources:
   bugtracker: https://github.com/clintongormley/Elastic-Model/issues
   repository: git://github.com/clintongormley/Elastic-Model.git
-version: 0.29_2
+version: '0.50'

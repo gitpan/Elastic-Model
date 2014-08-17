@@ -9,7 +9,7 @@ BEGIN {
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::NoTabs 0.07
+# this test was generated with Dist::Zilla::Plugin::Test::NoTabs 0.08
 
 use Test::More 0.88;
 use Test::NoTabs;
@@ -20,6 +20,7 @@ my @files = (
     'lib/Elastic/Manual/Analysis.pod',
     'lib/Elastic/Manual/Attributes.pod',
     'lib/Elastic/Manual/Attributes/Unique.pod',
+    'lib/Elastic/Manual/Delta.pod',
     'lib/Elastic/Manual/Intro.pod',
     'lib/Elastic/Manual/NoSQL.pod',
     'lib/Elastic/Manual/QueryDSL.pod',
@@ -32,6 +33,8 @@ my @files = (
     'lib/Elastic/Manual/Searching.pod',
     'lib/Elastic/Manual/Terminology.pod',
     'lib/Elastic/Model.pm',
+    'lib/Elastic/Model/0_90/Result.pm',
+    'lib/Elastic/Model/0_90/Store.pm',
     'lib/Elastic/Model/Alias.pm',
     'lib/Elastic/Model/Bulk.pm',
     'lib/Elastic/Model/Deleted.pm',

@@ -1,5 +1,5 @@
 package Elastic::Model::View;
-$Elastic::Model::View::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::View::VERSION = '0.50';
 use Moose;
 
 use Carp;
@@ -48,6 +48,19 @@ has 'post_filter' => (
 #===================================
     isa => HashRef,
     is  => 'rw',
+);
+
+#===================================
+has 'aggs' => (
+#===================================
+    traits  => ['Hash'],
+    isa     => HashRef [HashRef],
+    is      => 'rw',
+    handles => {
+        add_agg    => 'set',
+        remove_agg => 'delete',
+        get_agg    => 'get'
+    }
 );
 
 #===================================
@@ -299,8 +312,8 @@ around [
 
 around [
 #===================================
-    'facets', 'index_boosts', 'script_fields', 'highlighting',
-    'query',  'filter',       'post_filter',   'cache_opts'
+    'aggs',  'facets', 'index_boosts', 'script_fields', 'highlighting',
+    'query', 'filter', 'post_filter',  'cache_opts'
 #===================================
 ] => sub { _clone_args( \&_hash_args, @_ ) };
 
@@ -309,7 +322,7 @@ around 'highlight'
 #===================================
     => sub { _clone_args( \&_highlight_args, @_ ) };
 
-for my $name ( 'facet', 'index_boost', 'script_field' ) {
+for my $name ( 'agg', 'facet', 'index_boost', 'script_field' ) {
     my $attr = $name . 's';
     for my $method ( "add_$name", "remove_$name" ) {
         around $method => sub {
@@ -459,26 +472,71 @@ sub _build_search {
         if $self->_has_include_paths;
     $source->{exclude} = $self->exclude_paths
         if $self->_has_exclude_paths;
-    $source ||= @$fields ? 0 : 1;
+
+    $fields = ['_source'] unless $source || @$fields;
 
     my %args = _strip_undef(
         (   map { $_ => $self->$_ }
                 qw(
-                type sort from size facets
+                type sort from size aggs
                 min_score post_filter preference routing stats
                 script_fields timeout track_scores explain
                 )
         ),
+        facets        => $self->_build_facets,
         index         => $self->domain,
         query         => $self->_build_query,
         highlight     => $highlight,
         indices_boost => $self->index_boosts,
         @_,
         version => 1,
-        fields  => [ '_parent', '_routing', @$fields ],
-        _source => $source,
+        fields  => [ '_parent', '_routing', @$fields ]
     );
+    $args{_source} = $source
+        if defined $source;
     return \%args;
+}
+
+#===================================
+sub _build_facets {
+#===================================
+    my $self = shift;
+    return undef unless $self->facets;
+
+    my $facets = { %{ $self->facets } };
+
+    for ( values %$facets ) {
+        die "All (facets) must be HASH refs" unless ref $_ eq 'HASH';
+        $_ = my $facet = {%$_};
+        $self->_to_dsl(
+            {   queryb        => 'query',
+                filterb       => 'filter',
+                facet_filterb => 'facet_filter'
+            },
+            $facet
+        );
+    }
+
+    $facets;
+}
+
+#===================================
+sub _to_dsl {
+#===================================
+    my ( $self, $ops ) = ( shift, shift );
+
+    my $builder;
+    for my $clause (@_) {
+        while ( my ( $old, $new ) = each %$ops ) {
+            my $src = delete $clause->{$old} or next;
+            die "Cannot specify $old and $new parameters.\n" if $clause->{$new};
+
+            $builder ||= $self->search_builder;
+            my $method = $new eq 'query' ? 'query' : 'filter';
+            my $sub_clause = $builder->$method($src) or next;
+            $clause->{$new} = $sub_clause->{$method};
+        }
+    }
 }
 
 #===================================
@@ -526,7 +584,7 @@ Elastic::Model::View - Views to query your docs in Elasticsearch
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 
@@ -788,8 +846,8 @@ query.
     \%filter  = $view->post_filter;
 
 L<Post-filters|http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-post-filter.html>
-filter the results AFTER any L</facets> have been calculated.  In the above
-example, the facets would be calculated on all values of C<tag>, but the
+filter the results AFTER any L</aggs> have been calculated.  In the above
+example, the aggregations would be calculated on all values of C<tag>, but the
 results would then be limited to just those docs where C<tag == perl>.
 
 You can specify a post_filter using either the native Elasticsearch query DSL or,
@@ -840,7 +898,46 @@ The number of results returned in a single L</search()>, which defaults to 10.
 B<Note:> See L</scan()> for a slightly different application of the L</size>
 value.
 
+=head2 aggs
+
+    $new_view = $view->aggs(
+        active_docs => {
+            filter => {
+                term => { status => 'active' }
+            },
+            aggs => {
+                popular_tags => {
+                    terms => {
+                        field => 'path.to.tags',
+                        size  => 10
+                    }
+                }
+            }
+        },
+        agg_two => {....}
+    );
+
+    $new_view = $view->add_agg( agg_three => {...} )
+    $new_view = $view->remove_agg('agg_three');
+
+    \%aggs  = $view->aggs;
+    \%agg   = $view->get_agg('active_docs');
+
+Aggregations allow you to aggregate data from a query, for instance: most popular
+terms, number of blog posts per day, average price etc. Aggs are calculated
+from the query generated from L</query> and L</filter>.  If you want to filter
+your query results down further after calculating your aggs, you can
+use L</post_filter>.
+
+B<NOTE:> There is no support in aggs for L<Elastic::Model::SearchBuilder>.
+
+See L<http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations.html> for
+an explanation of what aggregations are available.
+
 =head2 facets
+
+B<IMPORTANT:> Facets are deprecated in favour of L<aggregations|/aggs>.
+They will be removed in a future version of Elasticsearch.
 
     $new_view = $view->facets(
         facet_one => {
@@ -935,7 +1032,7 @@ object without requesting it from Elasticsearch in a separate (but automatic) st
 
 L<Script fields|http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-script-fields.html>
 can be generated using the L<mvel|http://mvel.codehaus.org/Language+Guide+for+2.0>
-scripting language. (You can also use L<Javascript, Python and Java|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-scripting.html>.)
+scripting language. (You can also use L<Groovy, Javascript, Python and Java|http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-scripting.html>.)
 
 =head2 include_paths / exclude_paths
 
@@ -956,7 +1053,7 @@ The partial objects returned when L<Elastic::Model::Results/as_partials()>
 is in effect function exactly as real objects, except that they cannot
 be saved.
 
-See C<Partial fields> on L<http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-fields.html#partial>.
+See L<http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-source-filtering.html>.
 
 =head2 routing
 
@@ -1057,7 +1154,7 @@ L<Elastic::Model::Result/explain> to view the output.
     \@groups  = $view->stats;
 
 The statistics for each search can be aggregated by C<group>. These stats
-can later be retrieved using L<Search::Elasticsearch::Compat/index_stats()>.
+can later be retrieved using L<Search::Elasticsearch::Client::Direct::Indices/stats()>.
 
 =head2 search_builder
 

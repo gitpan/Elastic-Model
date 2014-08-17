@@ -1,5 +1,5 @@
 package Elastic::Model::Meta::Class::Model;
-$Elastic::Model::Meta::Class::Model::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Meta::Class::Model::VERSION = '0.50';
 use Moose::Role;
 use List::Util ();
 use MooseX::Types::Moose qw(HashRef Str);
@@ -198,7 +198,7 @@ Elastic::Model::Meta::Class::Model - A meta-class for Models
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 

@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::Objects;
-$Elastic::Model::TypeMap::Objects::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::TypeMap::Objects::VERSION = '0.50';
 use strict;
 use warnings;
 use Elastic::Model::TypeMap::Base qw(:all);
@@ -156,7 +156,7 @@ Elastic::Model::TypeMap::Objects - Type maps for objects and Moose classes
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 

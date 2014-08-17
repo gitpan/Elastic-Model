@@ -1,5 +1,5 @@
 package Elastic::Model::Types;
-$Elastic::Model::Types::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Types::VERSION = '0.50';
 use strict;
 use warnings;
 use Search::Elasticsearch();
@@ -208,7 +208,7 @@ Elastic::Model::Types - MooseX::Types for general and internal use
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 

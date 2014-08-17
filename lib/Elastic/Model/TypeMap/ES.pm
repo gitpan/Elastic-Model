@@ -1,5 +1,5 @@
 package Elastic::Model::TypeMap::ES;
-$Elastic::Model::TypeMap::ES::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::TypeMap::ES::VERSION = '0.50';
 use strict;
 use warnings;
 
@@ -88,7 +88,7 @@ Elastic::Model::TypeMap::ES - Type maps for ElasticSearch-specific types
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 
@@ -103,8 +103,8 @@ Attributes of type L<Elastic::Model::Types/Keyword> are in/deflated
 via L<Elastic::Model::TypeMap::Moose/Any> and are mapped as:
 
     {
-        type                         => 'string',
-        index                        => 'not_analyzed'
+        type   => 'string',
+        index  => 'not_analyzed'
     }
 
 It is a suitable type to use for string attributes which should not
@@ -122,20 +122,20 @@ via L<Elastic::Model::UID/"new_from_store()">. It is mapped as:
         path        => 'path',
         properties  => {
             index   => {
-                type                         => 'string',
-                index                        => 'not_analyzed'
+                type  => 'string',
+                index => 'not_analyzed'
             },
             type => {
-                type                         => 'string',
-                index                        => 'not_analyzed'
+                type  => 'string',
+                index => 'not_analyzed'
             },
             id   => {
-                type                         => 'string',
-                index                        => 'not_analyzed'
+                type  => 'string',
+                index => 'not_analyzed'
             },
             routing   => {
-                type                         => 'string',
-                index                        => 'no'
+                type  => 'string',
+                index => 'no'
             },
         }
     }

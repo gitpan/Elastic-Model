@@ -1,5 +1,5 @@
 package Elastic::Model::Meta::Class::Doc;
-$Elastic::Model::Meta::Class::Doc::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Meta::Class::Doc::VERSION = '0.50';
 use Moose::Role;
 
 use MooseX::Types::Moose qw(Maybe HashRef CodeRef);
@@ -120,7 +120,7 @@ Elastic::Model::Meta::Class::Doc - A meta-class for Docs
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 DESCRIPTION
 

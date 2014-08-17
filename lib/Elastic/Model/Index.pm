@@ -1,5 +1,5 @@
 package Elastic::Model::Index;
-$Elastic::Model::Index::VERSION = '0.29_2'; # TRIAL
+$Elastic::Model::Index::VERSION = '0.50';
 use Carp;
 use Moose;
 with 'Elastic::Model::Role::Index';
@@ -272,7 +272,7 @@ Elastic::Model::Index - Create and administer indices in Elasticsearch
 
 =head1 VERSION
 
-version 0.29_2
+version 0.50
 
 =head1 SYNOPSIS
 
@@ -402,16 +402,17 @@ to convert the single-value C<tag> field to an array of C<tags>:
 
 =item on_conflict / on_error
 
-If you are indexing to the new index at the same time as you are reindexing,
-you may get document conflicts.  You can handle the conflicts with a coderef
-callback, or ignore them by by setting C<on_conflict> to C<'IGNORE'>:
+If you are indexing to the new index at the same time as you
+are reindexing, you may get document conflicts.  You can handle the conflicts
+with a coderef callback, or ignore them by by setting C<on_conflict> to
+C<'IGNORE'>:
 
     $index->reindex( 'myapp_v2', on_conflict => 'IGNORE' );
 
 Similarly, you can pass an C<on_error> handler which will handle other errors,
 or all errors if no C<on_conflict> handler is defined.
 
-See L<Search::Elasticsearch::Compat/Error handlers> for more.
+See L<Search::Elasticsearch::Bulk/Using-callbacks> for more.
 
 =item uid_on_conflict / uid_on_error
 
